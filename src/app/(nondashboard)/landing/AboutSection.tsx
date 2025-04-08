@@ -1,6 +1,4 @@
-import Container from '@/components/Container'
-import Section from '@/components/Section'
-import SectionTitling from '@/components/SectionTitling'
+import { Container, Section, SectionTitling } from "@/components"
 
 const aboutList = [
 	{

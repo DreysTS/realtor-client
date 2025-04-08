@@ -1,24 +1,39 @@
 'use client'
 
+import { LogOut, Search, Settings, UserCircle } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 import { ModeToggle } from './ModeToggle'
-import { buttonVariants } from './ui'
-import { useLogoutMutation } from '@/hooks/query'
+import {
+	Avatar,
+	AvatarFallback,
+	AvatarImage,
+	Button,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+	buttonVariants
+} from './ui'
+import { useLogoutMutation, useProfile } from '@/hooks/query'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 import { cn } from '@/utils'
 
 export default function Navbar() {
 	const router = useRouter()
-	const pathname = usePathname()
+
+	const { user, isLoading } = useProfile()
 
 	const { logout, isLoadingLogout } = useLogoutMutation()
 
+	console.log(user?.role)
+
 	return (
 		<div
-			className='bg-background fixed top-0 left-0 z-50 w-full'
+			className='bg-background fixed top-0 left-0 z-50 w-full shadow-sm'
 			style={{ height: `${NAVBAR_HEIGHT}px` }}
 		>
 			<div className='flex w-full items-center justify-between px-8 py-3'>
@@ -28,30 +43,85 @@ export default function Navbar() {
 						<span>MosRealtor</span>
 					</div>
 				</Link>
+
+				<Button
+					variant='outline'
+					effect='expandIcon'
+					iconPlacement='right'
+					icon={Search}
+					onClick={() =>
+						router.push('/properties', { scroll: false })
+					}
+				>
+					Найти недвижимость
+				</Button>
+
 				<div className='flex items-center space-x-3'>
-					<>
+					{user ? (
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button
+									variant='ghost'
+									className='flex items-center gap-3'
+								>
+									<Avatar>
+										<AvatarImage />
+										<AvatarFallback className='bg-primary'>
+											U
+										</AvatarFallback>
+									</Avatar>
+									<div>Пользователь</div>
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align='end'>
+								<DropdownMenuItem
+									className='flex items-center'
+									onClick={() =>
+										router.push('/profile/favorites', {
+											scroll: false
+										})
+									}
+								>
+									<UserCircle />
+									<span>Личный кабинет</span>
+								</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem
+									className='flex items-center'
+									onClick={() =>
+										router.push('/profile/settings', {
+											scroll: false
+										})
+									}
+								>
+									<Settings />
+									<span>Настройки</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem
+									className='flex items-center'
+									onClick={() => {
+										logout()
+									}}
+								>
+									<LogOut />
+									Выйти
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					) : (
 						<Link
 							href='/auth/register'
 							className={cn(
 								buttonVariants({
 									size: 'sm'
-								})
+								}),
+								'max-sm:hidden'
 							)}
 						>
-							Регистрация
+							Зарегистрируйтесь
 						</Link>
-						<Link
-							href='/auth/login'
-							className={cn(
-								buttonVariants({
-									variant: 'secondary',
-									size: 'sm'
-								})
-							)}
-						>
-							Войти
-						</Link>
-					</>
+					)}
+
 					<ModeToggle />
 				</div>
 			</div>

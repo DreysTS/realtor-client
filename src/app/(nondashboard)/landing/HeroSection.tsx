@@ -9,7 +9,7 @@ import { Badge, Button } from '@/components/ui'
 
 export default function HeroSection() {
 	return (
-		<Section className='flex items-center max-sm:flex-col lg:h-screen pt-15'>
+		<Section className='flex items-center pt-15 max-sm:flex-col lg:h-screen'>
 			<Image
 				src={MoscowBackground}
 				alt='Hero'
@@ -21,7 +21,7 @@ export default function HeroSection() {
 				alt='Hero mobile'
 				width={615}
 				height={345.94}
-				className='sm:hidden rounded-xl'
+				className='rounded-xl sm:hidden'
 			/>
 
 			<Container className='grid items-center gap-x-16 gap-y-8 lg:grid-cols-2'>
@@ -38,8 +38,8 @@ export default function HeroSection() {
 						</Badge>
 						Недвижимость в Москве и Московской области
 					</Badge>
-					<h1 className='my-6 text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] lg:text-5xl 2xl:text-6xl'>
-						Ваш доверенный риелтор в сфере недвижимости
+					<h1 className='my-6 w-fit text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] lg:text-5xl 2xl:text-6xl'>
+						Ваш доверенный риэлтор в сфере недвижимости
 					</h1>
 
 					<ul className='my-6 ml-6 list-disc [text-shadow:_var(--background)_1px_0_10px] sm:w-4/5 xl:w-3/5 [&>li]:mt-2'>

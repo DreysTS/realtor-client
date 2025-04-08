@@ -82,31 +82,26 @@ const cooperationSteps = [
 
 export default function CollaborationOverviewSection() {
 	const cardsRef = useRef<(HTMLDivElement | null)[]>([])
-
-	const updateGradient = (e: PointerEvent, index: number) => {
-		const card = cardsRef.current[index]
-		if (!card) return
-
-		const rect = card.getBoundingClientRect()
-		const x = e.clientX - rect.left
-		const y = e.clientY - rect.top
-
-		card.style.setProperty('--x', `${x}px`)
-		card.style.setProperty('--y', `${y}px`)
-	}
+	const mousePosition = useRef({ x: 0, y: 0 })
 
 	useEffect(() => {
-		const handlePointerMove = (e: PointerEvent) => {
-			cardsRef.current.forEach((card, index) => {
-				if (card) updateGradient(e, index)
+		const updateGradient = (e: PointerEvent) => {
+			mousePosition.current = { x: e.clientX, y: e.clientY }
+			requestAnimationFrame(() => {
+				cardsRef.current.forEach(card => {
+					if (!card) return
+					const rect = card.getBoundingClientRect()
+					const x = mousePosition.current.x - rect.left
+					const y = mousePosition.current.y - rect.top
+					card.style.setProperty('--x', `${x}px`)
+					card.style.setProperty('--y', `${y}px`)
+				})
 			})
 		}
 
-		document.body.addEventListener('pointermove', handlePointerMove)
-
-		return () => {
-			document.body.removeEventListener('pointermove', handlePointerMove)
-		}
+		document.body.addEventListener('pointermove', updateGradient)
+		return () =>
+			document.body.removeEventListener('pointermove', updateGradient)
 	}, [])
 
 	return (
@@ -122,7 +117,6 @@ export default function CollaborationOverviewSection() {
 						key={index}
 						index={index}
 						item={item}
-						updateGradient={updateGradient}
 						cardsRef={cardsRef}
 					/>
 				))}
@@ -138,43 +132,33 @@ interface CooperationCardProps {
 		title: string
 		description: string
 	}
-	updateGradient: (e: PointerEvent, index: number) => void
 	cardsRef: React.RefObject<(HTMLDivElement | null)[]>
 }
 
 const CooperationCard: React.FC<CooperationCardProps> = ({
 	index,
 	item,
-	updateGradient,
 	cardsRef
 }) => {
 	return (
 		<div
-			key={index}
-			className='group bg-muted rounded-lg p-0.5'
+			className='group bg-muted cursor-default rounded-lg p-0.5'
 			style={{
-				background: `radial-gradient(27rem 27rem at var(--x, 50%) var(--y, 50%), hsl(var(--primary)), transparent, transparent)`
+				background:
+					'radial-gradient(27rem 27rem at var(--x, 50%) var(--y, 50%), var(--primary), transparent, transparent)'
 			}}
 			ref={el => {
-				if (cardsRef.current) {
-					cardsRef.current[index] = el
-				}
-				if (el) {
-					el.addEventListener('pointermove', e =>
-						updateGradient(e, index)
-					)
-				}
+				if (el) cardsRef.current[index] = el
 			}}
 		>
-			<div className='bg-background/90 h-full rounded-md p-4 backdrop-blur-lg'>
-				<div className='mb-3 flex flex-row items-center gap-3'>
-					<span className='bg-muted/60 group-hover:border-primary flex size-12 min-h-12 min-w-12 items-center justify-center rounded-md border transition-colors'>
-						{item.icon}
-					</span>
-					<h3 className='text-lg font-semibold'>{item.title}</h3>
-				</div>
-
-				<p className='text-muted-foreground'>{item.description}</p>
+			<div className='bg-background/90 h-full space-y-2 rounded-md p-4 backdrop-blur-lg'>
+				<div>{item.icon}</div>
+				<h3 className='text-base font-semibold sm:text-lg'>
+					{item.title}
+				</h3>
+				<p className='text-muted-foreground text-sm leading-snug font-semibold sm:text-base'>
+					{item.description}
+				</p>
 			</div>
 		</div>
 	)

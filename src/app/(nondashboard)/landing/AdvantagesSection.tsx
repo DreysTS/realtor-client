@@ -1,9 +1,7 @@
 import { Clock, Handshake, HousePlus, ShieldCheck } from 'lucide-react'
 import React from 'react'
 
-import Container from '@/components/Container'
-import Section from '@/components/Section'
-import SectionTitling from '@/components/SectionTitling'
+import { Container, Section, SectionTitling } from '@/components'
 
 const advantagesIconClass = 'size-8 lg:size-10 text-primary transition-colors'
 

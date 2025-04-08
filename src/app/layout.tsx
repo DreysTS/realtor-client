@@ -29,7 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
-				className={`selection:bg-primary/50 relative ${comfortaa.variable} ${montserratAlternates.variable}`}
+				className={`selection:bg-primary/50 relative antialiased ${comfortaa.variable} ${montserratAlternates.variable}`}
 			>
 				<MainProvider>{children}</MainProvider>
 			</body>

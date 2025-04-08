@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
@@ -7,13 +7,15 @@ import { toastMessageHandler } from '@/utils'
 
 export function useLogoutMutation() {
 	const router = useRouter()
+	const queryClient = useQueryClient()
 
 	const { mutate: logout, isPending: isLoadingLogout } = useMutation({
 		mutationKey: ['logout'],
 		mutationFn: () => authService.logout(),
 		onSuccess() {
+			queryClient.setQueryData(['profile'], null)
 			toast.success('Вы успешно вышли из системы')
-			router.push('/auth/login')
+			router.push('/')
 		},
 		onError(error) {
 			toastMessageHandler(error)

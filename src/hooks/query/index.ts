@@ -1,6 +1,7 @@
 export * from './useLoginMutation'
 export * from './useLogoutMutation'
 export * from './useNewPasswordMutation'
+export * from './useProfile'
 export * from './useRegisterMutation'
 export * from './useResetPasswordMutation'
 export * from './useUpdateProfileMutation'

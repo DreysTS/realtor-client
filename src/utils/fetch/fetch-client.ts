@@ -140,5 +140,5 @@ export class FetchClient {
 			},
 			...(!!body && { body: JSON.stringify(body) })
 		})
-	} 
+	}
 }
