@@ -1,6 +1,6 @@
 'use client'
 
-import { File, FilePlus2, Heart, Menu, X } from 'lucide-react'
+import { File, FilePlus2, Heart, Menu, Star, Users, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -24,15 +24,49 @@ export default function AppSidebar() {
 	const { toggleSidebar, open } = useSidebar()
 	const { user, isLoading } = useProfile()
 
-	const navLinks = [
-		{ icon: Heart, label: 'Избранное', href: '/profile/favorites' },
-		{ icon: File, label: 'Мои заявки', href: '/profile/requests' },
-		{
-			icon: FilePlus2,
-			label: 'Создать заявку',
-			href: '/profile/requests/new'
-		}
-	]
+	const role: string = 'ADMIN'
+
+	const navLinks =
+		role === 'REGULAR'
+			? [
+					{
+						icon: Heart,
+						label: 'Избранное',
+						href: '/profile/favorites'
+					},
+					{
+						icon: File,
+						label: 'Мои заявки',
+						href: '/profile/requests'
+					},
+					{
+						icon: FilePlus2,
+						label: 'Создать заявку',
+						href: '/profile/requests/new'
+					}
+				]
+			: [
+					{
+						icon: Heart,
+						label: 'Недвижимость',
+						href: '/realtor/properties'
+					},
+					{
+						icon: File,
+						label: 'Заявки',
+						href: '/realtor/requests'
+					},
+					{
+						icon: Star,
+						label: 'Отзывы',
+						href: '/realtor/reviews'
+					},
+					{
+						icon: Users,
+						label: 'Пользователи',
+						href: '/realtor/users'
+					}
+				]
 
 	return (
 		<Sidebar

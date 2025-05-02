@@ -52,14 +52,18 @@ export class FetchClient {
 			url += this.createSearchParams(options.params)
 		}
 
+		const isFormData = options.body instanceof FormData
+
 		const config: RequestInit = {
 			...options,
 			...(!!this.options && { ...this.options }),
 			method,
 			headers: {
-				...(!!options?.headers && options.headers),
+				...(!isFormData && { 'Content-Type': 'application/json' }),
+				...(options?.headers || {}),
 				...this.headers
-			}
+			},
+			body: isFormData ? options.body : JSON.stringify(options.body)
 		}
 
 		const response: Response = await fetch(url, config)
@@ -78,9 +82,8 @@ export class FetchClient {
 			response.headers.get('Content-Type')?.includes('application/json')
 		) {
 			return (await response.json()) as unknown as T
-		} else {
-			return (await response.text()) as unknown as T
 		}
+		return (await response.text()) as unknown as T
 	}
 
 	public get<T>(
@@ -92,31 +95,35 @@ export class FetchClient {
 
 	public post<T>(
 		endpoint: string,
-		body?: Record<string, any>,
+		body?: Record<string, any> | FormData,
 		options: RequestOptions = {}
 	) {
 		return this.request<T>(endpoint, 'POST', {
 			...options,
+			body: body instanceof FormData ? body : JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
+				...(body instanceof FormData
+					? {}
+					: { 'Content-Type': 'application/json' }),
 				...(options?.headers || {})
-			},
-			...(!!body && { body: JSON.stringify(body) })
+			}
 		})
 	}
 
 	public put<T>(
 		endpoint: string,
-		body?: Record<string, any>,
+		body?: Record<string, any> | FormData,
 		options: RequestOptions = {}
 	) {
 		return this.request<T>(endpoint, 'PUT', {
 			...options,
+			body: body instanceof FormData ? body : JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
+				...(body instanceof FormData
+					? {}
+					: { 'Content-Type': 'application/json' }),
 				...(options?.headers || {})
-			},
-			...(!!body && { body: JSON.stringify(body) })
+			}
 		})
 	}
 
@@ -129,16 +136,18 @@ export class FetchClient {
 
 	public patch<T>(
 		endpoint: string,
-		body?: Record<string, any>,
+		body?: Record<string, any> | FormData,
 		options: RequestOptions = {}
 	) {
 		return this.request<T>(endpoint, 'PATCH', {
 			...options,
+			body: body instanceof FormData ? body : JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
+				...(body instanceof FormData
+					? {}
+					: { 'Content-Type': 'application/json' }),
 				...(options?.headers || {})
-			},
-			...(!!body && { body: JSON.stringify(body) })
+			}
 		})
 	}
 }

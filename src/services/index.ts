@@ -1,4 +1,7 @@
 export * from './auth.service'
+export * from './favorites.service'
 export * from './password-recovery.service'
+export * from './property.service'
+export * from './request.service'
 export * from './user.service'
 export * from './verification.service'

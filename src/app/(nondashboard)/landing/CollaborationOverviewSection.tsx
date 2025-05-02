@@ -12,7 +12,7 @@ import {
 	Search,
 	ShieldCheck
 } from 'lucide-react'
-import React, { JSX, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { Container, Section, SectionTitling } from '@/components'
 
@@ -128,7 +128,7 @@ export default function CollaborationOverviewSection() {
 interface CooperationCardProps {
 	index: number
 	item: {
-		icon: JSX.Element
+		icon: React.ReactNode
 		title: string
 		description: string
 	}

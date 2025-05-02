@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'avatars.yandex.net'
+			},
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+				port: '4000',
+				pathname: '/static/**'
 			}
 		]
 	}

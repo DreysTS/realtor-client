@@ -29,7 +29,7 @@ export default function Navbar() {
 
 	const { logout, isLoadingLogout } = useLogoutMutation()
 
-	console.log(user?.role)
+	const role: string = 'ADMIN'
 
 	return (
 		<div
@@ -65,21 +65,26 @@ export default function Navbar() {
 									className='flex items-center gap-3'
 								>
 									<Avatar>
-										<AvatarImage />
+										<AvatarImage src={user.picture} />
 										<AvatarFallback className='bg-primary'>
-											U
+											{user.displayName[0].toUpperCase()}
 										</AvatarFallback>
 									</Avatar>
-									<div>Пользователь</div>
+									<div>{user.displayName}</div>
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align='end'>
 								<DropdownMenuItem
 									className='flex items-center'
 									onClick={() =>
-										router.push('/profile/favorites', {
-											scroll: false
-										})
+										router.push(
+											role === 'REGULAR'
+												? '/profile/favorites'
+												: '/realtor/properties',
+											{
+												scroll: false
+											}
+										)
 									}
 								>
 									<UserCircle />
@@ -89,9 +94,14 @@ export default function Navbar() {
 								<DropdownMenuItem
 									className='flex items-center'
 									onClick={() =>
-										router.push('/profile/settings', {
-											scroll: false
-										})
+										router.push(
+											role === 'REGULAR'
+												? '/profile/settings'
+												: '/realtor/users',
+											{
+												scroll: false
+											}
+										)
 									}
 								>
 									<Settings />
