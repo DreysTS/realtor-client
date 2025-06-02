@@ -6,15 +6,21 @@ import MoscowBackground from '../../../../public/moscow-background.png'
 
 import { Container, Section } from '@/components'
 import { Badge, Button } from '@/components/ui'
+import { NAVBAR_HEIGHT } from '@/lib/constants'
 
 export default function HeroSection() {
 	return (
-		<Section className='flex items-center pt-15 max-sm:flex-col lg:h-screen'>
+		<Section
+			className='flex items-center max-sm:flex-col lg:h-screen'
+			style={{
+				paddingTop: `calc(${NAVBAR_HEIGHT}px + 12px)`
+			}}
+		>
 			<Image
 				src={MoscowBackground}
 				alt='Hero'
 				fill={true}
-				className='pointer-events-none -z-20 h-screen w-screen object-cover select-none [mask-image:_linear-gradient(105deg,_transparent_50%,_var(--background))] max-sm:hidden'
+				className='pointer-events-none -z-20 h-screen w-screen [mask-image:_linear-gradient(105deg,_transparent_50%,_var(--background))] object-cover select-none max-sm:hidden'
 			/>
 			<Image
 				src={MoscowBackground}
@@ -26,19 +32,19 @@ export default function HeroSection() {
 
 			<Container className='grid items-center gap-x-16 gap-y-8 lg:grid-cols-2'>
 				<div className='relative z-0'>
-					<div className='bg-primary/50 absolute top-0 left-0 -z-10 h-[150%] w-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[100%] blur-[128px]'>
+					<div className='bg-primary/50 absolute top-0 left-0 -z-10 h-[150%] w-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[100%] blur-[128px] max-sm:hidden'>
 						<div className='bg-background absolute top-1/2 right-0 z-20 aspect-square w-full translate-x-1/3 -translate-y-1/3 rounded-full'></div>
 					</div>
 					<Badge
 						variant='outline'
-						className='bg-background/40 flex w-fit gap-2 rounded-full py-1.5 backdrop-blur-sm max-sm:hidden'
+						className='bg-background/40 flex w-fit gap-2 py-1.5 backdrop-blur-sm max-sm:hidden'
 					>
-						<Badge className='rounded-full'>
+						<Badge>
 							<Sparkles size={16} />
 						</Badge>
 						Недвижимость в Москве и Московской области
 					</Badge>
-					<h1 className='my-6 w-fit text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] lg:text-5xl 2xl:text-6xl'>
+					<h1 className='mb-6 sm:my-6 w-fit text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] lg:text-5xl 2xl:text-6xl'>
 						Ваш доверенный риэлтор в сфере недвижимости
 					</h1>
 
@@ -60,7 +66,7 @@ export default function HeroSection() {
 						>
 							Оставить заявку
 						</Button>
-						<Button variant='secondary'>
+						<Button variant='secondary' effect='shineHover'>
 							Ознакомиться с услугами
 						</Button>
 					</div>

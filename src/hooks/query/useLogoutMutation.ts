@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
@@ -14,6 +14,8 @@ export function useLogoutMutation() {
 		mutationFn: () => authService.logout(),
 		onSuccess() {
 			queryClient.setQueryData(['profile'], null)
+			queryClient.setQueryData(['user favorites'], null)
+			queryClient.setQueryData(['user favorites properties'], null)
 			toast.success('Вы успешно вышли из системы')
 			router.push('/')
 		},

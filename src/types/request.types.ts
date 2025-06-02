@@ -2,9 +2,9 @@ import { IProperty } from './property.types'
 import { IUser } from './user.types'
 
 export const PropertyRequestStatus = {
-	PENDING: 'Обрабатывается',
-	APPROWED: 'Подтверждён',
-	REJECTED: 'Отклонен'
+	PENDING: 'PENDING',
+	APPROWED: 'APPROWED',
+	REJECTED: 'REJECTED'
 } as const
 
 export type PropertyRequestStatus =
@@ -19,8 +19,7 @@ export interface IRequest {
 	rooms: number
 	address: string
 	images: string[]
-	currentUrl?: string
-	PropertyRequestStatus: PropertyRequestStatus
+	propertyRequestStatus: PropertyRequestStatus
 	rejectReason?: string
 	propertyId?: string
 	userId: string

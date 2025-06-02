@@ -5,6 +5,7 @@ import { BUILDING_TYPES, PROPERTY_TYPES, SELLING_TYPES } from '@/types'
 export const PropertySchema = z.object({
 	title: z.string().min(1, { message: 'Введите заголовок' }),
 	description: z.string().min(1, { message: 'Введите описание.' }),
+	images: z.array(z.string()),
 	price: z.coerce.number().positive('Цена должна быть положительным чилом.'),
 	square: z.coerce
 		.number()
@@ -56,7 +57,7 @@ export const PropertySchema = z.object({
 	longitude: z.coerce.number().optional()
 })
 
-export type TypePropertySchema = z.infer<typeof PropertySchema>
+export type TypeCreatePropertySchema = z.infer<typeof PropertySchema>
 
 export const UpdatePropertySchema = PropertySchema.partial()
 

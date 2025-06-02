@@ -1,29 +1,31 @@
-import {
-	ArrowRight,
-	Building,
-	LayoutDashboard,
-	MapPin,
-	Ruler
-} from 'lucide-react'
+import { Building, Heart, LayoutDashboard, MapPin, Ruler } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 import {
 	Badge,
+	Button,
 	Card,
 	CardHeader,
 	Separator,
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
-	TooltipTrigger,
-	buttonVariants
+	TooltipTrigger
 } from '@/components/ui'
+import { useFavorite } from '@/hooks/favorites'
 import { IProperty } from '@/types'
 import { cn } from '@/utils'
 
 export default function PropertyCard({ property }: { property: IProperty }) {
+	const {
+		handleFavorite,
+		isAddingToFavorite,
+		isFavorited,
+		isRemovingFromFavorite
+	} = useFavorite(property?.id as string)
+
 	return (
 		<Link href={`/properties/${property.id}`}>
 			<Card className='group hover:border-primary overflow-hidden bg-transparent pt-0 backdrop-blur-2xl transition-all hover:shadow-xl'>
@@ -32,35 +34,42 @@ export default function PropertyCard({ property }: { property: IProperty }) {
 						src={`${process.env.SERVER_URL}/static/${property.images[0]}`}
 						alt='Preview'
 						fill
-						className='propertyect-cover w-full transition-transform duration-300 group-hover:scale-105'
+						className='object-cover w-full transition-transform duration-300 group-hover:scale-105'
 					/>
-					<div
-						className={cn(
-							buttonVariants({
-								variant: 'outline',
-								size: 'icon'
-							}),
-							'absolute top-3 right-3 rounded-full'
-						)}
+
+					<Button
+						variant='outline'
+						size='icon'
+						className='absolute top-3 right-3 rounded-full'
+						disabled={isAddingToFavorite || isRemovingFromFavorite}
+						onClick={e => {
+							handleFavorite(e)
+						}}
 					>
-						<ArrowRight className='size-5' />
-					</div>
+						<Heart
+							className={cn(
+								isFavorited ? 'text-primary fill-primary' : ''
+							)}
+						/>
+					</Button>
 				</div>
-				<CardHeader className='space-y-3'>
+				<CardHeader className='space-y-1 lg:space-y-2'>
 					<div className='flex items-center justify-between'>
-						<h3 className='text-2xl font-bold'>
+						<h3 className='truncate text-xl font-bold lg:text-2xl'>
 							₽ {property.price.toLocaleString()}
 						</h3>
 						{!property.isSecondary ? (
 							<Badge className='cursor-default rounded-full'>
-								Новостройка
+								Новое
 							</Badge>
 						) : (
 							''
 						)}
 					</div>
-					<p className='text-xl font-bold'>{property.title}</p>
-					<p className='text-muted-foreground line-clamp-1 flex w-full items-center gap-2'>
+					<p className='line-clamp-1 truncate text-lg font-bold lg:text-xl'>
+						{property.title}
+					</p>
+					<p className='text-muted-foreground line-clamp-1 flex w-full items-center gap-2 max-lg:text-sm'>
 						<MapPin className='size-5' />
 						<span className='truncate'>
 							{property.location.address}

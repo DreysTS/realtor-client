@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropertiesPage from './PropertiesPage'
+
 export default function Page() {
-	return <div>Search page</div>
+	return <PropertiesPage />
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropertyRequestPage from './PropertyRequestPage'
+
 export default function Page() {
-	return <div>Requests</div>
+	return <PropertyRequestPage />
 }

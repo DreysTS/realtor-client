@@ -26,6 +26,7 @@ export interface IUser {
 	createdAt: string
 	updatedAt: string
 	email: string
+	phoneNumber: string
 	password: string
 	displayName: string
 	picture: string

@@ -7,6 +7,7 @@ export const SettingsSchema = z.object({
 	email: z.string().email({
 		message: 'Некорректная почта'
 	}),
+	phoneNumber: z.string(),
 	isTwoFactorEnabled: z.boolean()
 })
 

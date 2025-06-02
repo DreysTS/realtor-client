@@ -1,10 +1,29 @@
 import { api } from '@/api'
-import { TypePropertySchema, TypeUpdatePropertySchema } from '@/lib/schemes'
+import {
+	TypeCreatePropertySchema,
+	TypeUpdatePropertySchema
+} from '@/lib/schemes'
 import { IProperty } from '@/types/property.types'
 
 export class PropertyService {
-	public async findAll() {
-		const response = await api.get<IProperty[]>('property')
+	public async findAll(params: Record<string, string> = {}) {
+		const response = await api.get<IProperty[]>('property', {
+			params
+		})
+
+		return response
+	}
+
+	public async realtorFindAll() {
+		const response = await api.get<IProperty[]>('property/realtor')
+
+		return response
+	}
+
+	public async realtorFindById(propertyId: string) {
+		const response = await api.get<IProperty>(
+			`property/realtor/${propertyId}`
+		)
 
 		return response
 	}
@@ -15,8 +34,8 @@ export class PropertyService {
 		return response
 	}
 
-	public async create(formData: FormData) {
-		const response = await api.post<IProperty>('property', formData)
+	public async create(body: TypeCreatePropertySchema) {
+		const response = await api.post<IProperty>('property', body)
 
 		return response
 	}
@@ -33,20 +52,8 @@ export class PropertyService {
 		return response
 	}
 
-	public async setDraftStatus(id: string) {
-		const response = await api.patch(`property/${id}/draft`)
-
-		return response
-	}
-
-	public async setActiveStatus(id: string) {
-		const response = await api.patch(`property/${id}/active`)
-
-		return response
-	}
-
-	public async setArchiveStatus(id: string) {
-		const response = await api.patch(`property/${id}/archive`)
+	public async setStatus(id: string, status: string) {
+		const response = await api.patch(`property/${id}/${status}`)
 
 		return response
 	}

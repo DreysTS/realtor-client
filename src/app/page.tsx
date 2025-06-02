@@ -1,5 +1,6 @@
 import Landing from './(nondashboard)/landing/page'
-import Navbar from '@/components/Navbar'
+import { Footer } from '@/components'
+import { Navbar } from '@/components'
 
 export default function Home() {
 	return (
@@ -7,6 +8,7 @@ export default function Home() {
 			<Navbar />
 			<main>
 				<Landing />
+				<Footer />
 			</main>
 		</>
 	)

@@ -29,7 +29,7 @@ export function AuthWrapper({
 	isShowSocial = false
 }: PropsWithChildren<AuthWrapperProps>) {
 	return (
-		<Card className='w-full max-w-[400px] min-w-[320px]'>
+		<Card className='bg-background w-full max-w-[400px] min-w-[320px]'>
 			<CardHeader className='space-y-2'>
 				<CardTitle>{heading}</CardTitle>
 				{description && (

@@ -1,4 +1,11 @@
-import { Container, Section, SectionTitling } from "@/components"
+import Image from 'next/image'
+
+import About1 from '../../../../public/about-1.jpg'
+import About2 from '../../../../public/about-2.jpg'
+import About3 from '../../../../public/about-3.jpg'
+
+import { Container, Section, SectionTitling } from '@/components'
+import { cn } from '@/utils'
 
 const aboutList = [
 	{
@@ -24,30 +31,58 @@ const aboutList = [
 export default function AboutSection() {
 	return (
 		<Section>
-			<Container>
+			<Container className='overflow-hidden'>
 				<div className='grid gap-6 lg:grid-cols-2'>
-					<div>
+					<div className='overflow-x-auto'>
 						<SectionTitling title='Обо мне' className='!mb-0' />
 						{aboutList.slice(0, 3).map((item, index) => (
 							<p className='my-4 pr-6 leading-7' key={index}>
 								{item.text}
 							</p>
 						))}
-						<div className='flex flex-col items-center justify-center gap-6 sm:flex-row'>
-							<div className='bg-primary/50 aspect-[3/5] w-full rounded-lg'></div>
-							<div className='flex w-full flex-col gap-6'>
-								<div className='bg-primary/50 aspect-[3/4] w-full rounded-lg'></div>
-								<div className='bg-primary/50 aspect-[1] w-full rounded-lg'></div>
-							</div>
+						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
+							{[About1, About2, About3].map((item, index) => (
+								<div
+									className={cn(
+										index === 0
+											? 'sm:row-span-2 sm:my-auto'
+											: index === 2
+												? 'sm:place-self-start'
+												: '',
+										'relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full bg-primary'
+									)}
+									key={index}
+								>
+									<Image
+										src={item}
+										alt='about alt'
+										className='h-full w-full object-cover opacity-0'
+									/>
+								</div>
+							))}
 						</div>
 					</div>
-					<div className='flex flex-col-reverse lg:flex-col'>
-						<div className='flex flex-col items-center justify-center gap-6 sm:flex-row-reverse lg:flex-row'>
-							<div className='bg-primary/50 relative aspect-[3/4] w-full overflow-hidden rounded-lg'></div>
-							<div className='flex w-full flex-col gap-6'>
-								<div className='bg-primary/50 aspect-[1] w-full rounded-lg'></div>
-								<div className='bg-primary/50 aspect-[3/4] w-full rounded-lg'></div>
-							</div>
+					<div className='flex flex-col-reverse overflow-x-auto lg:flex-col'>
+						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
+							{[About1, About2, About3].map((item, index) => (
+								<div
+									className={cn(
+										index === 0
+											? 'sm:row-span-2 sm:my-auto'
+											: index === 2
+												? 'sm:place-self-start'
+												: '',
+										'relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full bg-primary'
+									)}
+									key={index}
+								>
+									<Image
+										src={item}
+										alt='about alt'
+										className='h-full w-full object-cover opacity-0'
+									/>
+								</div>
+							))}
 						</div>
 						{aboutList.slice(3).map((item, index) => (
 							<p

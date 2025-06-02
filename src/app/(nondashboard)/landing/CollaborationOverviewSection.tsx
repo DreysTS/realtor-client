@@ -8,6 +8,7 @@ import {
 	Filter,
 	Home,
 	Layers,
+	LucideIcon,
 	MessageCircle,
 	Search,
 	ShieldCheck
@@ -16,67 +17,65 @@ import React, { useEffect, useRef } from 'react'
 
 import { Container, Section, SectionTitling } from '@/components'
 
-const iconsClassname = 'text-primary'
-
 const cooperationSteps = [
 	{
 		title: 'Обозначение запроса',
 		description:
 			'Изначально формируем ваш запрос, который может быть скорректирован в процессе работы.',
-		icon: <Search className={iconsClassname} />
+		icon: Search
 	},
 	{
 		title: 'Помощь в одобрении ипотеки',
 		description:
 			'Подаём заявки в оптимальные банки, контролируем НБКИ. 90% успешных одобрений.',
-		icon: <CheckCircle className={iconsClassname} />
+		icon: CheckCircle
 	},
 	{
 		title: 'Одновременный поиск',
 		description: 'Рассматриваем как вторичное жильё, так и новостройки.',
-		icon: <Layers className={iconsClassname} />
+		icon: Layers
 	},
 	{
 		title: 'Консультации по новостройкам',
 		description:
 			'Проводим профессиональные консультации по выбору объектов в новостройках.',
-		icon: <Home className={iconsClassname} />
+		icon: Home
 	},
 	{
 		title: 'Подбор вторичного жилья',
 		description:
 			'Фильтруем проблемные квартиры и помогаем выбрать только надёжные варианты.',
-		icon: <Filter className={iconsClassname} />
+		icon: Filter
 	},
 	{
 		title: 'Переговоры по сделке',
 		description:
 			'Оптимальное проведение сделки. Предлагаем электронную регистрацию и аккредитив за 4900 руб.',
-		icon: <MessageCircle className={iconsClassname} />
+		icon: MessageCircle
 	},
 	{
 		title: 'Юридический аудит',
 		description:
 			'Проверяем документы объекта и продавца, обеспечивая вашу безопасность.',
-		icon: <ShieldCheck className={iconsClassname} />
+		icon: ShieldCheck
 	},
 	{
 		title: 'Сопровождение сделки',
 		description:
 			'Поддерживаем вас до подписания акта приёма-передачи квартиры.',
-		icon: <FileCheck className={iconsClassname} />
+		icon: FileCheck
 	},
 	{
 		title: 'Оплата за результат',
 		description:
 			'Вы оплачиваете услуги только после завершения всех этапов работы.',
-		icon: <CreditCard className={iconsClassname} />
+		icon: CreditCard
 	},
 	{
 		title: 'Экономия времени',
 		description:
 			'Оптимизируем все этапы сделки, чтобы сэкономить ваше время.',
-		icon: <Clock className={iconsClassname} />
+		icon: Clock
 	}
 ]
 
@@ -128,7 +127,7 @@ export default function CollaborationOverviewSection() {
 interface CooperationCardProps {
 	index: number
 	item: {
-		icon: React.ReactNode
+		icon: LucideIcon
 		title: string
 		description: string
 	}
@@ -152,7 +151,7 @@ const CooperationCard: React.FC<CooperationCardProps> = ({
 			}}
 		>
 			<div className='bg-background/90 h-full space-y-2 rounded-md p-4 backdrop-blur-lg'>
-				<div>{item.icon}</div>
+				<item.icon className='text-primary' />
 				<h3 className='text-base font-semibold sm:text-lg'>
 					{item.title}
 				</h3>

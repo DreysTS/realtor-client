@@ -1,6 +1,6 @@
 'use client'
 
-import { File, FilePlus2, Heart, Menu, Star, Users, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -13,60 +13,25 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+	buttonVariants,
 	useSidebar
 } from './ui'
 import { useProfile } from '@/hooks/query'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
-import { cn } from '@/utils'
+import { cn, navLinksGenerator } from '@/utils'
 
-export default function AppSidebar() {
+export function AppSidebar() {
 	const pathname = usePathname()
 	const { toggleSidebar, open } = useSidebar()
 	const { user, isLoading } = useProfile()
 
-	const role: string = 'ADMIN'
+	const role: string = 'REGULAR'
 
-	const navLinks =
-		role === 'REGULAR'
-			? [
-					{
-						icon: Heart,
-						label: 'Избранное',
-						href: '/profile/favorites'
-					},
-					{
-						icon: File,
-						label: 'Мои заявки',
-						href: '/profile/requests'
-					},
-					{
-						icon: FilePlus2,
-						label: 'Создать заявку',
-						href: '/profile/requests/new'
-					}
-				]
-			: [
-					{
-						icon: Heart,
-						label: 'Недвижимость',
-						href: '/realtor/properties'
-					},
-					{
-						icon: File,
-						label: 'Заявки',
-						href: '/realtor/requests'
-					},
-					{
-						icon: Star,
-						label: 'Отзывы',
-						href: '/realtor/reviews'
-					},
-					{
-						icon: Users,
-						label: 'Пользователи',
-						href: '/realtor/users'
-					}
-				]
+	const navLinks = navLinksGenerator(user?.role as string)
 
 	return (
 		<Sidebar
@@ -89,7 +54,7 @@ export default function AppSidebar() {
 							{open ? (
 								<>
 									<h1 className='line-clamp-1 text-xl font-bold'>
-										{user?.displayName}
+										Профиль
 									</h1>
 									<Button
 										size='icon-sm'
@@ -115,36 +80,56 @@ export default function AppSidebar() {
 
 			<SidebarContent>
 				<SidebarMenu>
-					{navLinks.map(link => {
-						const isActive = pathname === link.href
-						console.log(pathname)
+					<TooltipProvider>
+						{navLinks.map(link => {
+							const isActive = pathname.startsWith(link.href)
 
-						return (
-							<SidebarMenuItem key={link.href}>
-								<SidebarMenuButton
-									asChild
-									className={cn(
-										'flex items-center px-7 py-7 transition-colors',
-										isActive
-											? 'bg-primary/20 hover:bg-primary/25'
-											: '',
-										open ? '' : 'ml-2'
+							return (
+								<Tooltip key={link.href}>
+									<TooltipTrigger asChild>
+										<SidebarMenuItem>
+											<SidebarMenuButton
+												asChild
+												className={cn(
+													'flex items-center px-7 py-7 transition-colors',
+													isActive
+														? 'text-primary hover:text-primary'
+														: '',
+													open ? '' : 'ml-2'
+												)}
+											>
+												<Link
+													href={link.href}
+													className='w-full'
+													scroll={false}
+												>
+													<div className='flex items-center gap-3'>
+														<link.icon
+															className={cn(
+																open
+																	? 'h-5 w-5'
+																	: 'h-4 w-4'
+															)}
+														/>
+														{open && (
+															<span className='line-clamp-1'>
+																{link.label}
+															</span>
+														)}
+													</div>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									</TooltipTrigger>
+									{!open && (
+										<TooltipContent side='right'>
+											{link.label}
+										</TooltipContent>
 									)}
-								>
-									<Link
-										href={link.href}
-										className='w-full'
-										scroll={false}
-									>
-										<div className='flex items-center gap-3'>
-											<link.icon className='h-5 w-5' />
-											{open && <span>{link.label}</span>}
-										</div>
-									</Link>
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-						)
-					})}
+								</Tooltip>
+							)
+						})}
+					</TooltipProvider>
 				</SidebarMenu>
 			</SidebarContent>
 		</Sidebar>

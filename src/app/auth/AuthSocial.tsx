@@ -27,11 +27,11 @@ export function AuthSocial() {
 	return (
 		<>
 			<div className='grid grid-cols-2 gap-6'>
-				<Button onClick={() => onClick('google')} variant='outline'>
+				<Button onClick={() => onClick('google')} variant='outline' className='bg-background/40'>
 					<FaGoogle className='mr-2 size-4' />
 					Google
 				</Button>
-				<Button onClick={() => onClick('yandex')} variant='outline'>
+				<Button onClick={() => onClick('yandex')} variant='outline' className='bg-background/40'>
 					<FaYandex className='mr-2 size-4' />
 					Яндекс
 				</Button>
@@ -41,7 +41,7 @@ export function AuthSocial() {
 					<span className='w-full border-t' />
 				</div>
 				<div className='relative flex justify-center text-xs uppercase'>
-					<span className='bg-card text-muted-foreground px-2'>
+					<span className='bg-background text-muted-foreground px-2'>
 						Или
 					</span>
 				</div>

@@ -53,28 +53,35 @@ export class FetchClient {
 		}
 
 		const isFormData = options.body instanceof FormData
+		const isStringBody = typeof options.body === 'string'
 
 		const config: RequestInit = {
 			...options,
 			...(!!this.options && { ...this.options }),
 			method,
 			headers: {
-				...(!isFormData && { 'Content-Type': 'application/json' }),
+				...(!isFormData &&
+					!isStringBody && { 'Content-Type': 'application/json' }),
 				...(options?.headers || {}),
 				...this.headers
 			},
-			body: isFormData ? options.body : JSON.stringify(options.body)
+			body:
+				isFormData || isStringBody
+					? options.body
+					: options.body
+						? JSON.stringify(options.body)
+						: undefined
 		}
 
 		const response: Response = await fetch(url, config)
 
 		if (!response.ok) {
-			const error = (await response.json()) as
-				| { message: string }
+			const error = (await response.json().catch(() => ({}))) as
+				| { mesage: string }
 				| undefined
 			throw new FetchError(
 				response.status,
-				error?.message || response.statusText
+				error?.mesage || response.statusText
 			)
 		}
 
@@ -82,8 +89,9 @@ export class FetchClient {
 			response.headers.get('Content-Type')?.includes('application/json')
 		) {
 			return (await response.json()) as unknown as T
+		} else {
+			return (await response.text()) as unknown as T
 		}
-		return (await response.text()) as unknown as T
 	}
 
 	public get<T>(

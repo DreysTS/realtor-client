@@ -2,8 +2,7 @@
 
 import React from 'react'
 
-import AppSidebar from '@/components/AppSidebar'
-import Navbar from '@/components/Navbar'
+import { AppSidebar, Navbar } from '@/components'
 import { SidebarProvider } from '@/components/ui'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 

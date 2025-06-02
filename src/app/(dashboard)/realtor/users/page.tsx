@@ -1,5 +1,7 @@
 import React from 'react'
 
+import UsersPage from './UsersPage'
+
 export default function Page() {
-	return <div>Users</div>
+	return <UsersPage />
 }

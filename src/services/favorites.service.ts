@@ -1,14 +1,15 @@
 import { api } from '@/api'
+import { IFavoriteId, IFavoritedProperties } from '@/types'
 
-export class FavoritesService {
+export class FavoriteService {
 	public async getFavoritesProperties() {
-		const response = await api.get('favorites')
+		const response = await api.get<IFavoritedProperties[]>('favorites')
 
 		return response
 	}
 
 	public async getFavoritesId() {
-		const response = await api.get('favorites/ids')
+		const response = await api.get<IFavoriteId[]>('favorites/ids')
 
 		return response
 	}
@@ -31,3 +32,5 @@ export class FavoritesService {
 		return reponse
 	}
 }
+
+export const favoriteService = new FavoriteService()
