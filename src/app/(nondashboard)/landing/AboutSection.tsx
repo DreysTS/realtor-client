@@ -3,6 +3,9 @@ import Image from 'next/image'
 import About1 from '../../../../public/about-1.jpg'
 import About2 from '../../../../public/about-2.jpg'
 import About3 from '../../../../public/about-3.jpg'
+import About4 from '../../../../public/about-4.jpg'
+import About5 from '../../../../public/about-5.jpg'
+import About6 from '../../../../public/about-6.jpg'
 
 import { Container, Section, SectionTitling } from '@/components'
 import { cn } from '@/utils'
@@ -41,7 +44,7 @@ export default function AboutSection() {
 							</p>
 						))}
 						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
-							{[About1, About2, About3].map((item, index) => (
+							{[About5, About1, About3].map((item, index) => (
 								<div
 									className={cn(
 										index === 0
@@ -49,14 +52,14 @@ export default function AboutSection() {
 											: index === 2
 												? 'sm:place-self-start'
 												: '',
-										'relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full bg-primary'
+										'bg-primary relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full'
 									)}
 									key={index}
 								>
 									<Image
 										src={item}
 										alt='about alt'
-										className='h-full w-full object-cover opacity-0'
+										className='h-full w-full object-cover'
 									/>
 								</div>
 							))}
@@ -64,7 +67,7 @@ export default function AboutSection() {
 					</div>
 					<div className='flex flex-col-reverse overflow-x-auto lg:flex-col'>
 						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
-							{[About1, About2, About3].map((item, index) => (
+							{[About2, About4, About6].map((item, index) => (
 								<div
 									className={cn(
 										index === 0
@@ -72,14 +75,14 @@ export default function AboutSection() {
 											: index === 2
 												? 'sm:place-self-start'
 												: '',
-										'relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full bg-primary'
+										'bg-primary relative snap-center overflow-hidden rounded-lg max-sm:min-w-[80vw] sm:w-full'
 									)}
 									key={index}
 								>
 									<Image
 										src={item}
 										alt='about alt'
-										className='h-full w-full object-cover opacity-0'
+										className='h-full w-full object-cover'
 									/>
 								</div>
 							))}

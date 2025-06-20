@@ -1,11 +1,11 @@
 import { LucideIcon } from 'lucide-react'
 import React from 'react'
 
-interface IEmptyList {
+export interface IEmptyList {
 	title: string
 	description: string
 	icon: LucideIcon
-	buttonPrimary: React.ReactNode
+	buttonPrimary?: React.ReactNode
 	buttonSecondary?: React.ReactNode
 }
 

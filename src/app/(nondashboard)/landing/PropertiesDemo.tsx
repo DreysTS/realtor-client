@@ -45,12 +45,14 @@ export default function PropertiesDemo() {
 				) : (
 					<>
 						<div className='mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
-							{properties?.map(property => (
-								<PropertyCard
-									key={property.id}
-									property={property}
-								/>
-							))}
+							{properties
+								?.slice(0, 4)
+								.map(property => (
+									<PropertyCard
+										key={property.id}
+										property={property}
+									/>
+								))}
 						</div>
 						<div className='flex justify-end'>
 							<Link
@@ -59,7 +61,6 @@ export default function PropertiesDemo() {
 									buttonVariants({ effect: 'ringHover' })
 								)}
 								scroll={true}
-								
 							>
 								Просмотреть все{' '}
 								<ArrowRight className='size-5' />

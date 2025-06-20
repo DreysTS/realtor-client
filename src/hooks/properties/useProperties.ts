@@ -1,9 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { propertyService } from '@/services'
+import { BuildingType, PropertyType } from '@/types'
 
 type PropertyFilters = {
 	minPrice?: string
@@ -11,6 +12,9 @@ type PropertyFilters = {
 	minSquare?: string
 	maxSquare?: string
 	rooms?: string
+	buildingType: BuildingType
+	propertyType: PropertyType
+	isSecondary: string
 	sortBy?: string
 }
 
@@ -47,14 +51,33 @@ export function useProperties() {
 	}, [searchParams])
 
 	const {
-		data: properties,
+		data,
 		isLoading: isPropertiesLoading,
 		error: propertiesError,
+		fetchNextPage,
+		hasNextPage,
+		isFetchingNextPage,
 		refetch
-	} = useQuery({
+	} = useInfiniteQuery({
 		queryKey: ['properties', apiFilters],
-		queryFn: () => propertyService.findAll(apiFilters)
+		queryFn: async ({ pageParam = 1 }) => {
+			const response = await propertyService.findAll({
+				...apiFilters,
+				page: pageParam.toString()
+			})
+			return response
+		},
+		getNextPageParam: lastPage => {
+			return lastPage.pagination.hasMore
+				? lastPage.pagination.page + 1
+				: undefined
+		},
+		initialPageParam: 1
 	})
+
+	const properties = useMemo(() => {
+		return data?.pages.flatMap(page => page.data) || []
+	}, [data])
 
 	useEffect(() => {
 		refetch()
@@ -78,13 +101,22 @@ export function useProperties() {
 		router.push(pathname)
 	}, [pathname])
 
+	const loadMore = useCallback(() => {
+		if (hasNextPage && !isFetchingNextPage) {
+			fetchNextPage()
+		}
+	}, [hasNextPage, isFetchingNextPage, fetchNextPage])
+
 	return {
 		properties,
 		isPropertiesLoading,
+		isFetchingNextPage,
 		propertiesError,
 		filters: uiFilters,
 		updateFilters,
 		updateSorting,
-		resetFilters
+		resetFilters,
+		loadMore,
+		hasMore: hasNextPage
 	}
 }

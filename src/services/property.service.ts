@@ -3,11 +3,14 @@ import {
 	TypeCreatePropertySchema,
 	TypeUpdatePropertySchema
 } from '@/lib/schemes'
-import { IProperty } from '@/types/property.types'
+import { IPagination, IProperty } from '@/types'
 
 export class PropertyService {
 	public async findAll(params: Record<string, string> = {}) {
-		const response = await api.get<IProperty[]>('property', {
+		const response = await api.get<{
+			data: IProperty[]
+			pagination: IPagination
+		}>('property', {
 			params
 		})
 

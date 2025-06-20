@@ -1,7 +1,7 @@
 import React from 'react'
 
+import SortControl from './SortControl'
 import {
-	Input,
 	Label,
 	RadioGroup,
 	RadioGroupItem,
@@ -9,18 +9,11 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { useProperties } from '@/hooks/properties'
+import { radioRooms } from '@/lib/constants'
 import { cn } from '@/utils'
 
-const radioRooms = [
-	{ value: 0, label: 'Студия' },
-	{ value: 1, label: '1' },
-	{ value: 2, label: '2' },
-	{ value: 3, label: '3' },
-	{ value: 4, label: '4' }
-]
-
 export default function FiltersBar() {
-	const { filters, updateFilters } = useProperties()
+	const { filters, updateFilters, updateSorting } = useProperties()
 
 	return (
 		<>
@@ -119,6 +112,27 @@ export default function FiltersBar() {
 						})
 					}
 				/>
+			</div>
+			<div className='flex flex-col justify-between max-sm:hidden'>
+				<h4 className='text-muted-foreground mb-3 text-sm'>
+					Сортировка:
+				</h4>
+				<div className='flex flex-wrap gap-2'>
+					<SortControl
+						field='price'
+						currentSort={filters.sortBy}
+						onSort={updateSorting}
+					>
+						По цене
+					</SortControl>
+					<SortControl
+						field='square'
+						currentSort={filters.sortBy}
+						onSort={updateSorting}
+					>
+						По площади
+					</SortControl>
+				</div>
 			</div>
 		</>
 	)

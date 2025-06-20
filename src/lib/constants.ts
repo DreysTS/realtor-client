@@ -45,3 +45,29 @@ export const propertyPurchaseStatusMap = [
 	{ enum: 'REJECTED', translate: 'Отклонена' },
 	{ enum: 'COMPLETED', translate: 'Закрыта' }
 ]
+
+export const radioRooms = [
+	{ value: 0, label: 'Студия' },
+	{ value: 1, label: '1' },
+	{ value: 2, label: '2' },
+	{ value: 3, label: '3' },
+	{ value: 4, label: '4' }
+]
+
+export const radioBuildingType = [
+	{ value: 'panel', label: 'Панельный' },
+	{ value: 'brick', label: 'Кирпичный' },
+	{ value: 'monolith', label: 'Монолитный' }
+]
+
+export const radioPropertyType = [
+	{ value: 'apartment', label: 'Апартаменты' },
+	{ value: 'flat', label: 'Квартира' },
+	{ value: 'euro_flat', label: 'Евро' },
+	{ value: 'gab', label: 'Гараж' }
+]
+
+export const radioSecondary = [
+	{ value: 'false', label: 'Новостройка' },
+	{ value: 'true', label: 'Вторичка' }
+]

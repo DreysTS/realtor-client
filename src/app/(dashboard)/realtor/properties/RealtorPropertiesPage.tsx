@@ -6,7 +6,7 @@ import React from 'react'
 
 import PropertyForm from './PropertyForm'
 import RealtorPropertyCard from './RealtorPropertyCard'
-import { EmptyList, SidebarTitle } from '@/components/special'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import {
 	Button,
 	Loading,
@@ -19,6 +19,21 @@ import {
 } from '@/components/ui'
 import { useRealtorProperties } from '@/hooks/properties'
 import { cn } from '@/utils'
+
+const emptyListProps: IEmptyList = {
+	title: 'Список объектов пуст',
+	description:
+		'По кнопке выше вы можете добавить ещё объекты, если они у вас имеются. Или вы можете одобрить новые в заявках.',
+	icon: TextSearch,
+	buttonPrimary: (
+		<Link
+			href='/realtor/requests'
+			className={cn(buttonVariants({ effect: 'ringHover' }))}
+		>
+			Заявки
+		</Link>
+	)
+}
 
 export default function RealtorPropertiesPage() {
 	const { properties, isPropertiesLoading } = useRealtorProperties()
@@ -51,19 +66,10 @@ export default function RealtorPropertiesPage() {
 				{properties?.length === 0 ? (
 					<div className='flex justify-center'>
 						<EmptyList
-							title='Список объектов пуст'
-							description='По кнопке выше вы можете добавить ещё объекты, если они у вас имеются. Или вы можете одобрить новые в заявках.'
-							icon={TextSearch}
-							buttonPrimary={
-								<Link
-									href='/realtor/requests'
-									className={cn(
-										buttonVariants({ effect: 'ringHover' })
-									)}
-								>
-									Заявки
-								</Link>
-							}
+							title={emptyListProps.title}
+							description={emptyListProps.description}
+							icon={emptyListProps.icon}
+							buttonPrimary={emptyListProps.buttonPrimary}
 						/>
 					</div>
 				) : (

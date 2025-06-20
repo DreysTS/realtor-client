@@ -245,7 +245,7 @@ export default function PropertyPage() {
 
 										return (
 											<div
-												className='hover:border-primary group max-sn:snap-center space-y-2 rounded-xl border p-6 transition-all hover:shadow-lg max-sm:min-w-[320px]'
+												className='hover:border-primary group space-y-2 rounded-xl border p-6 transition-all hover:shadow-lg max-sm:min-w-[320px]'
 												key={index}
 											>
 												<item.icon className='text-primary' />

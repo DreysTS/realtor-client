@@ -1,28 +1,11 @@
-'use client'
+import React, { Suspense } from 'react'
 
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import NewVerificationPage from './NewVerificationPage'
 
-import { AuthWrapper } from '../AuthWrapper'
-
-import { Loading } from '@/components/ui'
-import { useVerificationMutation } from '@/hooks/query'
-
-export default function NewVerificationForm() {
-	const searchParams = useSearchParams()
-	const token = searchParams.get('token')
-
-	const { verification } = useVerificationMutation()
-
-	useEffect(() => {
-		verification(token)
-	}, [token])
-
+export default function Page() {
 	return (
-		<AuthWrapper heading='Подтверждение почты'>
-			<div>
-				<Loading />
-			</div>
-		</AuthWrapper>
+		<Suspense>
+			<NewVerificationPage />
+		</Suspense>
 	)
 }

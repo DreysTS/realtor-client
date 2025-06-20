@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import AboutSection from './AboutSection'
 import CollaborationOverviewSection from './CollaborationOverviewSection'
@@ -7,11 +7,11 @@ import PropertiesDemo from './PropertiesDemo'
 
 export default function Landing() {
 	return (
-		<>
+		<Suspense>
 			<HeroSection />
 			<AboutSection />
 			<CollaborationOverviewSection />
 			<PropertiesDemo />
-		</>
+		</Suspense>
 	)
 }

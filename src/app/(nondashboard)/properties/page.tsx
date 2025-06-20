@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import PropertiesPage from './PropertiesPage'
 
 export default function Page() {
-	return <PropertiesPage />
+	return (
+		<Suspense>
+			<PropertiesPage />
+		</Suspense>
+	)
 }

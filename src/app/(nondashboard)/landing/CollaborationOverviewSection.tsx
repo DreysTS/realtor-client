@@ -16,6 +16,7 @@ import {
 import React, { useEffect, useRef } from 'react'
 
 import { Container, Section, SectionTitling } from '@/components'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 const cooperationSteps = [
 	{
@@ -83,6 +84,8 @@ export default function CollaborationOverviewSection() {
 	const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 	const mousePosition = useRef({ x: 0, y: 0 })
 
+	const matches = useMediaQuery('(width >= 80rem)')
+
 	useEffect(() => {
 		const updateGradient = (e: PointerEvent) => {
 			mousePosition.current = { x: e.clientX, y: e.clientY }
@@ -105,7 +108,7 @@ export default function CollaborationOverviewSection() {
 
 	return (
 		<Section>
-			<Container className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>
+			<Container className='gap-4 sm:grid sm:grid-cols-2 xl:grid-cols-4'>
 				<SectionTitling
 					title='Этапы и преимущества сотрудничества'
 					subtitle='Полный цикл сопровождения: от первого запроса до передачи ключей'

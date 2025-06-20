@@ -10,25 +10,16 @@ import PropertyCard from '@/components/PropertyCard'
 import { EmptyList } from '@/components/special'
 import { Button } from '@/components/ui'
 import { useProperties } from '@/hooks/properties'
-import { NAVBAR_HEIGHT } from '@/lib/constants'
 
 export default function PropertiesPage() {
-	const { properties, isPropertiesLoading, updateFilters, resetFilters } =
-		useProperties()
-
-	const handleUpdateChange = (
-		e:
-			| React.ChangeEvent<HTMLInputElement>
-			| React.ChangeEvent<HTMLTextAreaElement>
-			| React.ChangeEvent<HTMLSelectElement>
-	) => {
-		updateFilters({ [e.target.name]: e.target.value })
-	}
+	const { properties, isPropertiesLoading, resetFilters, hasMore, loadMore, isFetchingNextPage } = useProperties()
 
 	return (
 		<>
 			{' '}
-			<Section className={`pt-3 sm:min-h-[calc(100vh-64px)]`}>
+			<Section
+				className={`flex flex-col pt-3 sm:min-h-[calc(100vh-64px)]`}
+			>
 				<div className='grid items-end gap-3 rounded-lg border p-4 shadow-sm sm:grid-cols-2 xl:flex'>
 					<FiltersBar />
 					<FullFilters />
@@ -40,12 +31,7 @@ export default function PropertiesPage() {
 					<div className='bg-primary h-36 w-36'>Loading...</div>
 				)}
 				{properties?.length === 0 ? (
-					<div
-						style={{
-							height: `calc(100vh - ${NAVBAR_HEIGHT}px)`
-						}}
-						className='grid place-items-center'
-					>
+					<div className='grid h-full grow place-items-center'>
 						<EmptyList
 							title='Список объектов пуст'
 							description='Вы можете оставить заявку на приобретение недвижимости, либо
@@ -72,6 +58,19 @@ export default function PropertiesPage() {
 								/>
 							))}
 						</div>
+						{hasMore && (
+							<div className='mt-6 flex justify-center'>
+								<Button
+									onClick={loadMore}
+									disabled={isFetchingNextPage}
+									className='px-6 py-3'
+								>
+									{isFetchingNextPage
+										? 'Загрузка...'
+										: 'Показать еще'}
+								</Button>
+							</div>
+						)}
 					</>
 				)}
 			</Section>
