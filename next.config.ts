@@ -21,7 +21,16 @@ const nextConfig: NextConfig = {
 				hostname: 'localhost',
 				port: '4000',
 				pathname: '/static/**'
-			}
+			},
+			{
+				protocol: 'https',
+				hostname: 'moskvrealty.ru'
+			},
+			{
+				protocol: 'https',
+				hostname: 'moskvrealty.ru',
+				pathname: '/static/**'
+			},
 		]
 	}
 }
