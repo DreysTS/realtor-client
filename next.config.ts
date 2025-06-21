@@ -24,11 +24,11 @@ const nextConfig: NextConfig = {
 			},
 			{
 				protocol: 'https',
-				hostname: 'moskvrealty.ru'
+				hostname: 'api.moskvrealty.ru'
 			},
 			{
 				protocol: 'https',
-				hostname: 'moskvrealty.ru',
+				hostname: 'api.moskvrealty.ru',
 				pathname: '/static/**'
 			},
 		]
