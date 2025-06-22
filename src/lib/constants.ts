@@ -64,7 +64,7 @@ export const radioPropertyType = [
 	{ value: 'apartment', label: 'Апартаменты' },
 	{ value: 'flat', label: 'Квартира' },
 	{ value: 'euro_flat', label: 'Евро' },
-	{ value: 'gab', label: 'Гараж' }
+	{ value: 'gab', label: 'ГАБ' }
 ]
 
 export const radioSecondary = [

@@ -93,7 +93,7 @@ export function SettingsForm() {
 								name='phoneNumber'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Почта</FormLabel>
+										<FormLabel>Номер телефона</FormLabel>
 										<FormControl>
 											<Input
 												placeholder='+70987654321'

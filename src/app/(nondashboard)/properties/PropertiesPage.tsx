@@ -12,7 +12,14 @@ import { Button } from '@/components/ui'
 import { useProperties } from '@/hooks/properties'
 
 export default function PropertiesPage() {
-	const { properties, isPropertiesLoading, resetFilters, hasMore, loadMore, isFetchingNextPage } = useProperties()
+	const {
+		properties,
+		isPropertiesLoading,
+		resetFilters,
+		hasMore,
+		loadMore,
+		isFetchingNextPage
+	} = useProperties()
 
 	return (
 		<>
@@ -31,7 +38,7 @@ export default function PropertiesPage() {
 					<div className='bg-primary h-36 w-36'>Loading...</div>
 				)}
 				{properties?.length === 0 ? (
-					<div className='grid h-full grow place-items-center'>
+					<div className='grid h-full grow place-items-center max-sm:pt-4'>
 						<EmptyList
 							title='Список объектов пуст'
 							description='Вы можете оставить заявку на приобретение недвижимости, либо
