@@ -12,7 +12,7 @@ import {
 	Sparkles
 } from 'lucide-react'
 import Image from 'next/image'
-import { useParams } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation'
 import React from 'react'
 import { FaTelegram, FaWhatsapp } from 'react-icons/fa'
 
@@ -42,7 +42,7 @@ import { cn, copyToClipboard, formatPhoneNumber, translateEnum } from '@/utils'
 export default function PropertyPage() {
 	const params = useParams<{ id: string }>()
 
-	const { property, isPropertyLoading } = usePropertyById(params.id)
+	const { property, isPropertyLoading, error } = usePropertyById(params.id)
 	const {
 		handleFavorite,
 		isAddingToFavorite,
@@ -56,6 +56,10 @@ export default function PropertyPage() {
 				<Loading />
 			</Container>
 		)
+	}
+
+	if (error?.message === 'Not Found') {
+		return notFound()
 	}
 
 	const featuresInformation = [

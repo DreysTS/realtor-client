@@ -103,7 +103,7 @@ export default function FiltersBar() {
 					step={1}
 					value={[
 						Number(filters.minSquare || 0),
-						Number(filters.maxSquare || 100000000)
+						Number(filters.maxSquare || 200)
 					]}
 					onValueChange={([min, max]) =>
 						updateFilters({
