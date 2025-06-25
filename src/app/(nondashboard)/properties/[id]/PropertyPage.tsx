@@ -59,7 +59,8 @@ export default function PropertyPage() {
 	}
 
 	if (error?.message === 'Not Found') {
-		return notFound()
+		notFound()
+		return null
 	}
 
 	const featuresInformation = [
