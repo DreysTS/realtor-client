@@ -42,7 +42,7 @@ import { cn, copyToClipboard, formatPhoneNumber, translateEnum } from '@/utils'
 export default function PropertyPage() {
 	const params = useParams<{ id: string }>()
 
-	const { property, isPropertyLoading, error } = usePropertyById(params.id)
+	const { property, isPropertyLoading } = usePropertyById(params.id)
 	const {
 		handleFavorite,
 		isAddingToFavorite,
@@ -58,9 +58,8 @@ export default function PropertyPage() {
 		)
 	}
 
-	if (error?.message === 'Not Found') {
+	if (!property) {
 		notFound()
-		return null
 	}
 
 	const featuresInformation = [
