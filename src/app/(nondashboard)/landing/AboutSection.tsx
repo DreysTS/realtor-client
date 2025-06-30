@@ -7,8 +7,9 @@ import About4 from '../../../../public/about-4.jpg'
 import About5 from '../../../../public/about-5.jpg'
 import About6 from '../../../../public/about-6.jpg'
 
-import { Container, Section, SectionTitling } from '@/components'
-import { cn } from '@/utils'
+import { Container, Section } from '@/components'
+import { SectionTitling } from '@/components/special'
+import { cn } from '@/lib/utils'
 
 const aboutList = [
 	{

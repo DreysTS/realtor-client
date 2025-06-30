@@ -3,7 +3,7 @@ import {
 	TypeCreatePropertySchema,
 	TypeUpdatePropertySchema
 } from '@/lib/schemes'
-import { IPagination, IProperty } from '@/types'
+import { IPagination, IProperty } from '@/lib/types'
 
 export class PropertyService {
 	public async findAll(params: Record<string, string> = {}) {

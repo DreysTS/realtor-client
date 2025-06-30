@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-import { PreviewDescription } from '@/components'
+import { PreviewDescription } from '@/components/special'
 import { Badge, Card, CardContent, CardHeader } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
-import { useDeletePurchase } from '@/hooks/purchases'
+import { useDeletePurchase } from '@/hooks/queries/purchases'
 import { propertyPurchaseStatusMap } from '@/lib/constants'
-import { IPurchase } from '@/types'
-import { formatPhoneNumber, translateEnum } from '@/utils'
+import { IPurchase } from '@/lib/types'
+import { formatPhoneNumber, translateEnum } from '@/lib/utils'
 
 export default function PurchaseCard({ purchase }: { purchase: IPurchase }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)

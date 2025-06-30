@@ -7,8 +7,8 @@ import PropertyPurchasesCard from '../PropertyPurchasesCard'
 
 import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useFindPurchase } from '@/hooks/purchases'
-import { IPurchase } from '@/types'
+import { useFindPurchase } from '@/hooks/queries/purchases'
+import { IPurchase } from '@/lib/types'
 
 export default function Page() {
 	const params = useParams<{ id: string }>()

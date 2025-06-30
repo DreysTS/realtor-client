@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ImageUpload } from '@/components'
+import { ImageUpload } from '@/components/special'
 import {
 	Button,
 	Form,
@@ -13,7 +13,7 @@ import {
 	Input,
 	Textarea
 } from '@/components/ui'
-import { useCreateRequest } from '@/hooks/requests'
+import { useCreateRequest } from '@/hooks/queries/requests'
 import { TypeCreateRequestSchema } from '@/lib/schemes'
 
 export default function RequestForm() {

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { BUILDING_TYPES, PROPERTY_TYPES, SELLING_TYPES } from '@/types'
+import { BUILDING_TYPES, PROPERTY_TYPES, SELLING_TYPES } from '@/lib/types'
 
 export const PropertySchema = z.object({
 	title: z.string().min(1, { message: 'Введите заголовок' }),

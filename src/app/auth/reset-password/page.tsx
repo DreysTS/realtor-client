@@ -19,7 +19,7 @@ import {
 	FormMessage,
 	Input
 } from '@/components/ui'
-import { useResetPasswordMutation } from '@/hooks/query'
+import { useResetPasswordMutation } from '@/hooks/queries/auth'
 import { ResetPasswordSchema, TypeResetPasswordSchema } from '@/lib/schemes'
 
 export default function ResetPasswordForm() {

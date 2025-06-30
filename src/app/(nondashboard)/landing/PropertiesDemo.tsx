@@ -4,12 +4,11 @@ import { ArrowRight, Building2, FilePlus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-import { Container, Section, SectionTitling } from '@/components'
-import PropertyCard from '@/components/PropertyCard'
-import { EmptyList } from '@/components/special'
+import { Container, Section } from '@/components'
+import { EmptyList, PropertyCard, SectionTitling } from '@/components/special'
 import { Button, buttonVariants } from '@/components/ui'
-import { useProperties } from '@/hooks/properties'
-import { cn } from '@/utils'
+import { useProperties } from '@/hooks/queries/properties'
+import { cn } from '@/lib/utils'
 
 export default function PropertiesDemo() {
 	const { properties, isPropertiesLoading } = useProperties()

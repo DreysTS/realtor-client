@@ -8,9 +8,9 @@ import {
 	Slider,
 	buttonVariants
 } from '@/components/ui'
-import { useProperties } from '@/hooks/properties'
+import { useProperties } from '@/hooks/queries/properties'
 import { radioRooms } from '@/lib/constants'
-import { cn } from '@/utils'
+import { cn } from '@/lib/utils'
 
 export default function FiltersBar() {
 	const { filters, updateFilters, updateSorting } = useProperties()

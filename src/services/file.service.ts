@@ -1,5 +1,5 @@
 import { api } from '@/api'
-import { IFile } from '@/types/file.types'
+import { IFile } from '@/lib/types/file.types'
 
 export class FileService {
 	public async upload(formData: FormData) {

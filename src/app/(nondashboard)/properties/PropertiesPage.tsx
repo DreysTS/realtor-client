@@ -6,10 +6,9 @@ import React from 'react'
 import FiltersBar from './FiltersBar'
 import FullFilters from './FullFilters'
 import { Footer, Section } from '@/components'
-import PropertyCard from '@/components/PropertyCard'
-import { EmptyList } from '@/components/special'
+import { EmptyList, PropertyCard } from '@/components/special'
 import { Button } from '@/components/ui'
-import { useProperties } from '@/hooks/properties'
+import { useProperties } from '@/hooks/queries/properties'
 
 export default function PropertiesPage() {
 	const {
@@ -23,7 +22,6 @@ export default function PropertiesPage() {
 
 	return (
 		<>
-			{' '}
 			<Section
 				className={`flex flex-col pt-3 sm:min-h-[calc(100vh-64px)]`}
 			>

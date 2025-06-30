@@ -20,7 +20,7 @@ import {
 	FormMessage,
 	Input
 } from '@/components/ui'
-import { useLoginMutation } from '@/hooks/query'
+import { useLoginMutation } from '@/hooks/queries/auth'
 import { LoginSchema, TypeLoginSchema } from '@/lib/schemes'
 
 export default function LoginForm() {

@@ -1,12 +1,20 @@
-import { Cookie } from 'lucide-react'
-
 import { api } from '@/api'
 import { TypeSettingsSchema } from '@/lib/schemes'
-import { IUser } from '@/types'
+import { IUser } from '@/lib/types'
 
 class UserService {
 	public async findProfile() {
 		const response = await api.get<IUser>('users/profile')
+
+		return response
+	}
+
+	public async findServerProfile(cookie: string) {
+		const response = await api.get<IUser>('users/profile', {
+			headers: {
+				Cookie: `session=${cookie}`
+			}
+		})
 
 		return response
 	}
@@ -38,7 +46,7 @@ class UserService {
 	public async role(cookie: string) {
 		const response = await api.get<Pick<IUser, 'role'>>('users/is-admin', {
 			headers: {
-				Cookie: cookie
+				Cookie: `session=${cookie}`
 			}
 		})
 

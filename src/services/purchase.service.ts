@@ -3,7 +3,7 @@ import {
 	TypeCreatePurchaseSchema,
 	TypeUpdatePurchaseSchema
 } from '@/lib/schemes'
-import { IPurchase } from '@/types'
+import { IPurchase } from '@/lib/types'
 
 export class PurchaseService {
 	public async findPurchase(purchaseId: string) {

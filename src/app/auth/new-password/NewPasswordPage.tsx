@@ -19,7 +19,7 @@ import {
 	FormMessage,
 	Input
 } from '@/components/ui'
-import { useNewPasswordMutation } from '@/hooks/query'
+import { useNewPasswordMutation } from '@/hooks/queries/auth'
 import { NewPasswordSchema, TypeNewPasswordSchema } from '@/lib/schemes'
 
 export default function NewPasswordPage() {

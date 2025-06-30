@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { PreviewDescription } from '@/components'
+import { PreviewDescription } from '@/components/special'
 import {
 	Avatar,
 	AvatarImage,
@@ -14,13 +14,13 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
-import { useUpdateStatus } from '@/hooks/purchases'
+import { useUpdateStatus } from '@/hooks/queries/purchases'
 import {
 	propertyPurchaseStatusMap,
 	propertyPurchaseStatuses
 } from '@/lib/constants'
-import { IPurchase } from '@/types'
-import { cn, formatPhoneNumber, translateEnum } from '@/utils'
+import { IPurchase } from '@/lib/types'
+import { cn, formatPhoneNumber, translateEnum } from '@/lib/utils'
 
 export default function PropertyPurchasesCard({
 	purchase

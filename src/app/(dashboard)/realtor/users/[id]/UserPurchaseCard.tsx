@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { PreviewCarousel, PreviewDescription } from '@/components'
+import { PreviewDescription } from '@/components/special'
 import {
 	Badge,
 	Button,
@@ -13,8 +13,8 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { propertyPurchaseStatusMap } from '@/lib/constants'
-import { IPurchase } from '@/types'
-import { cn, translateEnum } from '@/utils'
+import { IPurchase } from '@/lib/types'
+import { cn, translateEnum } from '@/lib/utils'
 
 export default function UserPurchaseCard({
 	purchase

@@ -14,7 +14,7 @@ import {
 	CardHeader,
 	Loading
 } from '@/components/ui'
-import { useFindUsersFeedbacks } from '@/hooks/feedback'
+import { useFindUsersFeedbacks } from '@/hooks/queries/feedback'
 
 const emptyListProps: IEmptyList = {
 	title: 'Никто ещё не оставил отзыва',

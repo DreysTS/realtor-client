@@ -6,7 +6,7 @@ import React from 'react'
 import PropertyRequestCard from './PropertyRequestCard'
 import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useUsersRequests } from '@/hooks/requests'
+import { useUsersRequests } from '@/hooks/queries/requests'
 
 const emptyListProps: Omit<IEmptyList, 'primaryButton' | 'secondaryButton'> = {
 	title: 'Список заявок на продажу пуст',

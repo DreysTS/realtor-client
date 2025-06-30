@@ -5,7 +5,7 @@ import React from 'react'
 import UserCard from './UserCard'
 import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useUsers } from '@/hooks/query'
+import { useUsers } from '@/hooks/queries/auth'
 
 export default function UsersPage() {
 	const { users, isUsersLoading, usersError } = useUsers()

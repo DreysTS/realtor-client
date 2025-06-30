@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import PropertyForm from './PropertyForm'
-import { PreviewCarousel, PreviewDescription } from '@/components'
+import { PreviewCarousel, PreviewDescription } from '@/components/special'
 import {
 	Badge,
 	Button,
@@ -11,6 +11,7 @@ import {
 	CardContent,
 	CardFooter,
 	CardHeader,
+	DataItem,
 	Dialog,
 	DialogContent,
 	DialogDescription,
@@ -30,8 +31,7 @@ import {
 	SheetHeader,
 	SheetTitle
 } from '@/components/ui'
-import { DataItem } from '@/components/ui/data-item'
-import { useRemoveProperty, useSetStatus } from '@/hooks/properties'
+import { useRemoveProperty, useSetStatus } from '@/hooks/queries/properties'
 import {
 	buildingTypeMap,
 	propertyStatuses,
@@ -39,8 +39,8 @@ import {
 	sellingTypeMap,
 	statusMap
 } from '@/lib/constants'
-import { IProperty } from '@/types'
-import { copyToClipboard, translateEnum } from '@/utils'
+import { IProperty } from '@/lib/types'
+import { copyToClipboard, translateEnum } from '@/lib/utils'
 
 export default function RealtorPropertyCard({
 	property

@@ -15,8 +15,9 @@ import {
 } from 'lucide-react'
 import React, { useEffect, useRef } from 'react'
 
-import { Container, Section, SectionTitling } from '@/components'
+import { Container, Section } from '@/components'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { SectionTitling } from '@/components/special'
 
 const cooperationSteps = [
 	{

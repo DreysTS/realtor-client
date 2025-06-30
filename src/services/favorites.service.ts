@@ -1,5 +1,5 @@
 import { api } from '@/api'
-import { IFavoriteId, IFavoritedProperties } from '@/types'
+import { IFavoriteId, IFavoritedProperties } from '@/lib/types'
 
 export class FavoriteService {
 	public async getFavoritesProperties() {

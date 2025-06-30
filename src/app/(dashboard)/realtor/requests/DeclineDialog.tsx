@@ -6,19 +6,16 @@ import {
 	Button,
 	Dialog,
 	DialogContent,
-	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	Form,
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
-	FormMessage,
 	Textarea
 } from '@/components/ui'
-import { useDeclineRequest } from '@/hooks/requests'
-import { IRequest } from '@/types'
+import { useDeclineRequest } from '@/hooks/queries/requests'
+import { IRequest } from '@/lib/types'
 
 interface IDecline {
 	rejectReason: string

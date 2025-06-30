@@ -1,6 +1,6 @@
 import { api } from '@/api'
 import { TypeFeedbackScheme } from '@/lib/schemes/feedback.scheme'
-import { IFeedback } from '@/types'
+import { IFeedback } from '@/lib/types'
 
 export class FeedbackService {
 	public async findFeedbacks() {

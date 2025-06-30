@@ -19,7 +19,7 @@ import {
 	FormMessage,
 	Input
 } from '@/components/ui'
-import { useRegisterMutation } from '@/hooks/query'
+import { useRegisterMutation } from '@/hooks/queries/auth'
 import { RegisterSchema, TypeRegisterSchema } from '@/lib/schemes'
 
 export default function RegisterForm() {

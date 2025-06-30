@@ -9,10 +9,10 @@ import UserPurchaseCard from './UserPurchaseCard'
 import UserRequestCard from './UserRequestCard'
 import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useFindUserPurchases } from '@/hooks/purchases'
-import { useFindUserById } from '@/hooks/query'
-import { useUserRequests } from '@/hooks/requests'
-import { IUser } from '@/types'
+import { useFindUserById } from '@/hooks/queries/auth'
+import { useFindUserPurchases } from '@/hooks/queries/purchases'
+import { useUserRequests } from '@/hooks/queries/requests'
+import { IUser } from '@/lib/types'
 
 export default function UserPage() {
 	const params = useParams<{ id: string }>()

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui'
-import { IUser } from '@/types'
+import { IUser } from '@/lib/types'
 
 export default function UserCard({
 	user,

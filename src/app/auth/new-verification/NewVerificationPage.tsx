@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { AuthWrapper } from '../AuthWrapper'
 
 import { Loading } from '@/components/ui'
-import { useVerificationMutation } from '@/hooks/query'
+import { useVerificationMutation } from '@/hooks/queries/auth'
 
 export default function NewVerificationPage() {
 	const searchParams = useSearchParams()

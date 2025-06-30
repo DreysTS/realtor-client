@@ -1,6 +1,6 @@
 import { api } from '@/api'
 import { TypeCreateRequestSchema } from '@/lib/schemes'
-import { IRequest } from '@/types/request.types'
+import { IRequest } from '@/lib/types/request.types'
 
 export class RequestService {
 	public async findRequests() {

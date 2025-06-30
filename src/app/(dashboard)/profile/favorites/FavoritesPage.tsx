@@ -4,11 +4,15 @@ import { Heart } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-import PropertyCard from '@/components/PropertyCard'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
+import {
+	EmptyList,
+	IEmptyList,
+	PropertyCard,
+	SidebarTitle
+} from '@/components/special'
 import { Loading, buttonVariants } from '@/components/ui'
-import { useFavoritesProperties } from '@/hooks/favorites'
-import { cn } from '@/utils'
+import { useFavoritesProperties } from '@/hooks/queries/favorites'
+import { cn } from '@/lib/utils'
 
 const emptyListProps: IEmptyList = {
 	title: 'Ещё нет избранных объектов',

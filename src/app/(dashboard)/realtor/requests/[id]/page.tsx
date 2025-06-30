@@ -7,8 +7,8 @@ import PropertyRequestCard from '../PropertyRequestCard'
 
 import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useFindRequestById } from '@/hooks/requests'
-import { IRequest } from '@/types'
+import { useFindRequestById } from '@/hooks/queries/requests'
+import { IRequest } from '@/lib/types'
 
 export default function Page() {
 	const params = useParams<{ id: string }>()

@@ -13,9 +13,9 @@ import {
 	Input,
 	Textarea
 } from '@/components/ui'
-import { useAddPurchase, useUpdatePurchase } from '@/hooks/purchases'
+import { useAddPurchase, useUpdatePurchase } from '@/hooks/queries/purchases'
 import { TypeCreatePurchaseSchema } from '@/lib/schemes'
-import { IPurchase } from '@/types'
+import { IPurchase } from '@/lib/types'
 
 export default function PurchaseForm({
 	purchase

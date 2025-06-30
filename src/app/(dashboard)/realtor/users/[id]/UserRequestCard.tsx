@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { PreviewCarousel } from '@/components'
 import {
 	Badge,
 	Button,
@@ -13,15 +12,18 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { propertyRequestStatusMap } from '@/lib/constants'
-import { IRequest } from '@/types'
-import { cn, translateEnum } from '@/utils'
+import { IRequest } from '@/lib/types'
+import { cn, translateEnum } from '@/lib/utils'
+import { PreviewCarousel } from '@/components/special'
 
 export default function UserRequestCard({ request }: { request: IRequest }) {
 	return (
 		<Card className='bg-transparent'>
 			<CardHeader className='grow'>
 				<div className='space-y-2'>
-					<h2 className='text-lg sm:text-xl xl:text-2xl font-semibold'>{request.title}</h2>
+					<h2 className='text-lg font-semibold sm:text-xl xl:text-2xl'>
+						{request.title}
+					</h2>
 					<Badge>
 						{translateEnum(
 							request.propertyRequestStatus,
@@ -35,7 +37,7 @@ export default function UserRequestCard({ request }: { request: IRequest }) {
 			</CardContent>
 			<Separator />
 			<CardFooter>
-				<div className='flex flex-wrap gap-2 w-full'>
+				<div className='flex w-full flex-wrap gap-2'>
 					<Link
 						className={cn(buttonVariants({}), 'grow')}
 						href={`/realtor/requests/${request.id}`}

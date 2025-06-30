@@ -34,10 +34,15 @@ import {
 	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui'
-import { useFavorite } from '@/hooks/favorites'
-import { usePropertyById } from '@/hooks/properties'
+import { useFavorite } from '@/hooks/queries/favorites'
+import { usePropertyById } from '@/hooks/queries/properties'
 import { buildingTypeMap, propertyTypeMap } from '@/lib/constants'
-import { cn, copyToClipboard, formatPhoneNumber, translateEnum } from '@/utils'
+import {
+	cn,
+	copyToClipboard,
+	formatPhoneNumber,
+	translateEnum
+} from '@/lib/utils'
 
 export default function PropertyPage() {
 	const params = useParams<{ id: string }>()

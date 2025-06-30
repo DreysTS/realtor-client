@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
-import { cn } from '@/utils'
+import { cn } from '@/lib/utils'
 
 export default function NotFound() {
 	return (

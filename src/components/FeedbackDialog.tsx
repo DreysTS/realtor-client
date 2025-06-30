@@ -18,10 +18,9 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	Textarea
 } from './ui'
-import { useCreateFeedback } from '@/hooks/feedback'
+import { useCreateFeedback } from '@/hooks/queries/feedback'
 import {
 	FeedbackScheme,
 	TypeFeedbackScheme

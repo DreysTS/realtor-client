@@ -7,8 +7,8 @@ import RealtorPropertyCard from '../RealtorPropertyCard'
 
 import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useRealtorProperty } from '@/hooks/properties'
-import { IProperty } from '@/types'
+import { useRealtorProperty } from '@/hooks/queries/properties'
+import { IProperty } from '@/lib/types'
 
 export default function RealtorPropertyPage() {
 	const params = useParams<{ id: string }>()

@@ -15,15 +15,15 @@ import {
 	Slider,
 	buttonVariants
 } from '@/components/ui'
-import { useProperties } from '@/hooks/properties'
+import { useProperties } from '@/hooks/queries/properties'
 import {
 	radioBuildingType,
 	radioPropertyType,
 	radioRooms,
 	radioSecondary
 } from '@/lib/constants'
-import { BuildingType, PropertyType } from '@/types'
-import { cn } from '@/utils'
+import { BuildingType, PropertyType } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 export default function FullFilters() {
 	const [isFiltersOpen, setIsFiltersOpen] = useState(false)

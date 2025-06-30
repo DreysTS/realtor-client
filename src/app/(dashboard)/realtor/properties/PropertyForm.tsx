@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form'
 
-import { ImageUpload } from '@/components'
+import { ImageUpload } from '@/components/special'
 import {
 	Button,
 	Form,
@@ -18,14 +18,17 @@ import {
 	Switch,
 	Textarea
 } from '@/components/ui'
-import { useCreateProperty, useUpdateProperty } from '@/hooks/properties'
+import {
+	useCreateProperty,
+	useUpdateProperty
+} from '@/hooks/queries/properties'
 import {
 	buildingTypeMap,
 	propertyTypeMap,
 	sellingTypeMap
 } from '@/lib/constants'
 import { TypeCreatePropertySchema } from '@/lib/schemes'
-import { IProperty } from '@/types'
+import { IProperty } from '@/lib/types'
 
 export default function PropertyForm({
 	property

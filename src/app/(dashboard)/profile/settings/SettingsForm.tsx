@@ -18,7 +18,7 @@ import {
 	Loading,
 	Switch
 } from '@/components/ui'
-import { useProfile, useUpdateProfileMutation } from '@/hooks/query'
+import { useProfile, useUpdateProfileMutation } from '@/hooks/queries/auth'
 import { SettingsSchema, TypeSettingsSchema } from '@/lib/schemes'
 
 export function SettingsForm() {

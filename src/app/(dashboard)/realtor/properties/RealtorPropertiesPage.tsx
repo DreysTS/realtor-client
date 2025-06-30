@@ -17,8 +17,8 @@ import {
 	SheetTrigger,
 	buttonVariants
 } from '@/components/ui'
-import { useRealtorProperties } from '@/hooks/properties'
-import { cn } from '@/utils'
+import { useRealtorProperties } from '@/hooks/queries/properties'
+import { cn } from '@/lib/utils'
 
 const emptyListProps: IEmptyList = {
 	title: 'Список объектов пуст',

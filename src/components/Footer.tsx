@@ -21,7 +21,7 @@ import {
 	TooltipTrigger,
 	buttonVariants
 } from './ui'
-import { cn } from '@/utils'
+import { cn } from '@/lib/utils'
 
 const socialMedias = [
 	{ icon: FaVk, label: 'Вконтакте' },

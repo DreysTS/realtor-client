@@ -21,8 +21,8 @@ import {
 	TabsList,
 	TabsTrigger
 } from '@/components/ui'
-import { useFindPurchases } from '@/hooks/purchases'
-import { useRequests } from '@/hooks/requests'
+import { useFindPurchases } from '@/hooks/queries/purchases'
+import { useRequests } from '@/hooks/queries/requests'
 
 const emptyListPropsRequests: IEmptyList = {
 	title: 'Заявок на продажу нету',
@@ -90,7 +90,10 @@ export default function RequestPage() {
 						Покупка
 					</TabsTrigger>
 				</TabsList>
-				<TabsContent value='requests' className='rounded-xl sm:border sm:p-3'>
+				<TabsContent
+					value='requests'
+					className='rounded-xl sm:border sm:p-3'
+				>
 					{requests?.length === 0 ? (
 						<div className='flex h-full grow items-center justify-center'>
 							<EmptyList
@@ -113,7 +116,10 @@ export default function RequestPage() {
 						</div>
 					)}
 				</TabsContent>
-				<TabsContent value='purchases' className='rounded-xl sm:border sm:p-3'>
+				<TabsContent
+					value='purchases'
+					className='rounded-xl sm:border sm:p-3'
+				>
 					{purchases?.length === 0 ? (
 						<div className='flex h-full grow items-center justify-center'>
 							<EmptyList

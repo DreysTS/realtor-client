@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import DeclineDialog from './DeclineDialog'
-import { PreviewCarousel, PreviewDescription } from '@/components'
+import { PreviewCarousel, PreviewDescription } from '@/components/special'
 import {
 	Avatar,
 	AvatarImage,
@@ -17,10 +17,10 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
-import { useAcceptRequest } from '@/hooks/requests'
+import { useAcceptRequest } from '@/hooks/queries/requests'
 import { propertyRequestStatusMap } from '@/lib/constants'
-import { IRequest } from '@/types'
-import { cn, translateEnum } from '@/utils'
+import { IRequest } from '@/lib/types'
+import { cn, translateEnum } from '@/lib/utils'
 
 export default function PropertyRequestCard({
 	request

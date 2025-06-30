@@ -6,7 +6,7 @@ import React from 'react'
 import PropertyPurchasesCard from './PropertyPurchasesCard'
 import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
-import { useFindUsersPurchases } from '@/hooks/purchases'
+import { useFindUsersPurchases } from '@/hooks/queries/purchases'
 
 const emptyListProps: IEmptyList = {
 	title: 'Список заявок на покупку пуст',
