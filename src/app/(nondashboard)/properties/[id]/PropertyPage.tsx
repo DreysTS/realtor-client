@@ -272,7 +272,7 @@ export default function PropertyPage() {
 						</div>
 					</div>
 					<div>
-						<Card className='sticky top-20 rounded-lg border lg:bg-transparent'>
+						<Card className='sticky top-20 rounded-lg border bg-transparent'>
 							<CardHeader>
 								<CardTitle className='text-xl font-semibold'>
 									{formatPhoneNumber('+78005553535')}

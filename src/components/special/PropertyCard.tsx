@@ -28,7 +28,7 @@ export function PropertyCard({ property }: { property: IProperty }) {
 
 	return (
 		<Link href={`/properties/${property.id}`}>
-			<Card className='group from-secondary/20 to-card overflow-hidden bg-gradient-to-t pt-0 backdrop-blur-2xl transition-all hover:shadow-xl'>
+			<Card className='group from-secondary/5 to-card overflow-hidden bg-gradient-to-t pt-0 backdrop-blur-2xl transition-all hover:shadow-xl'>
 				<div className='relative aspect-video overflow-hidden'>
 					<Image
 						src={`${process.env.SERVER_URL}/static/${property.images[0]}`}

@@ -18,7 +18,7 @@ import { useDeclineRequest } from '@/hooks/queries/requests'
 import { IRequest } from '@/lib/types'
 
 interface IDecline {
-	rejectReason: string
+	rejectionReason: string
 }
 
 export default function DeclineDialog({ request }: { request: IRequest }) {
@@ -38,7 +38,7 @@ export default function DeclineDialog({ request }: { request: IRequest }) {
 	const form = useForm<IDecline>({
 		mode: 'onChange',
 		values: {
-			rejectReason: ''
+			rejectionReason: ''
 		}
 	})
 
@@ -76,7 +76,7 @@ export default function DeclineDialog({ request }: { request: IRequest }) {
 						>
 							<FormField
 								control={form.control}
-								name='rejectReason'
+								name='rejectionReason'
 								render={({ field }) => (
 									<FormItem>
 										<FormControl>

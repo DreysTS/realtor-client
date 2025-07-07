@@ -12,16 +12,10 @@ export default function NotFound() {
 			style={{ height: `calc(100vh - ${NAVBAR_HEIGHT}px)` }}
 		>
 			<div className='flex max-w-[40rem] flex-col items-center gap-4 text-center'>
-				<span className='bg-card rounded-lg border p-2 lg:p-3'>
-					<Compass className='max-lg:size-5' />
-				</span>
-				<h1 className='text-xl font-semibold lg:text-3xl'>
-					Данный объект недвижимости не найден
-				</h1>
+				<h1 className='text-8xl font-bold'>404</h1>
 				<p className='text-muted-foreground'>
-					Возможно, он никогда не добавлялся на сайт, либо был
-					заархивирован. Вы можете зайти в каталог, чтобы ознакомиться
-					со всеми существующими в данный момент объектами.
+					Запрашиваемый объект не был найден. Вы можете ознакомиться
+					со всеми имеющимися объектами в каталоге
 				</p>
 				<div className='space-x-3'>
 					<Link
