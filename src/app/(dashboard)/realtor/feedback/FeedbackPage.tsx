@@ -29,14 +29,16 @@ export default function FeedbackPage() {
 	if (isUsersFeedbacksLoading) return <Loading />
 
 	return (
-		<div className='space-y-4'>
+		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Обратная связь пользователей</SidebarTitle>
 			{usersFeedbacks?.length === 0 ? (
-				<EmptyList
-					title={emptyListProps.title}
-					description={emptyListProps.description}
-					icon={emptyListProps.icon}
-				/>
+				<div className='flex grow items-center justify-center'>
+					<EmptyList
+						title={emptyListProps.title}
+						description={emptyListProps.description}
+						icon={emptyListProps.icon}
+					/>
+				</div>
 			) : (
 				usersFeedbacks?.map(feedback => (
 					<div key={feedback.id}>

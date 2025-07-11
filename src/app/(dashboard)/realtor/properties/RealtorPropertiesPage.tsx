@@ -41,7 +41,7 @@ export default function RealtorPropertiesPage() {
 	if (isPropertiesLoading) return <Loading />
 
 	return (
-		<div className='space-y-4'>
+		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Список всех объектов</SidebarTitle>
 			<div>
 				<Sheet>
@@ -62,27 +62,25 @@ export default function RealtorPropertiesPage() {
 					</SheetContent>
 				</Sheet>
 			</div>
-			<div>
-				{properties?.length === 0 ? (
-					<div className='flex justify-center'>
-						<EmptyList
-							title={emptyListProps.title}
-							description={emptyListProps.description}
-							icon={emptyListProps.icon}
-							buttonPrimary={emptyListProps.buttonPrimary}
+			{properties?.length === 0 ? (
+				<div className='flex grow items-center justify-center'>
+					<EmptyList
+						title={emptyListProps.title}
+						description={emptyListProps.description}
+						icon={emptyListProps.icon}
+						buttonPrimary={emptyListProps.buttonPrimary}
+					/>
+				</div>
+			) : (
+				<div className='flex flex-col gap-4 rounded-xl border p-4'>
+					{properties?.map(property => (
+						<RealtorPropertyCard
+							key={property.id}
+							property={property}
 						/>
-					</div>
-				) : (
-					<div className='flex flex-col gap-4 rounded-xl border p-4'>
-						{properties?.map(property => (
-							<RealtorPropertyCard
-								key={property.id}
-								property={property}
-							/>
-						))}
-					</div>
-				)}
-			</div>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }

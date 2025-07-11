@@ -21,10 +21,10 @@ export default function PropertyPurchasePage() {
 	if (isUsersPurchasesLoading) return <Loading />
 
 	return (
-		<div className='space-y-4'>
+		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Заявки на покупку</SidebarTitle>
 			{usersPurchases?.length === 0 ? (
-				<div className='flex justify-center'>
+				<div className='flex grow items-center justify-center'>
 					<EmptyList
 						title={emptyListProps.title}
 						description={emptyListProps.description}
