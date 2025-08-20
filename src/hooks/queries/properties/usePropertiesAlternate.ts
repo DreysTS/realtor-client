@@ -1,24 +1,29 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useDebouncedEffect } from '@/hooks/useDebounceEffect'
-import { useSearchParamsObject } from '@/hooks/useSearchParamsObject'
+import { useDebouncedEffect, useSearchParamsObject } from '@/hooks'
+import { PropertyFilters, SearchParamsObject } from '@/lib/types'
 import { propertyService } from '@/services'
-import { useFiltersStore } from '@/stores/filters.store'
 
-export function useProperties() {
-	const pathname = usePathname()
-	const router = useRouter()
+const DEFAULT_FILTERS = {
+	minPrice: '0',
+	maxPrice: '100000000',
+	minSquare: '0',
+	maxSquare: '200'
+}
+
+export function usePropertiesAlternate() {
 	const initialFilters = useSearchParamsObject()
+	const router = useRouter()
+	const pathname = usePathname()
 
-	const filters = useFiltersStore(s => s.filters)
-	const storeResetFilters = useFiltersStore(s => s.resetFilters)
-	const updateFilters = useFiltersStore(s => s.updateFilters)
-	const updateSorting = useFiltersStore(s => s.updateSorting)
+	const [filters, setFilters] = useState<SearchParamsObject>({
+		...DEFAULT_FILTERS
+	})
 
 	useEffect(() => {
-		updateFilters(initialFilters)
+		setFilters(initialFilters)
 	}, [])
 
 	useDebouncedEffect(
@@ -37,7 +42,7 @@ export function useProperties() {
 		hasNextPage,
 		isFetchingNextPage
 	} = useInfiniteQuery({
-		queryKey: ['properties', initialFilters],
+		queryKey: ['propertiesAlternate', initialFilters],
 		queryFn: ({ pageParam = 1 }) =>
 			propertyService.findAll({
 				...initialFilters,
@@ -48,10 +53,24 @@ export function useProperties() {
 				? lastPage.pagination.page + 1
 				: undefined
 		},
-		initialPageParam: 1,
+		initialPageParam: 1
 	})
 
 	const properties = data?.pages.flatMap(page => page.data) || []
+
+	const updateSorting = (field: string, direction: 'asc' | 'desc') => {
+		setFilters(prev => ({
+			...prev,
+			sortBy: `${field},${direction}`
+		}))
+	}
+
+	const updateFilters = (update: Partial<PropertyFilters>) => {
+		setFilters(prev => ({
+			...prev,
+			...update
+		}))
+	}
 
 	const handleApplyFilters = useCallback(() => {
 		const params = new URLSearchParams()
@@ -59,30 +78,32 @@ export function useProperties() {
 		Object.entries(filters).forEach(([key, value]) => {
 			if (value) {
 				if (Array.isArray(value)) {
-					params.set(key, value.join(','))
+					let stringValue = ''
+					const lastIndex = value.length - 1
+
+					value.forEach((val, index) => {
+						stringValue += val.toString()
+						stringValue += index === lastIndex ? '' : ','
+					})
+
+					params.set(key, stringValue)
 				} else {
 					params.set(key, value)
 				}
 			}
 		})
 
-		const newQuery = `?${params.toString()}`
-		if (typeof window !== 'undefined') {
-			const current = window.location.search
-			if (current === `?${params.toString()}`) return
-		}
-
-		router.push(newQuery)
+		router.push(`?${params.toString()}`)
 	}, [filters, router])
 
-	const loadMore = useCallback(() => {
+	const loadMore = () => {
 		if (hasNextPage && !isFetchingNextPage) fetchNextPage()
-	}, [hasNextPage])
+	}
 
-	const resetFilters = useCallback(() => {
-		storeResetFilters()
+	const resetFilters = () => {
+		setFilters({ ...DEFAULT_FILTERS })
 		router.push(pathname)
-	}, [])
+	}
 
 	return useMemo(
 		() => ({
@@ -93,6 +114,7 @@ export function useProperties() {
 			filters,
 			updateSorting,
 			updateFilters,
+			handleApplyFilters,
 			loadMore,
 			resetFilters,
 			hasMore: hasNextPage
@@ -105,6 +127,7 @@ export function useProperties() {
 			filters,
 			updateSorting,
 			updateFilters,
+			handleApplyFilters,
 			loadMore,
 			resetFilters,
 			hasNextPage

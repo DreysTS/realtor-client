@@ -1,5 +1,6 @@
 import { Sparkles } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 import MoscowBackground from '../../../../public/moscow-background.png'
@@ -25,6 +26,7 @@ export default function HeroSection() {
 			<Image
 				src={MoscowBackground}
 				alt='Hero mobile'
+				priority
 				width={615}
 				height={345.94}
 				className='rounded-xl sm:hidden'
@@ -44,7 +46,7 @@ export default function HeroSection() {
 						</Badge>
 						Недвижимость в Москве и Московской области
 					</Badge>
-					<h1 className='mb-6 sm:my-6 w-fit text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] lg:text-5xl 2xl:text-6xl'>
+					<h1 className='mb-6 w-fit text-3xl font-bold tracking-tight [text-shadow:_var(--background)_1px_0_10px] sm:my-6 lg:text-5xl 2xl:text-6xl'>
 						Ваш доверенный риэлтор в сфере недвижимости
 					</h1>
 

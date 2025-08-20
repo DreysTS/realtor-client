@@ -71,3 +71,19 @@ export const radioSecondary = [
 	{ value: 'false', label: 'Новостройка' },
 	{ value: 'true', label: 'Вторичка' }
 ]
+
+export const selectSort = [
+	{ label: 'Сначала дорогие', field: 'price', direction: 'desc' },
+	{ label: 'Сначала дешёвые', field: 'price', direction: 'asc' },
+	{ label: 'Сначала с большей площадью', field: 'square', direction: 'desc' },
+	{ label: 'Сначала с меньшей площадью', field: 'square', direction: 'asc' },
+	{ label: 'Наибольшее кол-во комнат', field: 'rooms', direction: 'desc' },
+	{ label: 'Наименьшее кол-во комнат', field: 'rooms', direction: 'asc' }
+]
+
+export const DEFAULT_FILTERS = {
+	minPrice: '0',
+	maxPrice: '100000000',
+	minSquare: '0',
+	maxSquare: '200'
+}

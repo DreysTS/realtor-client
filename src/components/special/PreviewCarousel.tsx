@@ -13,6 +13,7 @@ import {
 	DialogContent,
 	DialogTitle
 } from '@/components/ui'
+import { S3_PUBLIC_URL } from '@/lib/constants/environments'
 import { cn } from '@/lib/utils'
 
 export function PreviewCarousel({
@@ -38,7 +39,7 @@ export function PreviewCarousel({
 						<CarouselItem key={index}>
 							<div className='relative aspect-video overflow-hidden rounded-lg'>
 								<Image
-									src={`${process.env.SERVER_URL}/static/${image}`}
+									src={`${S3_PUBLIC_URL}/${image}`}
 									alt={`Preview image ${index}`}
 									fill
 									priority={true}
@@ -68,7 +69,7 @@ export function PreviewCarousel({
 								<CarouselItem key={index}>
 									<div className='relative aspect-video overflow-hidden rounded-lg'>
 										<Image
-											src={`${process.env.SERVER_URL}/static/${image}`}
+											src={`${S3_PUBLIC_URL}/${image}`}
 											alt={`Preview image ${index}`}
 											fill
 											className='object-cover'

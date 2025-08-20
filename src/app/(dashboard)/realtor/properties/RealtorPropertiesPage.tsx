@@ -12,6 +12,7 @@ import {
 	Loading,
 	Sheet,
 	SheetContent,
+	SheetFooter,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,

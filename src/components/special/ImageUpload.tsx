@@ -44,7 +44,7 @@ export function ImageUpload({ isDisabled, onChange, value }: ImageUploadProps) {
 						className='relative h-[200px] w-[200px] overflow-hidden rounded-md'
 					>
 						<Image
-							src={`${process.env.SERVER_URL}/static/${url}`}
+							src={`${process.env.S3_PUBLIC_URL}/${url}`}
 							alt='Превью'
 							fill
 						/>

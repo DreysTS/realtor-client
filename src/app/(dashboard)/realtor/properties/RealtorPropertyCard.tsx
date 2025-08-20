@@ -20,7 +20,6 @@ import {
 	DialogTitle,
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -54,14 +53,12 @@ export default function RealtorPropertyCard({
 	const { removeProperty, isPropertyRemoving } = useRemoveProperty()
 	const { setStatus, isSettingStatus } = useSetStatus()
 
-	const handleDeleteClick = (e: Event) => {
-		e.preventDefault()
+	const handleDeleteClick = () => {
 		setDropdownOpen(false)
 		setDeleteDialogOpen(true)
 	}
 
-	const handleUpdateClick = (e: Event) => {
-		e.preventDefault()
+	const handleUpdateClick = () => {
 		setDropdownOpen(false)
 		setUpdateSheetOpen(true)
 	}
@@ -108,40 +105,28 @@ export default function RealtorPropertyCard({
 									<span className='sr-only'>Open menu</span>
 								</Button>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent
-								className='w-54'
-								align='end'
-								onInteractOutside={e => {
-									if (deleteDialogOpen) {
-										e.preventDefault()
-									}
-								}}
-							>
+							<DropdownMenuContent className='w-54' align='end'>
 								<DropdownMenuLabel>Выберите</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								<DropdownMenuGroup>
-									<DropdownMenuItem
-										onSelect={() =>
-											copyToClipboard(property.id)
-										}
-									>
-										<Copy className='mr-2' />
-										Копировать id
-									</DropdownMenuItem>
-									<DropdownMenuItem
-										onSelect={handleUpdateClick}
-									>
-										<Edit className='mr-2' />
-										Изменить
-									</DropdownMenuItem>
-									<DropdownMenuItem
-										className='text-destructive'
-										onSelect={handleDeleteClick}
-									>
-										<Trash className='text-destructive mr-2' />
-										Удалить
-									</DropdownMenuItem>
-								</DropdownMenuGroup>
+								<DropdownMenuItem
+									onClick={() => copyToClipboard(property.id)}
+								>
+									<Copy className='mr-2' />
+									Копировать id
+								</DropdownMenuItem>
+								<DropdownMenuItem
+									onClick={() => handleUpdateClick()}
+								>
+									<Edit className='mr-2' />
+									Изменить
+								</DropdownMenuItem>
+								<DropdownMenuItem
+									className='text-destructive'
+									onClick={() => handleDeleteClick()}
+								>
+									<Trash className='text-destructive mr-2' />
+									Удалить
+								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
 					</div>

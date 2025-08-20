@@ -3,23 +3,21 @@
 import { BrushCleaning, Building2, FilePlus } from 'lucide-react'
 import React from 'react'
 
-import { Filters } from './Filters'
+import FiltersBar from './Filters'
 import { Container, Footer, Section } from '@/components'
 import { EmptyList, IEmptyList, PropertyCard } from '@/components/special'
 import {
 	Button,
 	Sheet,
 	SheetContent,
-	SheetDescription,
 	SheetFooter,
-	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger
 } from '@/components/ui'
-import { useProperties } from '@/hooks/queries/properties'
+import { usePropertiesAlternate } from '@/hooks/queries/properties/usePropertiesAlternate'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 
 const emptyListProps: IEmptyList = {
@@ -43,53 +41,50 @@ export default function PropertiesPage() {
 		isFetchingNextPage,
 		loadMore,
 		resetFilters
-	} = useProperties()
+	} = usePropertiesAlternate()
 
 	return (
 		<>
 			<Section>
 				<Container className='relative grid gap-4 lg:grid-cols-3 2xl:grid-cols-4'>
-					<div className='relative bottom-0 h-fit max-lg:hidden'>
-						<div className='sticky bottom-0 h-fit space-y-4 overflow-y-auto rounded-xl border p-4'>
-							<div className='flex justify-between'>
-								<h2 className='text-2xl'>Фильтры</h2>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											size='icon-sm'
-											variant='outline'
-											onClick={() => resetFilters()}
-										>
-											<BrushCleaning />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>Очистить</p>
-									</TooltipContent>
-								</Tooltip>
-							</div>
-							<Filters />
+					<div
+						className='sticky h-fit space-y-4 overflow-y-auto rounded-xl border p-4 max-lg:hidden'
+						style={{
+							top: `calc(${NAVBAR_HEIGHT}px + 8px)`
+						}}
+					>
+						<div className='flex justify-between'>
+							<h2 className='text-2xl'>Фильтры</h2>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										size='icon-sm'
+										variant='outline'
+										onClick={() => resetFilters()}
+									>
+										<BrushCleaning />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>Очистить</p>
+								</TooltipContent>
+							</Tooltip>
 						</div>
+						<FiltersBar />
 					</div>
 					<Sheet>
 						<SheetTrigger asChild>
 							<Button className='lg:hidden'>Фильтры</Button>
 						</SheetTrigger>
 						<SheetContent>
-							<SheetHeader>
+							<SheetTitle>
 								<SheetTitle className='text-2xl'>
 									Фильтры
 								</SheetTitle>
-								<SheetDescription aria-describedby='undefined'></SheetDescription>
-							</SheetHeader>
-							<div className='space-y-4 overflow-y-auto px-4'>
-								<Filters />
+							</SheetTitle>
+							<div className='overflow-y-auto px-4 py-10'>
+								<FiltersBar />
 							</div>
-							<SheetFooter>
-								<Button onClick={() => resetFilters()}>
-									Очистить
-								</Button>
-							</SheetFooter>
 						</SheetContent>
 					</Sheet>
 					<div className='lg:col-span-2 2xl:col-span-3'>

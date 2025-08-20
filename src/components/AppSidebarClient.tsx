@@ -15,7 +15,6 @@ import {
 	SidebarMenuItem,
 	Tooltip,
 	TooltipContent,
-	TooltipProvider,
 	TooltipTrigger,
 	useSidebar
 } from './ui'
@@ -79,56 +78,54 @@ export function AppSidebarClient({ initialData }: { initialData?: IUser }) {
 
 			<SidebarContent>
 				<SidebarMenu>
-					<TooltipProvider>
-						{navLinks.map(link => {
-							const isActive = pathname.startsWith(link.href)
+					{navLinks.map(link => {
+						const isActive = pathname.startsWith(link.href)
 
-							return (
-								<Tooltip key={link.href}>
-									<TooltipTrigger asChild>
-										<SidebarMenuItem>
-											<SidebarMenuButton
-												asChild
-												className={cn(
-													'flex items-center px-7 py-7 transition-colors',
-													isActive
-														? 'text-primary hover:text-primary'
-														: '',
-													open ? '' : 'ml-2'
-												)}
+						return (
+							<Tooltip key={link.href}>
+								<TooltipTrigger asChild>
+									<SidebarMenuItem>
+										<SidebarMenuButton
+											asChild
+											className={cn(
+												'flex items-center px-7 py-7 transition-colors',
+												isActive
+													? 'text-primary hover:text-background'
+													: '',
+												open ? '' : 'ml-2'
+											)}
+										>
+											<Link
+												href={link.href}
+												className='w-full'
+												scroll={false}
 											>
-												<Link
-													href={link.href}
-													className='w-full'
-													scroll={false}
-												>
-													<div className='flex items-center gap-3'>
-														<link.icon
-															className={cn(
-																open
-																	? 'h-5 w-5'
-																	: 'h-4 w-4'
-															)}
-														/>
-														{open && (
-															<span className='line-clamp-1'>
-																{link.label}
-															</span>
+												<div className='flex items-center gap-3'>
+													<link.icon
+														className={cn(
+															open
+																? 'h-5 w-5'
+																: 'h-4 w-4'
 														)}
-													</div>
-												</Link>
-											</SidebarMenuButton>
-										</SidebarMenuItem>
-									</TooltipTrigger>
-									{!open && (
-										<TooltipContent side='right'>
-											{link.label}
-										</TooltipContent>
-									)}
-								</Tooltip>
-							)
-						})}
-					</TooltipProvider>
+													/>
+													{open && (
+														<span className='line-clamp-1'>
+															{link.label}
+														</span>
+													)}
+												</div>
+											</Link>
+										</SidebarMenuButton>
+									</SidebarMenuItem>
+								</TooltipTrigger>
+								{!open && (
+									<TooltipContent side='right'>
+										{link.label}
+									</TooltipContent>
+								)}
+							</Tooltip>
+						)
+					})}
 				</SidebarMenu>
 			</SidebarContent>
 		</Sidebar>

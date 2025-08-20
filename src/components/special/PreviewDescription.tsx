@@ -29,7 +29,9 @@ export function PreviewDescription({ description }: { description: string }) {
 					<SheetHeader>
 						<SheetTitle>Описание</SheetTitle>
 					</SheetHeader>
-					<div className='w-full max-w-3xl px-4'>{description}</div>
+					<div className='w-full max-w-3xl overflow-y-auto px-4'>
+						{description}
+					</div>
 				</SheetContent>
 			</Sheet>
 		</>

@@ -14,9 +14,7 @@ export function useFavorite(id: string) {
 		favorite => favorite.propertyId === id
 	)
 
-	const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-		e.stopPropagation()
-		e.preventDefault()
+	const handleFavorite = () => {
 		isFavorited ? removeFromFavorite(id) : addToFavorite(id)
 	}
 

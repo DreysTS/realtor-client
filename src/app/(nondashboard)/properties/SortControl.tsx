@@ -5,7 +5,7 @@ import { Button } from '@/components/ui'
 
 const sortFields = ['createdAt', 'price', 'square', 'rooms'] as const
 
-type SortField = (typeof sortFields)[number]
+export type SortField = (typeof sortFields)[number]
 
 interface SortControlProps {
 	field: SortField

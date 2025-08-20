@@ -80,9 +80,16 @@ export type PropertyFilters = {
 	maxPrice?: string
 	minSquare?: string
 	maxSquare?: string
-	rooms?: string
-	buildingType: BuildingType
-	propertyType: PropertyType
+	rooms?: string[]
+	buildingType?: BuildingType[]
+	propertyType?: PropertyType[]
 	isSecondary: string
 	sortBy?: string
 }
+
+export type PropertyResponse = {
+	data: IProperty[]
+	pagination: IPagination
+}
+
+export type SearchParamsObject = Record<string, string | string[]>

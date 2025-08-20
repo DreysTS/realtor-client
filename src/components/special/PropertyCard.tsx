@@ -1,7 +1,10 @@
+'use client'
+
 import { Building, Heart, LayoutDashboard, MapPin, Ruler } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { memo } from 'react'
 
 import {
 	Badge,
@@ -11,14 +14,17 @@ import {
 	Separator,
 	Tooltip,
 	TooltipContent,
-	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui'
+import { useProfile } from '@/hooks/queries/auth'
 import { useFavorite } from '@/hooks/queries/favorites'
 import { IProperty } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { S3_PUBLIC_URL } from '@/lib/constants/environments'
 
-export function PropertyCard({ property }: { property: IProperty }) {
+export const PropertyCard = memo(({ property }: { property: IProperty }) => {
+	const router = useRouter()
+	const { user, isLoading } = useProfile()
 	const {
 		handleFavorite,
 		isAddingToFavorite,
@@ -26,15 +32,38 @@ export function PropertyCard({ property }: { property: IProperty }) {
 		isRemovingFromFavorite
 	} = useFavorite(property?.id as string)
 
+	const footerUnits = [
+		{
+			icon: Ruler,
+			value: property.square,
+			unit: 'м²',
+			tooltipContent: 'Площадь м²'
+		},
+		{
+			icon: Building,
+			value: `${property.floor}/${property.totalFloors}`,
+			unit: 'эт.',
+			tooltipContent: 'Этаж'
+		},
+		{
+			icon: LayoutDashboard,
+			value: property.rooms,
+			unit: 'к',
+			tooltipContent: 'Количество комнат'
+		}
+	]
+
 	return (
 		<Link href={`/properties/${property.id}`}>
-			<Card className='group from-secondary/5 to-card overflow-hidden bg-gradient-to-t pt-0 backdrop-blur-2xl transition-all hover:shadow-xl'>
+			<Card className='group from-secondary/15 to-card overflow-hidden bg-gradient-to-t pt-0 backdrop-blur-2xl transition-all hover:shadow-xl'>
 				<div className='relative aspect-video overflow-hidden'>
 					<Image
-						src={`${process.env.SERVER_URL}/static/${property.images[0]}`}
+						src={`${S3_PUBLIC_URL}/${property.images[0]}`}
 						alt='Preview'
-						fill
-						className='w-full object-cover transition-transform duration-300 group-hover:scale-105'
+						width={639}
+						height={360}
+						className='absolute inset-0 w-full object-cover transition-transform duration-300 group-hover:scale-105'
+						priority
 					/>
 
 					<Button
@@ -43,7 +72,13 @@ export function PropertyCard({ property }: { property: IProperty }) {
 						className='absolute top-3 right-3 rounded-full'
 						disabled={isAddingToFavorite || isRemovingFromFavorite}
 						onClick={e => {
-							handleFavorite(e)
+							e.stopPropagation()
+							e.preventDefault()
+							if (user) {
+								handleFavorite()
+							} else {
+								router.push('/auth/register')
+							}
 						}}
 					>
 						<Heart
@@ -76,57 +111,33 @@ export function PropertyCard({ property }: { property: IProperty }) {
 						</span>
 					</p>
 					<div className='bg-border h-px'></div>
-					<TooltipProvider>
-						<div className='text-muted-foreground flex h-8 items-center justify-evenly [&_.lucide]:size-4'>
-							<Tooltip delayDuration={50}>
-								<TooltipTrigger>
-									<div className='flex items-center justify-center gap-1'>
-										<Ruler />
-										<span className='text-foreground'>
-											{property.square}
-										</span>
-										м²
-									</div>
-								</TooltipTrigger>
-								<TooltipContent>Площадь м²</TooltipContent>
-							</Tooltip>
-
-							<Separator orientation='vertical' />
-
-							<Tooltip delayDuration={50}>
-								<TooltipTrigger>
-									<div className='flex items-center justify-center gap-1'>
-										<Building />
-										<span className='text-foreground'>
-											{property.floor}/
-											{property.totalFloors}
-										</span>
-										эт.
-									</div>
-								</TooltipTrigger>
-								<TooltipContent>Этаж</TooltipContent>
-							</Tooltip>
-
-							<Separator orientation='vertical' />
-
-							<Tooltip delayDuration={50}>
-								<TooltipTrigger>
-									<div className='flex items-center justify-center gap-1'>
-										<LayoutDashboard />
-										<span className='text-foreground'>
-											{property.rooms}
-										</span>
-										к.
-									</div>
-								</TooltipTrigger>
-								<TooltipContent>
-									Количество комнат
-								</TooltipContent>
-							</Tooltip>
-						</div>
-					</TooltipProvider>
+					<div className='text-muted-foreground flex h-8 items-center justify-evenly [&_.lucide]:size-4'>
+						{footerUnits.map((footerUnit, index) => {
+							return (
+								<React.Fragment key={index}>
+									<Tooltip delayDuration={50}>
+										<TooltipTrigger>
+											<div className='flex items-center justify-center gap-1 p-1 max-sm:text-sm'>
+												<footerUnit.icon />
+												<span className='text-foreground'>
+													{footerUnit.value}
+												</span>
+												{footerUnit.unit}
+											</div>
+										</TooltipTrigger>
+										<TooltipContent>
+											{footerUnit.tooltipContent}
+										</TooltipContent>
+									</Tooltip>
+									{footerUnits.length !== index + 1 && (
+										<Separator orientation='vertical' />
+									)}
+								</React.Fragment>
+							)
+						})}
+					</div>
 				</CardHeader>
 			</Card>
 		</Link>
 	)
-}
+})

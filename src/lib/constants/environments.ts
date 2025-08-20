@@ -1,0 +1,1 @@
+export const S3_PUBLIC_URL = process.env.S3_PUBLIC_URL
