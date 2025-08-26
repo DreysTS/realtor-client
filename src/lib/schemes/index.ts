@@ -1,3 +1,5 @@
+export * from './base-property.schema'
+export * from './feedback.scheme'
 export * from './login.schema'
 export * from './new-password.schema'
 export * from './property.schema'

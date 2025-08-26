@@ -36,11 +36,7 @@ export default function RootLayout({
 			<body
 				className={`selection:bg-primary/50 relative antialiased ${comfortaa.variable} ${montserratAlternates.variable}`}
 			>
-				<MainProvider>
-					<Navbar />
-
-					{children}
-				</MainProvider>
+				<MainProvider>{children}</MainProvider>
 			</body>
 		</html>
 	)

@@ -18,9 +18,9 @@ import {
 } from '@/components/ui'
 import { useProfile } from '@/hooks/queries/auth'
 import { useFavorite } from '@/hooks/queries/favorites'
+import { S3_PUBLIC_URL } from '@/lib/constants/environments'
 import { IProperty } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { S3_PUBLIC_URL } from '@/lib/constants/environments'
 
 export const PropertyCard = memo(({ property }: { property: IProperty }) => {
 	const router = useRouter()
@@ -60,17 +60,21 @@ export const PropertyCard = memo(({ property }: { property: IProperty }) => {
 					<Image
 						src={`${S3_PUBLIC_URL}/${property.images[0]}`}
 						alt='Preview'
-						width={639}
+						width={640}
 						height={360}
 						className='absolute inset-0 w-full object-cover transition-transform duration-300 group-hover:scale-105'
-						priority
+						loading='lazy'
 					/>
 
 					<Button
 						variant='outline'
 						size='icon'
 						className='absolute top-3 right-3 rounded-full'
-						disabled={isAddingToFavorite || isRemovingFromFavorite}
+						disabled={
+							isAddingToFavorite ||
+							isRemovingFromFavorite ||
+							isLoading
+						}
 						onClick={e => {
 							e.stopPropagation()
 							e.preventDefault()

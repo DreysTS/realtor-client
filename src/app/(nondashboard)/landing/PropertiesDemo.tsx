@@ -5,8 +5,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import { Container, Section } from '@/components'
-import { EmptyList, PropertyCard, SectionTitling } from '@/components/special'
 import { Button, buttonVariants } from '@/components/ui'
+import { EmptyList, PropertyCard, SectionTitling } from '@/components/widgets'
 import { useProperties } from '@/hooks/queries/properties'
 import { cn } from '@/lib/utils'
 
@@ -59,7 +59,6 @@ export default function PropertiesDemo() {
 								className={cn(
 									buttonVariants({ effect: 'ringHover' })
 								)}
-								scroll={true}
 							>
 								Просмотреть все{' '}
 								<ArrowRight className='size-5' />

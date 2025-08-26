@@ -9,20 +9,20 @@ import { Button } from '../ui'
 import { useUpload } from '@/hooks/queries/files'
 
 interface ImageUploadProps {
-	isDisabled: boolean
+	disabled: boolean | undefined
 	onChange: (value: string[]) => void
 	value: string[]
 }
 
-export function ImageUpload({ isDisabled, onChange, value }: ImageUploadProps) {
+export function ImageUpload({ disabled, onChange, value }: ImageUploadProps) {
 	const { handleButtonClick, isUploading, fileInputRef, handleFileChange } =
-		useUpload(onChange)
+		useUpload(onChange, value)
 
 	return (
 		<div className='space-y-2'>
 			<Button
 				type='button'
-				disabled={isDisabled || isUploading}
+				disabled={disabled || isUploading}
 				variant='secondary'
 				onClick={handleButtonClick}
 			>
@@ -35,7 +35,7 @@ export function ImageUpload({ isDisabled, onChange, value }: ImageUploadProps) {
 				className='hidden'
 				ref={fileInputRef}
 				onChange={handleFileChange}
-				disabled={isDisabled}
+				disabled={disabled}
 			/>
 			<div className='flex flex-wrap gap-4'>
 				{value.map(url => (

@@ -1,12 +1,11 @@
 import { create } from 'zustand'
 
-import { DEFAULT_FILTERS } from '@/lib/constants'
+
 import { PropertyFilters, SearchParamsObject } from '@/lib/types'
+import { DEFAULT_FILTERS } from '../lib/constants/filters'
 
 type FiltersStore = {
 	filters: SearchParamsObject
-	// initialFilters: SearchParamsObject
-	// setInitialFilters: (filters: SearchParamsObject) => void
 	updateFilters: (update: Partial<PropertyFilters>) => void
 	updateSorting: (field: string, direction: 'asc' | 'desc') => void
 	resetFilters: () => void
@@ -14,11 +13,6 @@ type FiltersStore = {
 
 export const useFiltersStore = create<FiltersStore>(set => ({
 	filters: { ...DEFAULT_FILTERS },
-	// initialFilters: {},
-	// setInitialFilters: filters =>
-	// 	set(state => ({
-	// 		initialFilters: { ...filters }
-	// 	})),
 	updateFilters: update =>
 		set(state => ({ filters: { ...state.filters, ...update } })),
 	updateSorting: (field, direction) =>

@@ -19,6 +19,7 @@ export interface IRequest {
 	rooms: number
 	address: string
 	images: string[]
+	contactMethod: string
 	propertyRequestStatus: PropertyRequestStatus
 	rejectReason?: string
 	propertyId?: string

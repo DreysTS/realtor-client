@@ -16,8 +16,8 @@ import {
 import React, { useEffect, useRef } from 'react'
 
 import { Container, Section } from '@/components'
+import { SectionTitling } from '@/components/widgets'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { SectionTitling } from '@/components/special'
 
 const cooperationSteps = [
 	{

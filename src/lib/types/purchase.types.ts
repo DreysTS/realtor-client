@@ -13,12 +13,12 @@ export type PropertyPurchaseStatusType =
 export interface IPurchase {
 	id: string
 	description: string
-	budget_min?: number
-	budget_max?: number
+	budgetMin?: number
+	budgetMax?: number
 	rooms?: number
-	area_min?: number
-	area_max?: number
-	contact_method?: string
+	areaMin?: number
+	areaMax?: number
+	contactMethod?: string
 	status: PropertyPurchaseStatusType
 	userId: string
 	createdAt: string

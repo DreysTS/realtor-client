@@ -89,7 +89,7 @@ export function Footer() {
 					</div>
 					<Separator />
 					<div className='flex justify-center'>
-						&copy; MoskvRealry{' '}
+						&copy; MoskvRealty{' '}
 						{new Date().toLocaleDateString('ru', {
 							year: 'numeric'
 						})}

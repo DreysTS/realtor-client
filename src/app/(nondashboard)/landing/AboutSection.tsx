@@ -8,7 +8,7 @@ import About5 from '../../../../public/about-5.jpg'
 import About6 from '../../../../public/about-6.jpg'
 
 import { Container, Section } from '@/components'
-import { SectionTitling } from '@/components/special'
+import { SectionTitling } from '@/components/widgets'
 import { cn } from '@/lib/utils'
 
 const aboutList = [

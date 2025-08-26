@@ -1,23 +1,19 @@
 import { z } from 'zod'
 
+import { BasePropertySchema } from './base-property.schema'
 import { BUILDING_TYPES, PROPERTY_TYPES, SELLING_TYPES } from '@/lib/types'
 
-export const PropertySchema = z.object({
-	title: z.string().min(1, { message: 'Введите заголовок' }),
-	description: z.string().min(1, { message: 'Введите описание.' }),
-	images: z.array(z.string()),
-	price: z.coerce.number().positive('Цена должна быть положительным чилом.'),
-	square: z.coerce
-		.number()
-		.positive('Площадь должна быть положительным числом.'),
-	rooms: z.coerce
-		.number()
-		.int('Количество комнат должно быть целым числом.')
-		.positive('Количество комнат должно быть положительным числом.'),
+export const PropertySchema = BasePropertySchema.extend({
 	kitchenSquare: z.coerce
 		.number()
 		.positive('Площадь кухни должна быть положительным числом.'),
-	roomsSquare: z.coerce.number().optional(),
+	roomsSquare: z
+		.array(z.number())
+		.optional()
+		.refine(value => value?.every(num => num > 0) ?? true, {
+			message: 'Все значения должны быть положительными числами'
+		})
+		.default([]),
 	floor: z.coerce
 		.number()
 		.int('Этаж должен быть целым числом')
@@ -50,11 +46,8 @@ export const PropertySchema = z.object({
 	sellingType: z
 		.enum([SELLING_TYPES.RENT, SELLING_TYPES.SALE, SELLING_TYPES.SOLD])
 		.optional(),
-	address: z.string().min(1).optional(),
 	city: z.string().min(1).optional(),
-	district: z.string().min(1).optional(),
-	latitude: z.coerce.number().optional(),
-	longitude: z.coerce.number().optional()
+	district: z.string().min(1).optional()
 })
 
 export type TypeCreatePropertySchema = z.infer<typeof PropertySchema>

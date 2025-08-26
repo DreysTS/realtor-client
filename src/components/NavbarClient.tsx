@@ -94,9 +94,6 @@ export function NavbarClient({ initialData }: { initialData?: IUser }) {
 											user.role === 'REGULAR'
 												? '/profile/favorites'
 												: '/realtor/properties',
-											{
-												scroll: false
-											}
 										)
 									}
 								>
@@ -110,10 +107,7 @@ export function NavbarClient({ initialData }: { initialData?: IUser }) {
 										router.push(
 											user.role === 'REGULAR'
 												? '/profile/settings'
-												: '/realtor/requests',
-											{
-												scroll: false
-											}
+												: '/realtor/requests'
 										)
 									}
 								>
