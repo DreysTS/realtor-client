@@ -1,37 +1,38 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useDebouncedEffect, useSearchParamsObject } from '@/hooks'
 import { PropertyFilters, SearchParamsObject } from '@/lib/types'
 import { propertyService } from '@/services'
 
-const DEFAULT_FILTERS = {
+/* const DEFAULT_FILTERS = {
 	minPrice: '0',
 	maxPrice: '100000000',
 	minSquare: '0',
 	maxSquare: '200'
-}
+} */
 
 export function usePropertiesAlternate() {
 	const initialFilters = useSearchParamsObject()
 	const router = useRouter()
 	const pathname = usePathname()
+	const searchParams = useSearchParams()
 
 	const [filters, setFilters] = useState<SearchParamsObject>({
-		...DEFAULT_FILTERS
+		...initialFilters
 	})
 
 	useEffect(() => {
-		setFilters(initialFilters)
-	}, [])
+		setFilters({ ...initialFilters })
+	}, [searchParams])
 
 	useDebouncedEffect(
 		() => {
 			handleApplyFilters()
 		},
-		[filters],
-		300
+		[filters, searchParams, pathname],
+		500
 	)
 
 	const {
@@ -56,54 +57,56 @@ export function usePropertiesAlternate() {
 		initialPageParam: 1
 	})
 
-	const properties = data?.pages.flatMap(page => page.data) || []
+	const properties = useMemo(() => {
+		return data?.pages.flatMap(page => page.data)
+	}, [initialFilters])
 
-	const updateSorting = (field: string, direction: 'asc' | 'desc') => {
-		setFilters(prev => ({
-			...prev,
-			sortBy: `${field},${direction}`
-		}))
-	}
+	const updateSorting = useCallback(
+		(field: string, direction: 'asc' | 'desc') => {
+			setFilters(prev => ({
+				...prev,
+				sortBy: `${field},${direction}`
+			}))
+		},
+		[]
+	)
 
-	const updateFilters = (update: Partial<PropertyFilters>) => {
-		setFilters(prev => ({
-			...prev,
-			...update
-		}))
-	}
+	const updateFilters = useCallback((update: Partial<PropertyFilters>) => {
+		setFilters(prev => ({ ...prev, ...update }))
+	}, [])
 
 	const handleApplyFilters = useCallback(() => {
 		const params = new URLSearchParams()
 
 		Object.entries(filters).forEach(([key, value]) => {
-			if (value) {
-				if (Array.isArray(value)) {
-					let stringValue = ''
-					const lastIndex = value.length - 1
-
-					value.forEach((val, index) => {
-						stringValue += val.toString()
-						stringValue += index === lastIndex ? '' : ','
-					})
-
-					params.set(key, stringValue)
-				} else {
+			if (Array.isArray(value)) {
+				if (value.length > 0) {
+					params.set(key, value.join(','))
+				}
+			} else if (typeof value === 'string') {
+				if (value.trim() !== '') {
 					params.set(key, value)
 				}
 			}
 		})
 
-		router.push(`?${params.toString()}`)
-	}, [filters, router])
+		const newQuery = params.toString() ? `?${params.toString()}` : ''
+		if (typeof window !== 'undefined') {
+			const current = window.location.search
+			if (current === newQuery) return
+		}
+
+		router.push(`${pathname}${newQuery}`, { scroll: false })
+	}, [filters, router, pathname])
 
 	const loadMore = () => {
 		if (hasNextPage && !isFetchingNextPage) fetchNextPage()
 	}
 
-	const resetFilters = () => {
-		setFilters({ ...DEFAULT_FILTERS })
+	const resetFilters = useCallback(() => {
+		setFilters({})
 		router.push(pathname)
-	}
+	}, [])
 
 	return useMemo(
 		() => ({

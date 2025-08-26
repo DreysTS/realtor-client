@@ -5,18 +5,22 @@ import React from 'react'
 
 import FiltersBar from './Filters'
 import { Container, Footer, Section } from '@/components'
-import { EmptyList, IEmptyList, PropertyCard } from '@/components/special'
 import {
 	Button,
+	Loading,
 	Sheet,
 	SheetContent,
+	SheetDescription,
 	SheetFooter,
+	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
+	Skeleton,
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger
 } from '@/components/ui'
+import { EmptyList, IEmptyList, PropertyCard } from '@/components/widgets'
 import { usePropertiesAlternate } from '@/hooks/queries/properties/usePropertiesAlternate'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 
@@ -48,7 +52,7 @@ export default function PropertiesPage() {
 			<Section>
 				<Container className='relative grid gap-4 lg:grid-cols-3 2xl:grid-cols-4'>
 					<div
-						className='sticky h-fit space-y-4 overflow-y-auto rounded-xl border p-4 max-lg:hidden'
+						className='h-fit space-y-4 overflow-y-auto rounded-xl border p-4 max-lg:hidden'
 						style={{
 							top: `calc(${NAVBAR_HEIGHT}px + 8px)`
 						}}
@@ -77,21 +81,28 @@ export default function PropertiesPage() {
 							<Button className='lg:hidden'>Фильтры</Button>
 						</SheetTrigger>
 						<SheetContent>
-							<SheetTitle>
+							<SheetHeader>
 								<SheetTitle className='text-2xl'>
 									Фильтры
 								</SheetTitle>
-							</SheetTitle>
-							<div className='overflow-y-auto px-4 py-10'>
+								<SheetDescription>
+									Полные фильтры для точечного выбора
+									недвижимости
+								</SheetDescription>
+							</SheetHeader>
+							<div className='space-y-4 overflow-y-auto px-4'>
 								<FiltersBar />
 							</div>
+							<SheetFooter>
+								<Button onClick={() => resetFilters()}>
+									Очистить <BrushCleaning />
+								</Button>
+							</SheetFooter>
 						</SheetContent>
 					</Sheet>
 					<div className='lg:col-span-2 2xl:col-span-3'>
-						{(isPropertiesLoading || isPropertiesFetching) ?? (
-							<div className='bg-primary h-36 w-36'>
-								Loading...
-							</div>
+						{(isPropertiesLoading || isPropertiesFetching) && (
+							<Loading />
 						)}
 						{properties?.length === 0 ? (
 							<div className='grid h-full grow place-items-center max-sm:pt-4'>
@@ -104,7 +115,7 @@ export default function PropertiesPage() {
 							</div>
 						) : (
 							<>
-								<div className='grid gap-4 md:grid-cols-2 2xl:grid-cols-3'>
+								<div className='grid gap-4 sm:grid-cols-2 2xl:grid-cols-3'>
 									{properties?.map(property => (
 										<PropertyCard
 											property={property}

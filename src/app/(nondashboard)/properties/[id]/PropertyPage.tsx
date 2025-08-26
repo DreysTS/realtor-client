@@ -37,6 +37,7 @@ import {
 import { useFavorite } from '@/hooks/queries/favorites'
 import { usePropertyById } from '@/hooks/queries/properties'
 import { buildingTypeMap, propertyTypeMap } from '@/lib/constants'
+import { S3_PUBLIC_URL } from '@/lib/constants/environments'
 import {
 	cn,
 	copyToClipboard,
@@ -127,7 +128,7 @@ export default function PropertyPage() {
 										>
 											<div className='relative aspect-video w-full overflow-hidden rounded-2xl'>
 												<Image
-													src={`${process.env.SERVER_URL}/static/${url}`}
+													src={`${S3_PUBLIC_URL}/${url}`}
 													alt={`${property?.title} ${index}`}
 													fill
 													className='object-cover'
@@ -181,8 +182,8 @@ export default function PropertyPage() {
 														isAddingToFavorite ||
 														isRemovingFromFavorite
 													}
-													onClick={e =>
-														handleFavorite(e)
+													onClick={() =>
+														handleFavorite()
 													}
 												>
 													<Heart

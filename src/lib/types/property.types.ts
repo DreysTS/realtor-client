@@ -50,7 +50,7 @@ export interface IProperty {
 	square: number
 	rooms: number
 	kitchenSquare?: number
-	roomsSquare: number
+	roomsSquare: number[]
 	floor?: number
 	totalFloors?: number
 	isSecondary?: boolean
@@ -83,7 +83,7 @@ export type PropertyFilters = {
 	rooms?: string[]
 	buildingType?: BuildingType[]
 	propertyType?: PropertyType[]
-	isSecondary: string
+	isSecondary?: string
 	sortBy?: string
 }
 
@@ -92,4 +92,6 @@ export type PropertyResponse = {
 	pagination: IPagination
 }
 
-export type SearchParamsObject = Record<string, string | string[]>
+export type SearchParamsObject<T = Record<string, string | string[]>> = {
+	[K in keyof T]: T[K]
+}

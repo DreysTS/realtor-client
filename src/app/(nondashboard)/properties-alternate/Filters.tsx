@@ -1,27 +1,17 @@
-import { BrushCleaning } from 'lucide-react'
 import React from 'react'
 
 import SortControl, { SortField } from '../properties/SortControl'
 
-import {
-	Button,
-	Checkbox,
-	Input,
-	Label,
-	RadioGroup,
-	RadioGroupItem,
-	Slider,
-	buttonVariants
-} from '@/components/ui'
+import { FilterCheckboxGroup } from './FilterCheckboxGroup'
+import { Input, Slider } from '@/components/ui'
 import { usePropertiesAlternate } from '@/hooks/queries/properties/usePropertiesAlternate'
 import {
-	radioBuildingType,
-	radioPropertyType,
-	radioRooms,
-	radioSecondary
-} from '@/lib/constants'
-import { BuildingType, PropertyType } from '@/lib/types'
-import { cn } from '@/lib/utils'
+	BUILDING_TYPE_FILTERS_LIST,
+	PROPERTY_TYPE_FILTERS_LIST,
+	ROOMS_FILTERS_LIST,
+	SECONDARY_FILTERS_LIST,
+	SORTING_FILTERS_LIST
+} from '@/lib/constants/filters'
 
 export default function FiltersBar() {
 	const { filters, updateFilters, updateSorting } = usePropertiesAlternate()
@@ -35,20 +25,7 @@ export default function FiltersBar() {
 					Сортировка
 				</h4>
 				<div className='flex flex-wrap gap-3'>
-					{[
-						{
-							field: 'price',
-							label: 'По цене'
-						},
-						{
-							field: 'square',
-							label: 'По площади'
-						},
-						{
-							field: 'rooms',
-							label: 'По кол-ву комнат'
-						}
-					].map(item => (
+					{SORTING_FILTERS_LIST.map(item => (
 						<SortControl
 							key={item.field}
 							field={item.field as SortField}
@@ -145,176 +122,40 @@ export default function FiltersBar() {
 
 			{/* Rooms filter */}
 
-			<div className='flex flex-col'>
-				<h4 className='text-muted-foreground mb-3 text-sm'>
-					Кол-во комнат
-				</h4>
-				<div className='flex flex-row flex-wrap gap-3'>
-					{radioRooms.map(item => (
-						<div
-							className='flex items-center space-x-2'
-							key={item.label}
-						>
-							<Checkbox
-								id={item.label}
-								className='peer sr-only'
-								checked={
-									filters.rooms?.includes(
-										item.value.toString()
-									) ?? false
-								}
-								onCheckedChange={checked => {
-									const value = item.value.toString()
-									const prev =
-										(filters.rooms as string[]) ?? []
-
-									if (checked) {
-										if (!prev.includes(value)) {
-											updateFilters({
-												rooms: [...prev, value]
-											})
-										}
-									} else {
-										updateFilters({
-											rooms: prev.filter(v => v !== value)
-										})
-									}
-								}}
-							/>
-							<Label
-								htmlFor={item.label}
-								className={cn(
-									buttonVariants({
-										variant: 'outline'
-									}),
-									'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-								)}
-							>
-								<span className='mx-auto'>{item.label}</span>
-							</Label>
-						</div>
-					))}
-				</div>
-			</div>
+			<FilterCheckboxGroup
+				title='Кол-во комнат'
+				paramKey='rooms'
+				options={ROOMS_FILTERS_LIST}
+				filters={filters}
+				updateFilters={updateFilters}
+			/>
 
 			{/* Building type filter */}
 
-			<div className='flex flex-col'>
-				<h4 className='text-muted-foreground mb-3 text-sm'>
-					Кол-во комнат
-				</h4>
-				<div className='flex flex-row flex-wrap gap-3'>
-					{radioBuildingType.map(item => (
-						<div
-							className='flex items-center space-x-2'
-							key={item.label}
-						>
-							<Checkbox
-								id={item.label}
-								className='peer sr-only'
-								checked={
-									filters.buildingType?.includes(
-										item.value.toString()
-									) ?? false
-								}
-								onCheckedChange={checked => {
-									const value = item.value as BuildingType
-									const prev =
-										(filters.buildingType as BuildingType[]) ??
-										[]
-
-									if (checked) {
-										if (!prev.includes(value)) {
-											updateFilters({
-												buildingType: [...prev, value]
-											})
-										}
-									} else {
-										updateFilters({
-											buildingType: prev.filter(
-												v => v !== value
-											)
-										})
-									}
-								}}
-							/>
-							<Label
-								htmlFor={item.label}
-								className={cn(
-									buttonVariants({
-										variant: 'outline'
-									}),
-									'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-								)}
-							>
-								<span className='mx-auto'>{item.label}</span>
-							</Label>
-						</div>
-					))}
-				</div>
-			</div>
+			<FilterCheckboxGroup
+				title='Тип стен'
+				paramKey='buildingType'
+				options={BUILDING_TYPE_FILTERS_LIST}
+				filters={filters}
+				updateFilters={updateFilters}
+			/>
 
 			{/* Property type filter */}
 
-			<div className='flex flex-col'>
-				<h4 className='text-muted-foreground mb-3 text-sm'>
-					Кол-во комнат
-				</h4>
-				<div className='flex flex-row flex-wrap gap-3'>
-					{radioPropertyType.map(item => (
-						<div
-							className='flex items-center space-x-2'
-							key={item.label}
-						>
-							<Checkbox
-								id={item.label}
-								className='peer sr-only'
-								checked={
-									filters.propertyType?.includes(
-										item.value.toString()
-									) ?? false
-								}
-								onCheckedChange={checked => {
-									const value = item.value as PropertyType
-									const prev =
-										(filters.propertyType as PropertyType[]) ??
-										[]
-
-									if (checked) {
-										if (!prev.includes(value)) {
-											updateFilters({
-												propertyType: [...prev, value]
-											})
-										}
-									} else {
-										updateFilters({
-											propertyType: prev.filter(
-												v => v !== value
-											)
-										})
-									}
-								}}
-							/>
-							<Label
-								htmlFor={item.label}
-								className={cn(
-									buttonVariants({
-										variant: 'outline'
-									}),
-									'peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-								)}
-							>
-								<span className='mx-auto'>{item.label}</span>
-							</Label>
-						</div>
-					))}
-				</div>
-			</div>
+			<FilterCheckboxGroup
+				title='Тип недвижимости'
+				paramKey='propertyType'
+				options={PROPERTY_TYPE_FILTERS_LIST}
+				filters={filters}
+				updateFilters={updateFilters}
+			/>
 
 			{/* Is secondary filter */}
 
-			<div>
-				<h4 className='text-muted-foreground mb-3 text-sm'>Новизна</h4>
+			{/* <div>
+				<h4 className='text-muted-foreground mb-3 text-sm'>
+					Тип рынка
+				</h4>
 				<RadioGroup
 					className='flex flex-row flex-wrap gap-3'
 					value={(filters.isSecondary as string) || ''}
@@ -324,7 +165,7 @@ export default function FiltersBar() {
 						})
 					}
 				>
-					{radioSecondary.map(item => (
+					{SECONDARY_FILTERS_LIST.map(item => (
 						<div
 							className='flex items-center space-x-2'
 							key={item.value}
@@ -348,7 +189,15 @@ export default function FiltersBar() {
 						</div>
 					))}
 				</RadioGroup>
-			</div>
+			</div> */}
+
+			<FilterCheckboxGroup
+				title='Тип рынка'
+				paramKey='isSecondary'
+				options={SECONDARY_FILTERS_LIST}
+				filters={filters}
+				updateFilters={updateFilters}
+			/>
 		</>
 	)
 }

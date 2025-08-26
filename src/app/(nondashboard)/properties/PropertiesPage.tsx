@@ -3,9 +3,8 @@
 import { BrushCleaning, Building2, FilePlus } from 'lucide-react'
 import React from 'react'
 
-import { Filters } from './Filters'
+import Filters from './Filters'
 import { Container, Footer, Section } from '@/components'
-import { EmptyList, IEmptyList, PropertyCard } from '@/components/special'
 import {
 	Button,
 	Sheet,
@@ -19,6 +18,7 @@ import {
 	TooltipContent,
 	TooltipTrigger
 } from '@/components/ui'
+import { EmptyList, IEmptyList, PropertyCard } from '@/components/widgets'
 import { useProperties } from '@/hooks/queries/properties'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 

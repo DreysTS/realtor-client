@@ -1,32 +1,38 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useMemo } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useDebouncedEffect } from '@/hooks/useDebounceEffect'
-import { useSearchParamsObject } from '@/hooks/useSearchParamsObject'
+import { useDebouncedEffect, useSearchParamsObject } from '@/hooks'
+import { PropertyFilters, SearchParamsObject } from '@/lib/types'
 import { propertyService } from '@/services'
-import { useFiltersStore } from '@/stores/filters.store'
+
+/* const DEFAULT_FILTERS = {
+	minPrice: '0',
+	maxPrice: '100000000',
+	minSquare: '0',
+	maxSquare: '200'
+} */
 
 export function useProperties() {
-	const pathname = usePathname()
-	const router = useRouter()
 	const initialFilters = useSearchParamsObject()
+	const router = useRouter()
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
 
-	const filters = useFiltersStore(s => s.filters)
-	const storeResetFilters = useFiltersStore(s => s.resetFilters)
-	const updateFilters = useFiltersStore(s => s.updateFilters)
-	const updateSorting = useFiltersStore(s => s.updateSorting)
+	const [filters, setFilters] = useState<SearchParamsObject>({
+		...initialFilters
+	})
 
 	useEffect(() => {
-		updateFilters(initialFilters)
-	}, [])
+		setFilters({ ...initialFilters })
+	}, [searchParams])
 
 	useDebouncedEffect(
 		() => {
 			handleApplyFilters()
 		},
-		[filters],
-		300
+		[filters, searchParams, pathname],
+		500
 	)
 
 	const {
@@ -37,7 +43,7 @@ export function useProperties() {
 		hasNextPage,
 		isFetchingNextPage
 	} = useInfiniteQuery({
-		queryKey: ['properties', initialFilters],
+		queryKey: ['propertiesAlternate', initialFilters],
 		queryFn: ({ pageParam = 1 }) =>
 			propertyService.findAll({
 				...initialFilters,
@@ -48,39 +54,57 @@ export function useProperties() {
 				? lastPage.pagination.page + 1
 				: undefined
 		},
-		initialPageParam: 1,
+		initialPageParam: 1
 	})
 
-	const properties = data?.pages.flatMap(page => page.data) || []
+	const properties = useMemo(() => {
+		return data?.pages.flatMap(page => page.data)
+	}, [initialFilters])
+
+	const updateSorting = useCallback(
+		(field: string, direction: 'asc' | 'desc') => {
+			setFilters(prev => ({
+				...prev,
+				sortBy: `${field},${direction}`
+			}))
+		},
+		[]
+	)
+
+	const updateFilters = useCallback((update: Partial<PropertyFilters>) => {
+		setFilters(prev => ({ ...prev, ...update }))
+	}, [])
 
 	const handleApplyFilters = useCallback(() => {
 		const params = new URLSearchParams()
 
 		Object.entries(filters).forEach(([key, value]) => {
-			if (value) {
-				if (Array.isArray(value)) {
+			if (Array.isArray(value)) {
+				if (value.length > 0) {
 					params.set(key, value.join(','))
-				} else {
+				}
+			} else if (typeof value === 'string') {
+				if (value.trim() !== '') {
 					params.set(key, value)
 				}
 			}
 		})
 
-		const newQuery = `?${params.toString()}`
+		const newQuery = params.toString() ? `?${params.toString()}` : ''
 		if (typeof window !== 'undefined') {
 			const current = window.location.search
-			if (current === `?${params.toString()}`) return
+			if (current === newQuery) return
 		}
 
-		router.push(newQuery)
-	}, [filters, router])
+		router.push(`${pathname}${newQuery}`, { scroll: false })
+	}, [filters, router, pathname])
 
-	const loadMore = useCallback(() => {
+	const loadMore = () => {
 		if (hasNextPage && !isFetchingNextPage) fetchNextPage()
-	}, [hasNextPage])
+	}
 
 	const resetFilters = useCallback(() => {
-		storeResetFilters()
+		setFilters({})
 		router.push(pathname)
 	}, [])
 
@@ -93,6 +117,7 @@ export function useProperties() {
 			filters,
 			updateSorting,
 			updateFilters,
+			handleApplyFilters,
 			loadMore,
 			resetFilters,
 			hasMore: hasNextPage
@@ -105,6 +130,7 @@ export function useProperties() {
 			filters,
 			updateSorting,
 			updateFilters,
+			handleApplyFilters,
 			loadMore,
 			resetFilters,
 			hasNextPage
