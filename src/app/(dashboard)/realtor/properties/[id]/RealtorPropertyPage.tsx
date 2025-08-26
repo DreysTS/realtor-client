@@ -5,8 +5,8 @@ import React from 'react'
 
 import RealtorPropertyCard from '../RealtorPropertyCard'
 
-import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { SidebarTitle } from '@/components/widgets'
 import { useRealtorProperty } from '@/hooks/queries/properties'
 import { IProperty } from '@/lib/types'
 

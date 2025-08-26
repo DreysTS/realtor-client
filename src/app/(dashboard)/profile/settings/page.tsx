@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { SettingsForm } from './SettingsForm'
-import { SidebarTitle } from '@/components/special'
+import { SidebarTitle } from '@/components/widgets'
 
 export default function Page() {
 	return (

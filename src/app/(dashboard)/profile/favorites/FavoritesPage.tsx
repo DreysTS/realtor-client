@@ -4,13 +4,13 @@ import { Heart } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
+import { Loading, buttonVariants } from '@/components/ui'
 import {
 	EmptyList,
 	IEmptyList,
 	PropertyCard,
 	SidebarTitle
-} from '@/components/special'
-import { Loading, buttonVariants } from '@/components/ui'
+} from '@/components/widgets'
 import { useFavoritesProperties } from '@/hooks/queries/favorites'
 import { cn } from '@/lib/utils'
 

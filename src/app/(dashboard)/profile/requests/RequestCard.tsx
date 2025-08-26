@@ -2,7 +2,6 @@ import { EllipsisVertical, Trash } from 'lucide-react'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-import { PreviewCarousel, PreviewDescription } from '@/components/special'
 import {
 	Badge,
 	Button,
@@ -26,12 +25,13 @@ import {
 	Separator
 } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
+import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useDeleteRequest } from '@/hooks/queries/requests'
 import { propertyRequestStatusMap } from '@/lib/constants'
 import { IRequest } from '@/lib/types'
 import { translateEnum } from '@/lib/utils'
 
-export default function RequestCard({ request }: { request: IRequest }) {
+export function RequestCard({ request }: { request: IRequest }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
 

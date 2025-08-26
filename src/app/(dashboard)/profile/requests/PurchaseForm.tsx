@@ -1,51 +1,37 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import {
-	Button,
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	Input,
-	Textarea
-} from '@/components/ui'
+import { RenderFormField } from '@/components/form/RenderFormField'
+import { Button, DialogClose, Form } from '@/components/ui'
+import { PROPERTY_PURCHASE_FIELDS } from '@/config/form'
 import { useAddPurchase, useUpdatePurchase } from '@/hooks/queries/purchases'
-import { TypeCreatePurchaseSchema } from '@/lib/schemes'
+import { CreatePurchaseSchema, TypeCreatePurchaseSchema } from '@/lib/schemes'
 import { IPurchase } from '@/lib/types'
 
-export default function PurchaseForm({
-	purchase
-}: {
-	purchase?: IPurchase | null
-}) {
+export function PurchaseForm({ purchase }: { purchase?: IPurchase | null }) {
 	const form = useForm<TypeCreatePurchaseSchema>({
-		mode: 'onChange',
+		resolver: zodResolver(CreatePurchaseSchema),
 		values: {
 			description: purchase?.description || '',
-			phone_number: purchase?.user.phoneNumber || '',
-			budget_min: purchase?.budget_min || ('' as unknown as number),
-			budget_max: purchase?.budget_max || ('' as unknown as number),
+			budgetMin: purchase?.budgetMin || ('' as unknown as number),
+			budgetMax: purchase?.budgetMax || ('' as unknown as number),
 			rooms: purchase?.rooms || ('' as unknown as number),
-			area_min: purchase?.area_min || ('' as unknown as number),
-			area_max: purchase?.area_max || ('' as unknown as number),
-			contact_method: purchase?.contact_method || ''
+			areaMin: purchase?.areaMin || ('' as unknown as number),
+			areaMax: purchase?.areaMax || ('' as unknown as number),
+			phoneNumber: purchase?.user.phoneNumber || '',
+			contactMethod: purchase?.contactMethod || ''
 		}
 	})
 
 	const { createPurchase, isPurchaseCreating } = useAddPurchase()
 	const { updatePurchase, isPurchaseUpdating } = useUpdatePurchase()
 
-	async function onSubmit(values: TypeCreatePurchaseSchema) {
-		values.budget_min = Number(values.budget_min)
-		values.budget_max = Number(values.budget_max)
-		values.rooms = Number(values.rooms)
-		values.area_min = Number(values.area_min)
-		values.area_max = Number(values.area_max)
+	const disabled = isPurchaseCreating || isPurchaseUpdating
 
+	async function onSubmit(values: TypeCreatePurchaseSchema) {
 		purchase
 			? updatePurchase({ purchaseId: purchase.id, data: values })
 			: createPurchase(values)
@@ -55,168 +41,23 @@ export default function PurchaseForm({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto max-w-3xl space-y-8 py-10'
+				className='mx-auto max-w-3xl space-y-8'
 			>
-				<FormField
-					control={form.control}
-					name='description'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Описание</FormLabel>
-							<FormControl>
-								<Textarea
-									className='resize-none'
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='phone_number'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Номер телефона</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='budget_min'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Минимальный бюджет</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='budget_max'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Максимальный бюджет</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='rooms'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Желаемое количество комнат</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='area_min'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Минимальная площадь</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='area_max'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Максимальная площадь</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='contact_method'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Способ связи</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={
-										isPurchaseCreating || isPurchaseUpdating
-									}
-								/>
-							</FormControl>
-						</FormItem>
-					)}
-				/>
+				{PROPERTY_PURCHASE_FIELDS.map(field => (
+					<RenderFormField
+						key={String(field.name)}
+						field={field}
+						control={form.control}
+						disabled={disabled}
+					/>
+				))}
 				<div className='flex gap-3'>
-					<Button
-						type='reset'
-						variant='ghost'
-						onClick={() => {
-							form.reset
-						}}
-						disabled={isPurchaseCreating || isPurchaseUpdating}
-					>
-						Сбросить
-					</Button>
-					<Button
-						type='submit'
-						className='grow'
-						disabled={isPurchaseCreating || isPurchaseUpdating}
-					>
+					<DialogClose asChild>
+						<Button variant='ghost' disabled={disabled}>
+							Отмена
+						</Button>
+					</DialogClose>
+					<Button type='submit' className='grow' disabled={disabled}>
 						Отправить
 					</Button>
 				</div>

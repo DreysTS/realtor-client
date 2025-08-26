@@ -1,23 +1,31 @@
 'use client'
 
-import { PlusCircle, TextSearch } from 'lucide-react'
+import { useDirection } from '@radix-ui/react-direction'
+import {
+	Expand,
+	Fullscreen,
+	Maximize,
+	PlusCircle,
+	TextSearch
+} from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 import PropertyForm from './PropertyForm'
 import RealtorPropertyCard from './RealtorPropertyCard'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import {
 	Button,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 	Loading,
-	Sheet,
-	SheetContent,
-	SheetFooter,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
 	buttonVariants
 } from '@/components/ui'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
 import { useRealtorProperties } from '@/hooks/queries/properties'
 import { cn } from '@/lib/utils'
 
@@ -37,7 +45,15 @@ const emptyListProps: IEmptyList = {
 }
 
 export default function RealtorPropertiesPage() {
+	const [variant, setVariant] = useState<'fullscreen' | 'default'>('default')
+
+	const handleChangeVariant = () => {
+		setVariant(prev => (prev === 'default' ? 'fullscreen' : 'default'))
+	}
+
 	const { properties, isPropertiesLoading } = useRealtorProperties()
+
+	const direction = useDirection()
 
 	if (isPropertiesLoading) return <Loading />
 
@@ -45,23 +61,46 @@ export default function RealtorPropertiesPage() {
 		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Список всех объектов</SidebarTitle>
 			<div>
-				<Sheet>
-					<SheetTrigger asChild>
+				<Dialog>
+					<DialogTrigger asChild>
 						<Button variant='outline'>
-							Добавить <PlusCircle />
+							Создать заявку <PlusCircle />
 						</Button>
-					</SheetTrigger>
-					<SheetContent className='overflow-y-scroll sm:max-w-fit'>
-						<SheetHeader>
-							<SheetTitle className='text-2xl'>
-								Добавить объект
-							</SheetTitle>
-						</SheetHeader>
-						<div className='px-4'>
+					</DialogTrigger>
+					<DialogContent
+						className={cn(
+							'p-0',
+							variant === 'default'
+								? 'sm:max-h-[min(650px,80vh)] sm:max-w-lg'
+								: ''
+						)}
+						variant={variant}
+						dir={direction}
+					>
+						<DialogHeader className='border-border m-0 border-b pt-5 pb-3'>
+							<DialogTitle className='px-6 text-base'>
+								Добавить недвижимость
+							</DialogTitle>
+							<DialogDescription></DialogDescription>
+						</DialogHeader>
+						<div className='my-3 me-1 h-full overflow-y-auto ps-6 pe-5 text-sm'>
 							<PropertyForm />
 						</div>
-					</SheetContent>
-				</Sheet>
+						<DialogFooter className='border-border border-t px-6 py-4'>
+							<Button
+								className='grow'
+								variant='outline'
+								onClick={handleChangeVariant}
+							>
+								{variant === 'default' ? (
+									<Expand />
+								) : (
+									<Maximize />
+								)}
+							</Button>
+						</DialogFooter>
+					</DialogContent>
+				</Dialog>
 			</div>
 			{properties?.length === 0 ? (
 				<div className='flex grow items-center justify-center'>

@@ -5,8 +5,8 @@ import React from 'react'
 
 import PropertyRequestCard from '../PropertyRequestCard'
 
-import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { SidebarTitle } from '@/components/widgets'
 import { useFindRequestById } from '@/hooks/queries/requests'
 import { IRequest } from '@/lib/types'
 

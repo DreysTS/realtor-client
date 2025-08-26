@@ -1,12 +1,15 @@
 import React from 'react'
 
 import AppSidebar from '@/components/AppSidebar'
+import Navbar from '@/components/Navbar'
 import { SidebarProvider } from '@/components/ui'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<SidebarProvider>
+			<Navbar />
+
 			<div className='min-h-screen w-full'>
 				<div style={{ marginTop: `${NAVBAR_HEIGHT}px` }}>
 					<div

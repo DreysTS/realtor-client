@@ -5,8 +5,8 @@ import React from 'react'
 
 import PropertyPurchasesCard from '../PropertyPurchasesCard'
 
-import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { SidebarTitle } from '@/components/widgets'
 import { useFindPurchase } from '@/hooks/queries/purchases'
 import { IPurchase } from '@/lib/types'
 

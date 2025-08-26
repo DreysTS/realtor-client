@@ -1,26 +1,28 @@
 'use client'
 
+import { useDirection } from '@radix-ui/react-direction'
 import { FileX, PlusCircle } from 'lucide-react'
 import React from 'react'
 
-import PurchaseCard from './PurchaseCard'
-import PurchaseForm from './PurchaseForm'
-import RequestCard from './RequestCard'
-import RequestForm from './RequestForm'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
+import { PurchaseCard } from './PurchaseCard'
+import { PurchaseForm } from './PurchaseForm'
+import { RequestCard } from './RequestCard'
+import { RequestForm } from './RequestForm'
 import {
 	Button,
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 	Loading,
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
+	ScrollArea,
 	Tabs,
 	TabsContent,
 	TabsList,
 	TabsTrigger
 } from '@/components/ui'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
 import { useFindPurchases } from '@/hooks/queries/purchases'
 import { useRequests } from '@/hooks/queries/requests'
 
@@ -47,49 +49,18 @@ export default function RequestPage() {
 	return (
 		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Мои заявки</SidebarTitle>
-			<div className='space-x-4'>
-				<Sheet>
-					<SheetTrigger asChild>
-						<Button variant='outline'>
-							Продать <PlusCircle />
-						</Button>
-					</SheetTrigger>
-					<SheetContent className='overflow-y-scroll sm:min-w-3xl'>
-						<SheetHeader>
-							<SheetTitle className='text-2xl'>
-								Продать
-							</SheetTitle>
-						</SheetHeader>
-						<div className='px-4'>
-							<RequestForm />
-						</div>
-					</SheetContent>
-				</Sheet>
-				<Sheet>
-					<SheetTrigger asChild>
-						<Button>
-							Купить <PlusCircle />
-						</Button>
-					</SheetTrigger>
-					<SheetContent className='overflow-y-scroll sm:min-w-3xl'>
-						<SheetHeader>
-							<SheetTitle className='text-2xl'>Купить</SheetTitle>
-						</SheetHeader>
-						<div className='px-4'>
-							<PurchaseForm />
-						</div>
-					</SheetContent>
-				</Sheet>
-			</div>
 			<Tabs defaultValue='requests' className='grow'>
-				<TabsList>
-					<TabsTrigger className='border-0' value='requests'>
-						Продажа
-					</TabsTrigger>
-					<TabsTrigger className='border-0' value='purchases'>
-						Покупка
-					</TabsTrigger>
-				</TabsList>
+				<div className='flex flex-wrap justify-between gap-2'>
+					<DialogForm />
+					<TabsList>
+						<TabsTrigger className='border-0' value='requests'>
+							Продажа
+						</TabsTrigger>
+						<TabsTrigger className='border-0' value='purchases'>
+							Покупка
+						</TabsTrigger>
+					</TabsList>
+				</div>
 				<TabsContent
 					value='requests'
 					className='rounded-xl sm:border sm:p-3'
@@ -146,5 +117,52 @@ export default function RequestPage() {
 				</TabsContent>
 			</Tabs>
 		</div>
+	)
+}
+
+function DialogForm() {
+	const direction = useDirection()
+
+	return (
+		<Dialog>
+			<DialogTrigger asChild>
+				<Button variant='outline'>
+					Создать заявку <PlusCircle />
+				</Button>
+			</DialogTrigger>
+			<DialogContent
+				className='p-0 sm:max-h-[min(650px,80vh)] sm:max-w-lg'
+				onInteractOutside={e => e.preventDefault()}
+				dir={direction}
+			>
+				<Tabs defaultValue='request'>
+					<DialogHeader className='border-border m-0 flex gap-2 border-b pt-5 pb-3'>
+						<DialogTitle className='px-6 text-base'>
+							Создать заявку
+						</DialogTitle>
+
+						<div className='px-6'>
+							<TabsList className='w-full'>
+								<TabsTrigger value='request'>
+									Продать
+								</TabsTrigger>
+								<TabsTrigger value='purchase'>
+									Купить
+								</TabsTrigger>
+							</TabsList>
+						</div>
+					</DialogHeader>
+
+					<ScrollArea className='my-3 me-1 h-[480px] ps-6 pe-5 text-sm'>
+						<TabsContent value='request'>
+							<RequestForm />
+						</TabsContent>
+						<TabsContent value='purchase'>
+							<PurchaseForm />
+						</TabsContent>
+					</ScrollArea>
+				</Tabs>
+			</DialogContent>
+		</Dialog>
 	)
 }

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import PropertyForm from './PropertyForm'
-import { PreviewCarousel, PreviewDescription } from '@/components/special'
 import {
 	Badge,
 	Button,
@@ -30,6 +29,7 @@ import {
 	SheetHeader,
 	SheetTitle
 } from '@/components/ui'
+import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useRemoveProperty, useSetStatus } from '@/hooks/queries/properties'
 import {
 	buildingTypeMap,

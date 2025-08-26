@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import DeclineDialog from './DeclineDialog'
-import { PreviewCarousel, PreviewDescription } from '@/components/special'
 import {
 	Avatar,
 	AvatarImage,
@@ -17,6 +16,7 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
+import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useAcceptRequest } from '@/hooks/queries/requests'
 import { propertyRequestStatusMap } from '@/lib/constants'
 import { IRequest } from '@/lib/types'

@@ -4,7 +4,6 @@ import { ListX } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import {
 	Avatar,
 	AvatarFallback,
@@ -14,6 +13,7 @@ import {
 	CardHeader,
 	Loading
 } from '@/components/ui'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
 import { useFindUsersFeedbacks } from '@/hooks/queries/feedback'
 
 const emptyListProps: IEmptyList = {

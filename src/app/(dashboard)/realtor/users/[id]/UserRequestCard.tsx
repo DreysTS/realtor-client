@@ -11,10 +11,10 @@ import {
 	Separator,
 	buttonVariants
 } from '@/components/ui'
+import { PreviewCarousel } from '@/components/widgets'
 import { propertyRequestStatusMap } from '@/lib/constants'
 import { IRequest } from '@/lib/types'
 import { cn, translateEnum } from '@/lib/utils'
-import { PreviewCarousel } from '@/components/special'
 
 export default function UserRequestCard({ request }: { request: IRequest }) {
 	return (

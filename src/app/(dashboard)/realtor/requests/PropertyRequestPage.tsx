@@ -4,8 +4,8 @@ import { FileX2 } from 'lucide-react'
 import React from 'react'
 
 import PropertyRequestCard from './PropertyRequestCard'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
 import { useUsersRequests } from '@/hooks/queries/requests'
 
 const emptyListProps: Omit<IEmptyList, 'primaryButton' | 'secondaryButton'> = {

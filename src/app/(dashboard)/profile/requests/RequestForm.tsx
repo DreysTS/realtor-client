@@ -1,24 +1,16 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ImageUpload } from '@/components/special'
-import {
-	Button,
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-	Input,
-	Textarea
-} from '@/components/ui'
+import { RenderFormField } from '@/components/form/RenderFormField'
+import { Button, DialogClose, Form } from '@/components/ui'
+import { PROPERTY_REQUEST_FIELDS } from '@/config/form'
 import { useCreateRequest } from '@/hooks/queries/requests'
-import { TypeCreateRequestSchema } from '@/lib/schemes'
+import { CreateRequestSchema, TypeCreateRequestSchema } from '@/lib/schemes'
 
-export default function RequestForm() {
+export function RequestForm() {
 	const form = useForm<TypeCreateRequestSchema>({
-		mode: 'onChange',
+		resolver: zodResolver(CreateRequestSchema),
 		values: {
 			title: '',
 			description: '',
@@ -26,17 +18,17 @@ export default function RequestForm() {
 			price: '' as unknown as number,
 			square: '' as unknown as number,
 			rooms: '' as unknown as number,
-			address: ''
+			address: '',
+			phoneNumber: '',
+			contactMethod: ''
 		}
 	})
 
 	const { createRequest, isRequestCreating } = useCreateRequest()
 
-	async function onSubmit(values: TypeCreateRequestSchema) {
-		values.price = Number(values.price)
-		values.rooms = Number(values.rooms)
-		values.square = Number(values.square)
+	const disabled = isRequestCreating
 
+	async function onSubmit(values: TypeCreateRequestSchema) {
 		createRequest(values)
 	}
 
@@ -44,158 +36,23 @@ export default function RequestForm() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto w-full max-w-3xl space-y-8 py-10'
+				className='mx-auto w-full max-w-3xl space-y-8'
 			>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Заголовок (название)</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Трёшка на Патриках'
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='description'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Описание</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder='Всего владельцев было двое..'
-									className='resize-none'
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='images'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Выберите изображения</FormLabel>
-							<FormControl>
-								<ImageUpload
-									isDisabled={isRequestCreating}
-									onChange={field.onChange}
-									value={field.value as string[]}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='price'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Стоимость</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='10.000.000'
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='square'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Площадь</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='43.8 '
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='rooms'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Количество комнат</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='2'
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name='address'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Адрес</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='г. Москва, улица Пушкина, дом Колотушкина'
-									{...field}
-									disabled={isRequestCreating}
-								/>
-							</FormControl>
-
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
+				{PROPERTY_REQUEST_FIELDS.map(field => (
+					<RenderFormField
+						key={String(field.name)}
+						field={field}
+						control={form.control}
+						disabled={disabled}
+					/>
+				))}
 				<div className='flex gap-3'>
-					<Button
-						type='reset'
-						variant='ghost'
-						onClick={() => {
-							form.reset
-						}}
-						disabled={isRequestCreating}
-					>
-						Сбросить
-					</Button>
-					<Button
-						type='submit'
-						className='grow'
-						disabled={isRequestCreating}
-					>
+					<DialogClose asChild>
+						<Button variant='ghost' disabled={disabled}>
+							Отмена
+						</Button>
+					</DialogClose>
+					<Button type='submit' className='grow' disabled={disabled}>
 						Отправить
 					</Button>
 				</div>

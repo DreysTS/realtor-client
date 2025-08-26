@@ -3,8 +3,8 @@
 import React from 'react'
 
 import UserCard from './UserCard'
-import { SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { SidebarTitle } from '@/components/widgets'
 import { useUsers } from '@/hooks/queries/auth'
 
 export default function UsersPage() {

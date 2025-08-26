@@ -4,8 +4,8 @@ import { FileX2 } from 'lucide-react'
 import React from 'react'
 
 import PropertyPurchasesCard from './PropertyPurchasesCard'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/special'
 import { Loading } from '@/components/ui'
+import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
 import { useFindUsersPurchases } from '@/hooks/queries/purchases'
 
 const emptyListProps: IEmptyList = {

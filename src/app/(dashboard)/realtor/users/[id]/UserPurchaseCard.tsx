@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { PreviewDescription } from '@/components/special'
 import {
 	Badge,
 	Button,
@@ -12,6 +11,7 @@ import {
 	Separator,
 	buttonVariants
 } from '@/components/ui'
+import { PreviewDescription } from '@/components/widgets'
 import { propertyPurchaseStatusMap } from '@/lib/constants'
 import { IPurchase } from '@/lib/types'
 import { cn, translateEnum } from '@/lib/utils'

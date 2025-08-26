@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { PreviewDescription } from '@/components/special'
 import {
 	Avatar,
 	AvatarImage,
@@ -14,6 +13,7 @@ import {
 	buttonVariants
 } from '@/components/ui'
 import { DataItem } from '@/components/ui/data-item'
+import { PreviewDescription } from '@/components/widgets'
 import { useUpdateStatus } from '@/hooks/queries/purchases'
 import {
 	propertyPurchaseStatusMap,
