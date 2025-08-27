@@ -1,33 +1,11 @@
 'use client'
 
-import { Heart } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 
-import { Loading, buttonVariants } from '@/components/ui'
-import {
-	EmptyList,
-	IEmptyList,
-	PropertyCard,
-	SidebarTitle
-} from '@/components/widgets'
+import { EmptyUserFavorites } from '@/components/empty-state'
+import { Loading } from '@/components/ui'
+import { PropertyCard, SidebarTitle } from '@/components/widgets'
 import { useFavoritesProperties } from '@/hooks/queries/favorites'
-import { cn } from '@/lib/utils'
-
-const emptyListProps: IEmptyList = {
-	title: 'Ещё нет избранных объектов',
-	description:
-		'Вы можете добавить понравившиеся вам объекты в каталоге недвижимости. Смотрите по вашим предпочтениям.',
-	icon: Heart,
-	buttonPrimary: (
-		<Link
-			href='/properties'
-			className={cn(buttonVariants({ effect: 'ringHover' }))}
-		>
-			Каталог
-		</Link>
-	)
-}
 
 export default function FavoritesPage() {
 	const { favoritedProperties, isFavoritedPropertiesLoading } =
@@ -43,12 +21,7 @@ export default function FavoritesPage() {
 
 			{favoritedProperties?.length === 0 ? (
 				<div className='flex grow items-center justify-center'>
-					<EmptyList
-						title={emptyListProps.title}
-						description={emptyListProps.description}
-						icon={emptyListProps.icon}
-						buttonPrimary={emptyListProps.buttonPrimary}
-					/>
+					<EmptyUserFavorites />
 				</div>
 			) : (
 				<div className='grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>

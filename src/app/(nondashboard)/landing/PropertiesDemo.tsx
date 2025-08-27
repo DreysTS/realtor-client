@@ -1,12 +1,13 @@
 'use client'
 
-import { ArrowRight, Building2, FilePlus } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 import { Container, Section } from '@/components'
-import { Button, buttonVariants } from '@/components/ui'
-import { EmptyList, PropertyCard, SectionTitling } from '@/components/widgets'
+import { EmptyProperties } from '@/components/empty-state'
+import { buttonVariants } from '@/components/ui'
+import { PropertyCard, SectionTitling } from '@/components/widgets'
 import { useProperties } from '@/hooks/queries/properties'
 import { cn } from '@/lib/utils'
 
@@ -25,21 +26,7 @@ export default function PropertiesDemo() {
 					<div className='relative grid place-items-center overflow-hidden rounded-xl border p-6 shadow-lg'>
 						<div className='bg-primary absolute top-0 right-0 -z-1 h-64 w-64 translate-x-1/2 -translate-y-1/2 rounded-full blur-[15rem]'></div>
 						<div className='bg-primary absolute bottom-0 left-0 -z-1 h-48 w-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-[20rem]'></div>
-						<EmptyList
-							title='Список объектов пуст'
-							description='Вы можете оставить заявку на приобретение недвижимости, либо
-				подождать, пока появятся новые объекты'
-							icon={Building2}
-							buttonPrimary={
-								<Button
-									effect='expandIcon'
-									icon={FilePlus}
-									iconPlacement='right'
-								>
-									Оставить заявку
-								</Button>
-							}
-						/>
+						<EmptyProperties />
 					</div>
 				) : (
 					<>

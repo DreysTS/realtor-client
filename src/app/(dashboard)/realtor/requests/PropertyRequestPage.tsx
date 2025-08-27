@@ -1,19 +1,12 @@
 'use client'
 
-import { FileX2 } from 'lucide-react'
 import React from 'react'
 
 import PropertyRequestCard from './PropertyRequestCard'
+import { EmptyRealtorPropertyRequest } from '@/components/empty-state'
 import { Loading } from '@/components/ui'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
+import { SidebarTitle } from '@/components/widgets'
 import { useUsersRequests } from '@/hooks/queries/requests'
-
-const emptyListProps: Omit<IEmptyList, 'primaryButton' | 'secondaryButton'> = {
-	title: 'Список заявок на продажу пуст',
-	description:
-		'Ещё никто из пользователей не создал заявку на продажу недвижимости. Нужно подождать определённый период времени.',
-	icon: FileX2
-}
 
 export default function PropertyRequestPage() {
 	const { usersRequests, isUsersRequestsLoading } = useUsersRequests()
@@ -25,11 +18,7 @@ export default function PropertyRequestPage() {
 			<SidebarTitle>Заявки на продажу</SidebarTitle>
 			{usersRequests?.length === 0 ? (
 				<div className='flex grow items-center justify-center'>
-					<EmptyList
-						title={emptyListProps.title}
-						description={emptyListProps.description}
-						icon={emptyListProps.icon}
-					/>
+					<EmptyRealtorPropertyRequest />
 				</div>
 			) : (
 				<div className='flex flex-col gap-4'>

@@ -1,10 +1,11 @@
 'use client'
 
-import { BrushCleaning, Building2, FilePlus } from 'lucide-react'
+import { BrushCleaning } from 'lucide-react'
 import React from 'react'
 
-import Filters from './Filters'
+import { Filters } from './Filters'
 import { Container, Footer, Section } from '@/components'
+import { EmptyProperties } from '@/components/empty-state'
 import {
 	Button,
 	Sheet,
@@ -18,21 +19,8 @@ import {
 	TooltipContent,
 	TooltipTrigger
 } from '@/components/ui'
-import { EmptyList, IEmptyList, PropertyCard } from '@/components/widgets'
+import { PropertyCard } from '@/components/widgets'
 import { useProperties } from '@/hooks/queries/properties'
-import { NAVBAR_HEIGHT } from '@/lib/constants'
-
-const emptyListProps: IEmptyList = {
-	title: 'Список объектов пуст',
-	description:
-		'Вы можете оставить заявку на приобретение недвижимости, либо подождать, пока появятся новые объекты',
-	icon: Building2,
-	buttonPrimary: (
-		<Button effect='expandIcon' icon={FilePlus} iconPlacement='right'>
-			Оставить заявку
-		</Button>
-	)
-}
 
 export default function PropertiesPage() {
 	const {
@@ -100,12 +88,7 @@ export default function PropertiesPage() {
 						)}
 						{properties?.length === 0 ? (
 							<div className='grid h-full grow place-items-center max-sm:pt-4'>
-								<EmptyList
-									title={emptyListProps.title}
-									description={emptyListProps.description}
-									icon={emptyListProps.icon}
-									buttonPrimary={emptyListProps.buttonPrimary}
-								/>
+								<EmptyProperties />
 							</div>
 						) : (
 							<>

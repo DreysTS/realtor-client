@@ -1,13 +1,14 @@
 'use client'
 
 import { useDirection } from '@radix-ui/react-direction'
-import { FileX, PlusCircle } from 'lucide-react'
+import { PlusCircle } from 'lucide-react'
 import React from 'react'
 
 import { PurchaseCard } from './PurchaseCard'
 import { PurchaseForm } from './PurchaseForm'
 import { RequestCard } from './RequestCard'
 import { RequestForm } from './RequestForm'
+import { EmptyUserPurchases, EmptyUserRequests } from '@/components/empty-state'
 import {
 	Button,
 	Dialog,
@@ -22,23 +23,9 @@ import {
 	TabsList,
 	TabsTrigger
 } from '@/components/ui'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
+import { SidebarTitle } from '@/components/widgets'
 import { useFindPurchases } from '@/hooks/queries/purchases'
 import { useRequests } from '@/hooks/queries/requests'
-
-const emptyListPropsRequests: IEmptyList = {
-	title: 'Заявок на продажу нету',
-	description:
-		'Вы можете создать заявку на продажу по первой кнопке выше и заполнить небольшую форму. Ваша заявка будет рассмотрена риэлтором.',
-	icon: FileX
-}
-
-const emptyListPropsPurchases: IEmptyList = {
-	title: 'Заявок на покупку нету',
-	description:
-		'Вы можете создать заявку на покупку по второй кнопке выше и заполнить небольшую форму. Ваша заявка будет рассмотрена риэлтором.',
-	icon: FileX
-}
 
 export default function RequestPage() {
 	const { requests, isRequestsLoading } = useRequests()
@@ -67,14 +54,7 @@ export default function RequestPage() {
 				>
 					{requests?.length === 0 ? (
 						<div className='flex h-full grow items-center justify-center'>
-							<EmptyList
-								title={emptyListPropsRequests.title}
-								description={emptyListPropsRequests.description}
-								icon={emptyListPropsRequests.icon}
-								buttonPrimary={
-									emptyListPropsRequests.buttonPrimary
-								}
-							/>
+							<EmptyUserRequests />
 						</div>
 					) : (
 						<div className='flex flex-col gap-4'>
@@ -93,16 +73,7 @@ export default function RequestPage() {
 				>
 					{purchases?.length === 0 ? (
 						<div className='flex h-full grow items-center justify-center'>
-							<EmptyList
-								title={emptyListPropsPurchases.title}
-								description={
-									emptyListPropsPurchases.description
-								}
-								icon={emptyListPropsPurchases.icon}
-								buttonPrimary={
-									emptyListPropsPurchases.buttonPrimary
-								}
-							/>
+							<EmptyUserPurchases />
 						</div>
 					) : (
 						<div className='flex flex-col gap-4'>

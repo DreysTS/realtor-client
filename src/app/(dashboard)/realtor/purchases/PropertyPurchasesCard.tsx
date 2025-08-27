@@ -54,18 +54,18 @@ export default function PropertyPurchasesCard({
 					/>
 					<DataItem
 						label='Способ связи'
-						value={purchase.contact_method}
+						value={purchase.contactMethod}
 					/>
 					<PreviewDescription description={purchase.description} />
 				</div>
 				<div>
 					<DataItem
 						label='Минимальный бюджет'
-						value={purchase.budget_min?.toLocaleString() + ' ₽'}
+						value={purchase.budgetMin?.toLocaleString() + ' ₽'}
 					/>
 					<DataItem
 						label='Максимальный бюджет'
-						value={purchase.budget_min?.toLocaleString() + ' ₽'}
+						value={purchase.budgetMax?.toLocaleString() + ' ₽'}
 					/>
 					<DataItem
 						label='Количество комнат'
@@ -73,11 +73,11 @@ export default function PropertyPurchasesCard({
 					/>
 					<DataItem
 						label='Минимальная площадь'
-						value={purchase.area_min + ' м²'}
+						value={purchase.areaMin + ' м²'}
 					/>
 					<DataItem
 						label='Максимальная площадь'
-						value={purchase.area_max + ' м²'}
+						value={purchase.areaMax + ' м²'}
 					/>
 				</div>
 				<div>

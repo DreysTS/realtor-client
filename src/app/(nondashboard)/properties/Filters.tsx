@@ -13,7 +13,7 @@ import {
 	SORTING_FILTERS_LIST
 } from '@/lib/constants/filters'
 
-export default function Filters() {
+export function Filters() {
 	const { filters, updateFilters, updateSorting } = useProperties()
 
 	return (

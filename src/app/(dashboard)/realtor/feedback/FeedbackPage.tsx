@@ -1,9 +1,9 @@
 'use client'
 
-import { ListX } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
+import { EmptyFeedback } from '@/components/empty-state'
 import {
 	Avatar,
 	AvatarFallback,
@@ -13,15 +13,8 @@ import {
 	CardHeader,
 	Loading
 } from '@/components/ui'
-import { EmptyList, IEmptyList, SidebarTitle } from '@/components/widgets'
+import { SidebarTitle } from '@/components/widgets'
 import { useFindUsersFeedbacks } from '@/hooks/queries/feedback'
-
-const emptyListProps: IEmptyList = {
-	title: 'Никто ещё не оставил отзыва',
-	description:
-		'Стоит подождать какое-то время, прежде чем кто-то из пользователей оставит отзыв.',
-	icon: ListX
-}
 
 export default function FeedbackPage() {
 	const { usersFeedbacks, isUsersFeedbacksLoading } = useFindUsersFeedbacks()
@@ -33,11 +26,7 @@ export default function FeedbackPage() {
 			<SidebarTitle>Обратная связь пользователей</SidebarTitle>
 			{usersFeedbacks?.length === 0 ? (
 				<div className='flex grow items-center justify-center'>
-					<EmptyList
-						title={emptyListProps.title}
-						description={emptyListProps.description}
-						icon={emptyListProps.icon}
-					/>
+					<EmptyFeedback />
 				</div>
 			) : (
 				usersFeedbacks?.map(feedback => (

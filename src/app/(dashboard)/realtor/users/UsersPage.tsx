@@ -8,7 +8,7 @@ import { SidebarTitle } from '@/components/widgets'
 import { useUsers } from '@/hooks/queries/auth'
 
 export default function UsersPage() {
-	const { users, isUsersLoading, usersError } = useUsers()
+	const { users, isUsersLoading } = useUsers()
 
 	if (isUsersLoading) return <Loading />
 
