@@ -36,7 +36,7 @@ export function RequestForm() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto w-full max-w-3xl space-y-8'
+				className='mx-auto w-full space-y-8'
 			>
 				{PROPERTY_REQUEST_FIELDS.map(field => (
 					<RenderFormField

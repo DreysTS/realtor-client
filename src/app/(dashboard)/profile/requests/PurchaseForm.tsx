@@ -41,7 +41,7 @@ export function PurchaseForm({ purchase }: { purchase?: IPurchase | null }) {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='mx-auto max-w-3xl space-y-8'
+				className='mx-auto space-y-8'
 			>
 				{PROPERTY_PURCHASE_FIELDS.map(field => (
 					<RenderFormField

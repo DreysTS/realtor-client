@@ -39,7 +39,7 @@ export function DialogFormWrapper({ action, title, children }: Props) {
 			</DialogTrigger>
 			<DialogContent
 				className={cn(
-					'p-0',
+					'p-0 max-sm:h-screen',
 					variant === 'default'
 						? 'sm:max-h-[min(650px,80vh)] sm:max-w-lg'
 						: ''
@@ -54,7 +54,7 @@ export function DialogFormWrapper({ action, title, children }: Props) {
 					<DialogDescription></DialogDescription>
 				</DialogHeader>
 				{children}
-				<DialogFooter className='border-border border-t px-6 py-4'>
+				<DialogFooter className='border-border border-t px-6 py-4 max-sm:hidden'>
 					<Button
 						className='grow'
 						variant='outline'

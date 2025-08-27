@@ -9,10 +9,14 @@ import { PurchaseForm } from './PurchaseForm'
 import { RequestCard } from './RequestCard'
 import { RequestForm } from './RequestForm'
 import { EmptyUserPurchases, EmptyUserRequests } from '@/components/empty-state'
+import { DialogFormWrapper } from '@/components/form/DialogFormWrapper'
 import {
 	Button,
 	Dialog,
+	DialogClose,
 	DialogContent,
+	DialogDescription,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -38,7 +42,29 @@ export default function RequestPage() {
 			<SidebarTitle>Мои заявки</SidebarTitle>
 			<Tabs defaultValue='requests' className='grow'>
 				<div className='flex flex-wrap justify-between gap-2'>
-					<DialogForm />
+					<DialogFormWrapper action='Создать заявку' title=''>
+						<Tabs defaultValue='request' className='h-full overflow-hidden pt-4'>
+							<div className='px-6'>
+								<TabsList className='w-full'>
+									<TabsTrigger value='request'>
+										Продать
+									</TabsTrigger>
+									<TabsTrigger value='purchase'>
+										Купить
+									</TabsTrigger>
+								</TabsList>
+							</div>
+
+							<div className='my-3 me-1 h-full overflow-y-auto ps-6 pe-5 text-sm'>
+								<TabsContent value='request' className='h-full'>
+									<RequestForm />
+								</TabsContent>
+								<TabsContent value='purchase' className='h-full'>
+									<PurchaseForm />
+								</TabsContent>
+							</div>
+						</Tabs>
+					</DialogFormWrapper>
 					<TabsList>
 						<TabsTrigger className='border-0' value='requests'>
 							Продажа
