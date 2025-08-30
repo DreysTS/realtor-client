@@ -6,13 +6,6 @@ import { useDebouncedEffect, useSearchParamsObject } from '@/hooks'
 import { PropertyFilters, SearchParamsObject } from '@/lib/types'
 import { propertyService } from '@/services'
 
-/* const DEFAULT_FILTERS = {
-	minPrice: '0',
-	maxPrice: '100000000',
-	minSquare: '0',
-	maxSquare: '200'
-} */
-
 export function useProperties() {
 	const initialFilters = useSearchParamsObject()
 	const router = useRouter()
@@ -43,7 +36,7 @@ export function useProperties() {
 		hasNextPage,
 		isFetchingNextPage
 	} = useInfiniteQuery({
-		queryKey: ['propertiesAlternate', initialFilters],
+		queryKey: ['properties', initialFilters],
 		queryFn: ({ pageParam = 1 }) =>
 			propertyService.findAll({
 				...initialFilters,

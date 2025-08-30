@@ -20,7 +20,7 @@ export function EmptyState({
 				<Icon className='max-lg:size-5' />
 			</span>
 			<h1 className='text-xl font-semibold lg:text-3xl'>{title}</h1>
-			<p className='text-muted-foreground'>{description}</p>
+			<span className='text-muted-foreground'>{description}</span>
 			<div className='space-x-3'>{children}</div>
 		</div>
 	)

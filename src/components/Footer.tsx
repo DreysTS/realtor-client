@@ -1,13 +1,12 @@
 import { Mail } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { FaTelegram, FaViber, FaVk, FaWhatsapp } from 'react-icons/fa'
+import { FaTelegram, FaVk, FaWhatsapp } from 'react-icons/fa'
 
 import { Container } from './Container'
 import { FeedbackDialog } from './FeedbackDialog'
 import { Section } from './Section'
 import {
-	Button,
 	Card,
 	CardContent,
 	CardDescription,
@@ -24,11 +23,10 @@ import {
 import { cn } from '@/lib/utils'
 
 const socialMedias = [
-	{ icon: FaVk, label: 'Вконтакте' },
-	{ icon: FaTelegram, label: 'Telegram' },
-	{ icon: FaWhatsapp, label: 'WhatsApp' },
-	{ icon: FaViber, label: 'Viber' },
-	{ icon: Mail, label: 'Почта' }
+	{ icon: FaVk, label: 'Вконтакте', href: 'https://vk.com/olenaisaenkova' },
+	{ icon: FaTelegram, label: 'Telegram', href: 'https://t.me/+79539217432' },
+	{ icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/79539217432' },
+	{ icon: Mail, label: 'Почта', href: 'mailto:o.a.isaenkova@msk.etagi.com' }
 ]
 
 export function Footer() {
@@ -67,16 +65,20 @@ export function Footer() {
 									{socialMedias.map(item => (
 										<Tooltip key={item.label}>
 											<TooltipTrigger>
-												<div
+												<a
 													className={cn(
 														buttonVariants({
 															variant: 'outline',
 															size: 'icon'
 														})
 													)}
+													href={item.href}
 												>
 													<item.icon className='' />
-												</div>
+													<span className='sr-only'>
+														{item.label}
+													</span>
+												</a>
 											</TooltipTrigger>
 											<TooltipContent>
 												{item.label}

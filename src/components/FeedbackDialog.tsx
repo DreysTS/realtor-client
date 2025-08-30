@@ -72,6 +72,9 @@ export function FeedbackDialog() {
 						/>
 						<DialogFooter className='pt-4'>
 							<DialogClose asChild>
+								<Button variant='ghost'>Отмена</Button>
+							</DialogClose>
+							<DialogClose asChild>
 								<Button
 									type='submit'
 									disabled={isFeedbackCreating}

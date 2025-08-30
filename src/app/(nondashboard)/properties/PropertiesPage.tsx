@@ -40,7 +40,7 @@ export default function PropertiesPage() {
 					<div className='relative bottom-0 h-fit max-lg:hidden'>
 						<div className='sticky bottom-0 h-fit space-y-4 overflow-y-auto rounded-xl border p-4'>
 							<div className='flex justify-between'>
-								<h2 className='text-2xl'>Фильтры</h2>
+								<h3 className='text-2xl'>Фильтры</h3>
 								<Tooltip>
 									<TooltipTrigger asChild>
 										<Button
@@ -49,6 +49,9 @@ export default function PropertiesPage() {
 											onClick={() => resetFilters()}
 										>
 											<BrushCleaning />
+											<span className='sr-only'>
+												Очистить
+											</span>
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent>

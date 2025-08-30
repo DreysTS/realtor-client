@@ -20,7 +20,7 @@ export interface IRequest {
 	address: string
 	images: string[]
 	contactMethod: string
-	propertyRequestStatus: PropertyRequestStatus
+	status: PropertyRequestStatus
 	rejectReason?: string
 	propertyId?: string
 	userId: string

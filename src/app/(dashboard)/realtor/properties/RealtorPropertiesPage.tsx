@@ -2,9 +2,9 @@
 
 import React from 'react'
 
-import PropertyForm from './PropertyForm'
 import RealtorPropertyCard from './RealtorPropertyCard'
 import { EmptyRealtorProperties } from '@/components/empty-state'
+import { PropertyForm } from '@/components/form'
 import { DialogFormWrapper } from '@/components/form/DialogFormWrapper'
 import { Loading } from '@/components/ui'
 import { SidebarTitle } from '@/components/widgets'

@@ -1,27 +1,14 @@
 'use client'
 
-import { useDirection } from '@radix-ui/react-direction'
-import { PlusCircle } from 'lucide-react'
 import React from 'react'
 
 import { PurchaseCard } from './PurchaseCard'
-import { PurchaseForm } from './PurchaseForm'
 import { RequestCard } from './RequestCard'
-import { RequestForm } from './RequestForm'
 import { EmptyUserPurchases, EmptyUserRequests } from '@/components/empty-state'
+import { PurchaseForm, RequestForm } from '@/components/form'
 import { DialogFormWrapper } from '@/components/form/DialogFormWrapper'
 import {
-	Button,
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
 	Loading,
-	ScrollArea,
 	Tabs,
 	TabsContent,
 	TabsList,
@@ -43,7 +30,10 @@ export default function RequestPage() {
 			<Tabs defaultValue='requests' className='grow'>
 				<div className='flex flex-wrap justify-between gap-2'>
 					<DialogFormWrapper action='Создать заявку' title=''>
-						<Tabs defaultValue='request' className='h-full overflow-hidden pt-4'>
+						<Tabs
+							defaultValue='request'
+							className='h-full overflow-hidden pt-4'
+						>
 							<div className='px-6'>
 								<TabsList className='w-full'>
 									<TabsTrigger value='request'>
@@ -59,7 +49,10 @@ export default function RequestPage() {
 								<TabsContent value='request' className='h-full'>
 									<RequestForm />
 								</TabsContent>
-								<TabsContent value='purchase' className='h-full'>
+								<TabsContent
+									value='purchase'
+									className='h-full'
+								>
 									<PurchaseForm />
 								</TabsContent>
 							</div>
@@ -114,52 +107,5 @@ export default function RequestPage() {
 				</TabsContent>
 			</Tabs>
 		</div>
-	)
-}
-
-function DialogForm() {
-	const direction = useDirection()
-
-	return (
-		<Dialog>
-			<DialogTrigger asChild>
-				<Button variant='outline'>
-					Создать заявку <PlusCircle />
-				</Button>
-			</DialogTrigger>
-			<DialogContent
-				className='p-0 sm:max-h-[min(650px,80vh)] sm:max-w-lg'
-				onInteractOutside={e => e.preventDefault()}
-				dir={direction}
-			>
-				<Tabs defaultValue='request'>
-					<DialogHeader className='border-border m-0 flex gap-2 border-b pt-5 pb-3'>
-						<DialogTitle className='px-6 text-base'>
-							Создать заявку
-						</DialogTitle>
-
-						<div className='px-6'>
-							<TabsList className='w-full'>
-								<TabsTrigger value='request'>
-									Продать
-								</TabsTrigger>
-								<TabsTrigger value='purchase'>
-									Купить
-								</TabsTrigger>
-							</TabsList>
-						</div>
-					</DialogHeader>
-
-					<ScrollArea className='my-3 me-1 h-[480px] ps-6 pe-5 text-sm'>
-						<TabsContent value='request'>
-							<RequestForm />
-						</TabsContent>
-						<TabsContent value='purchase'>
-							<PurchaseForm />
-						</TabsContent>
-					</ScrollArea>
-				</Tabs>
-			</DialogContent>
-		</Dialog>
 	)
 }

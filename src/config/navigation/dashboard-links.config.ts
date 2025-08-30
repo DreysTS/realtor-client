@@ -9,8 +9,6 @@ import {
 	Users
 } from 'lucide-react'
 
-import { IUser } from '../types'
-
 export interface Link {
 	icon: LucideIcon
 	label: string
@@ -22,9 +20,7 @@ export interface Section {
 	links: Link[]
 }
 
-export type LinksConfig = Record<string, Section>
-
-export const linksConfig: LinksConfig = {
+export const DASHBOARD_LINKS_CONFIG = {
 	profile: {
 		title: 'Профиль',
 		links: [
@@ -75,4 +71,9 @@ export const linksConfig: LinksConfig = {
 			}
 		]
 	}
-}
+} as const
+
+export type DashboardLinksConfig = typeof DASHBOARD_LINKS_CONFIG
+export type DashboardSectionKey = keyof DashboardLinksConfig
+export type DashboardLink =
+	DashboardLinksConfig[DashboardSectionKey]['links'][number]

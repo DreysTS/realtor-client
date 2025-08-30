@@ -5,7 +5,6 @@ import {
 	QueryClientProvider,
 	isServer
 } from '@tanstack/react-query'
-import { type PropsWithChildren, useState } from 'react'
 
 function makeQueryClient() {
 	return new QueryClient({

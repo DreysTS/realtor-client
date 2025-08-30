@@ -18,10 +18,18 @@ import { cn } from '@/lib/utils'
 interface Props {
 	action: string
 	title?: string
+	open?: boolean
+	onOpenChange?(open: boolean): void
 	children: React.ReactNode
 }
 
-export function DialogFormWrapper({ action, title, children }: Props) {
+export function DialogFormWrapper({
+	action,
+	title,
+	open,
+	onOpenChange,
+	children
+}: Props) {
 	const [variant, setVariant] = useState<'default' | 'fullscreen'>('default')
 
 	const direction = useDirection()
@@ -31,7 +39,7 @@ export function DialogFormWrapper({ action, title, children }: Props) {
 	}
 
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogTrigger asChild>
 				<Button variant='outline'>
 					{action} <PlusCircle />

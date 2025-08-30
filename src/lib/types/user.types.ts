@@ -1,6 +1,6 @@
 export enum UserRole {
 	Regular = 'REGULAR',
-	Admin = 'ADMIN'
+	Realtor = 'REALTOR'
 }
 
 export enum AuthMethod {

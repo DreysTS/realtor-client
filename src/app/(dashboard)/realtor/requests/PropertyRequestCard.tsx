@@ -40,7 +40,7 @@ export default function PropertyRequestCard({
 							</h2>
 							<Badge>
 								{translateEnum(
-									request.propertyRequestStatus,
+									request.status,
 									propertyRequestStatusMap
 								)}
 							</Badge>
@@ -122,7 +122,7 @@ export default function PropertyRequestCard({
 							className='grow'
 							variant='ghost'
 							disabled={
-								request.propertyRequestStatus === 'APPROWED' ||
+								request.status === 'APPROWED' ||
 								isRequestAccepting
 							}
 							onClick={() => acceptRequest(request.id)}

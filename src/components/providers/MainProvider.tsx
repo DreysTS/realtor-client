@@ -1,9 +1,20 @@
 'use client'
 
-import { TanstackQueryProvider, ThemeProvider, ToastProvider } from '.'
+import {
+	AuthProvider,
+	TanstackQueryProvider,
+	ThemeProvider,
+	ToastProvider
+} from '.'
 import { type PropsWithChildren } from 'react'
 
-export function MainProvider({ children }: PropsWithChildren<unknown>) {
+import { IUser } from '@/lib/types'
+
+type MainProviderProps = PropsWithChildren<{
+	user: IUser | null
+}>
+
+export function MainProvider({ children, user }: MainProviderProps) {
 	return (
 		<TanstackQueryProvider>
 			<ThemeProvider
@@ -12,8 +23,10 @@ export function MainProvider({ children }: PropsWithChildren<unknown>) {
 				disableTransitionOnChange
 				storageKey='site-theme'
 			>
-				<ToastProvider />
-				{children}
+				<AuthProvider user={user}>
+					<ToastProvider />
+					{children}
+				</AuthProvider>
 			</ThemeProvider>
 		</TanstackQueryProvider>
 	)

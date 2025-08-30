@@ -2,7 +2,7 @@ import { Copy, Edit, EllipsisVertical, Trash } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import PropertyForm from './PropertyForm'
+import { DialogFormWrapper, PropertyForm } from '@/components/form'
 import {
 	Badge,
 	Button,
@@ -23,11 +23,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-	Separator,
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle
+	Separator
 } from '@/components/ui'
 import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useRemoveProperty, useSetStatus } from '@/hooks/queries/properties'
@@ -48,7 +44,7 @@ export default function RealtorPropertyCard({
 }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-	const [updateSheetOpen, setUpdateSheetOpen] = useState(false)
+	const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
 
 	const { removeProperty, isPropertyRemoving } = useRemoveProperty()
 	const { setStatus, isSettingStatus } = useSetStatus()
@@ -60,7 +56,7 @@ export default function RealtorPropertyCard({
 
 	const handleUpdateClick = () => {
 		setDropdownOpen(false)
-		setUpdateSheetOpen(true)
+		setUpdateDialogOpen(true)
 	}
 
 	const handleConfirmDelete = () => {
@@ -305,20 +301,17 @@ export default function RealtorPropertyCard({
 				</DialogContent>
 			</Dialog>
 
-			{/* ========== Update Sheet ========== */}
+			{/* ========== Update Dialog ========== */}
 
-			<Sheet open={updateSheetOpen} onOpenChange={setUpdateSheetOpen}>
-				<SheetContent className='overflow-y-scroll sm:max-w-fit'>
-					<SheetHeader>
-						<SheetTitle className='text-2xl'>
-							Обновить объект
-						</SheetTitle>
-					</SheetHeader>
-					<div className='px-4'>
-						<PropertyForm property={property} />
-					</div>
-				</SheetContent>
-			</Sheet>
+			<DialogFormWrapper
+				action='Создать заявку'
+				open={updateDialogOpen}
+				onOpenChange={setUpdateDialogOpen}
+			>
+				<div className='my-3 me-1 h-full overflow-y-auto ps-6 pe-5 text-sm'>
+					<PropertyForm />
+				</div>
+			</DialogFormWrapper>
 		</>
 	)
 }

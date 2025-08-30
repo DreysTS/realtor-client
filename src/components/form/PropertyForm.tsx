@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 import { RenderFormField } from '@/components/form/RenderFormField'
-import { Button, Form } from '@/components/ui'
+import { Button, DialogClose, Form } from '@/components/ui'
 import { PROPERTY_FIELDS } from '@/config/form'
 import {
 	useCreateProperty,
@@ -13,11 +13,7 @@ import {
 import { PropertySchema, TypeCreatePropertySchema } from '@/lib/schemes'
 import { IProperty } from '@/lib/types'
 
-export default function PropertyForm({
-	property
-}: {
-	property?: IProperty | null
-}) {
+export function PropertyForm({ property }: { property?: IProperty | null }) {
 	const form = useForm<TypeCreatePropertySchema>({
 		resolver: zodResolver(PropertySchema),
 		mode: 'onSubmit',
@@ -68,9 +64,11 @@ export default function PropertyForm({
 				))}
 
 				<div className='flex gap-3'>
-					<Button type='reset' variant='ghost' disabled={disabled}>
-						Сбросить
-					</Button>
+					<DialogClose asChild>
+						<Button variant='ghost' disabled={disabled}>
+							Отмена
+						</Button>
+					</DialogClose>
 					<Button type='submit' className='grow' disabled={disabled}>
 						Отправить
 					</Button>

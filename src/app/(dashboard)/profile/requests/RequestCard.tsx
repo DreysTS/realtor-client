@@ -59,7 +59,7 @@ export function RequestCard({ request }: { request: IRequest }) {
 							</h2>
 							<Badge>
 								{translateEnum(
-									request.propertyRequestStatus,
+									request.status,
 									propertyRequestStatusMap
 								)}
 							</Badge>
@@ -152,7 +152,7 @@ export function RequestCard({ request }: { request: IRequest }) {
 						)}
 					</div>
 				</CardContent>
-				{request.propertyRequestStatus === 'APPROWED' && (
+				{request.status === 'APPROWED' && (
 					<>
 						<Separator />
 						<CardFooter>
@@ -168,7 +168,7 @@ export function RequestCard({ request }: { request: IRequest }) {
 						</CardFooter>
 					</>
 				)}
-				{request.propertyRequestStatus === 'REJECTED' && (
+				{request.status === 'REJECTED' && (
 					<>
 						<Separator />
 						<CardFooter>

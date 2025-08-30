@@ -4,7 +4,7 @@ import AboutSection from './AboutSection'
 import CollaborationOverviewSection from './CollaborationOverviewSection'
 import HeroSection from './HeroSection'
 import PropertiesDemo from './PropertiesDemo'
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components'
 
 export default function Landing() {
 	return (

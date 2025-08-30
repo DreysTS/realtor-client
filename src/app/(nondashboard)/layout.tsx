@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
