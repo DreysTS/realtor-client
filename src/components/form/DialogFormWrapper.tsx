@@ -40,11 +40,13 @@ export function DialogFormWrapper({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogTrigger asChild>
-				<Button variant='outline'>
-					{action} <PlusCircle />
-				</Button>
-			</DialogTrigger>
+			{!open && !onOpenChange && (
+				<DialogTrigger asChild>
+					<Button variant='outline'>
+						{action} <PlusCircle />
+					</Button>
+				</DialogTrigger>
+			)}
 			<DialogContent
 				className={cn(
 					'p-0 max-sm:h-screen',

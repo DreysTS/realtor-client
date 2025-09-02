@@ -32,7 +32,8 @@ import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
-	TooltipTrigger
+	TooltipTrigger,
+	buttonVariants
 } from '@/components/ui'
 import { useFavorite } from '@/hooks/queries/favorites'
 import { usePropertyById } from '@/hooks/queries/properties'
@@ -276,7 +277,7 @@ export default function PropertyPage() {
 						<Card className='sticky top-20 rounded-lg border bg-transparent'>
 							<CardHeader>
 								<CardTitle className='text-xl font-semibold'>
-									{formatPhoneNumber('+78005553535')}
+									{formatPhoneNumber('+79539217432')}
 								</CardTitle>
 								<CardDescription>
 									Позвоните по номеру телефона или
@@ -285,16 +286,32 @@ export default function PropertyPage() {
 							</CardHeader>
 							<Separator orientation='horizontal' />
 							<CardContent className='flex flex-wrap gap-6'>
-								<Button
-									variant='outline'
-									effect='shineHover'
-									className='grow'
+								<a
+									className={cn(
+										buttonVariants({
+											variant: 'outline',
+											effect: 'shineHover'
+										}),
+										'grow'
+									)}
+									href='https://t.me/+79539217432'
+									target='_blank'
 								>
 									Telegram <FaTelegram />
-								</Button>
-								<Button className='grow' effect='shineHover'>
+								</a>
+
+								<a
+									className={cn(
+										buttonVariants({
+											effect: 'shineHover'
+										}),
+										'grow'
+									)}
+									href='https://wa.me/79539217432'
+									target='_blank'
+								>
 									WhatsApp <FaWhatsapp />
-								</Button>
+								</a>
 							</CardContent>
 						</Card>
 					</div>

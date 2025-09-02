@@ -15,7 +15,7 @@ export function SectionTitling({
 	className
 }: ISectionTitling) {
 	return (
-		<div className={cn('mb-8 lg:mb-16', className)}>
+		<div className={cn('mb-4 lg:mb-8', className)}>
 			<h2 className='pb-2 text-2xl font-semibold tracking-tight transition-colors [text-shadow:_hsl(var(--foreground)/0.3)_0_0_16px] first:mt-0 lg:text-4xl'>
 				{title}
 			</h2>

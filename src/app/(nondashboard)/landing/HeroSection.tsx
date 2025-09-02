@@ -1,3 +1,5 @@
+'use client'
+
 import { Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,10 +8,12 @@ import React from 'react'
 import MoscowBackground from '../../../../public/moscow-background.png'
 
 import { Container, Section } from '@/components'
-import { Badge, Button } from '@/components/ui'
+import { SendYourApplication } from '@/components/feature/SendYourApplication'
+import { Badge, buttonVariants } from '@/components/ui'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
-export default function HeroSection() {
+export function HeroSection() {
 	return (
 		<Section
 			className='flex items-center max-sm:flex-col lg:h-screen'
@@ -62,15 +66,18 @@ export default function HeroSection() {
 					</ul>
 
 					<div className='z-10 flex flex-wrap gap-2'>
-						<Button
-							effect='ringHover'
-							className='before:bg-primary/80 relative before:absolute before:-left-1/4 before:-z-10 before:h-[120%] before:w-2/3 before:rotate-12 before:rounded before:blur-2xl before:content-[""]'
+						<SendYourApplication />
+						<Link
+							className={cn(
+								buttonVariants({
+									variant: 'secondary',
+									effect: 'shineHover'
+								})
+							)}
+							href='/properties'
 						>
-							Оставить заявку
-						</Button>
-						<Button variant='secondary' effect='shineHover'>
-							Ознакомиться с услугами
-						</Button>
+							Каталог
+						</Link>
 					</div>
 				</div>
 			</Container>

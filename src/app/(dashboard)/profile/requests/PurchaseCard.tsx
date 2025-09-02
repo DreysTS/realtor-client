@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Badge, Card, CardContent, CardHeader } from '@/components/ui'
-import { DataItem } from '@/components/ui/data-item'
+import { DataItem } from '@/components/ui/data-fields'
 import { PreviewDescription } from '@/components/widgets'
 import { useDeletePurchase } from '@/hooks/queries/purchases'
 import { propertyPurchaseStatusMap } from '@/lib/constants'

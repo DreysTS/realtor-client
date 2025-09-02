@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { BasePropertySchema } from './base-property.schema'
-import { BUILDING_TYPES, PROPERTY_TYPES, SELLING_TYPES } from '@/lib/types'
+import { BUILDING_TYPES, PROPERTY_TYPES } from '@/lib/types'
 
 export const PropertySchema = BasePropertySchema.extend({
 	kitchenSquare: z.coerce
@@ -42,9 +42,6 @@ export const PropertySchema = BasePropertySchema.extend({
 			PROPERTY_TYPES.EURO_FLAT,
 			PROPERTY_TYPES.GAB
 		])
-		.optional(),
-	sellingType: z
-		.enum([SELLING_TYPES.RENT, SELLING_TYPES.SALE, SELLING_TYPES.SOLD])
 		.optional(),
 	city: z.string().min(1).optional(),
 	district: z.string().min(1).optional()

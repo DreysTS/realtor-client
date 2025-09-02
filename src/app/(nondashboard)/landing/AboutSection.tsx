@@ -32,7 +32,7 @@ const aboutList = [
 	}
 ]
 
-export default function AboutSection() {
+export function AboutSection() {
 	return (
 		<Section>
 			<Container className='overflow-hidden'>
@@ -44,7 +44,7 @@ export default function AboutSection() {
 								{item.text}
 							</p>
 						))}
-						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
+						{/* <div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
 							{[About5, About1, About3].map((item, index) => (
 								<div
 									className={cn(
@@ -64,10 +64,10 @@ export default function AboutSection() {
 									/>
 								</div>
 							))}
-						</div>
+						</div> */}
 					</div>
 					<div className='flex flex-col-reverse overflow-x-auto lg:flex-col'>
-						<div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
+						{/* <div className='relative flex gap-6 overflow-x-auto max-sm:snap-x sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:place-content-center sm:items-center'>
 							{[About2, About4, About6].map((item, index) => (
 								<div
 									className={cn(
@@ -87,7 +87,7 @@ export default function AboutSection() {
 									/>
 								</div>
 							))}
-						</div>
+						</div> */}
 						{aboutList.slice(3).map((item, index) => (
 							<p
 								className='my-4 pr-6 leading-7 lg:px-6'

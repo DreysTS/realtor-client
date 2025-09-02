@@ -25,7 +25,7 @@ const advantagesList = [
 	}
 ]
 
-export default function AdvantagesSection() {
+export function AdvantagesSection() {
 	return (
 		<Section className='overflow-hidden'>
 			<Container className='relative'>

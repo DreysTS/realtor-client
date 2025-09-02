@@ -15,7 +15,7 @@ import {
 	Separator,
 	buttonVariants
 } from '@/components/ui'
-import { DataItem } from '@/components/ui/data-item'
+import { DataItem } from '@/components/ui/data-fields'
 import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useAcceptRequest } from '@/hooks/queries/requests'
 import { propertyRequestStatusMap } from '@/lib/constants'

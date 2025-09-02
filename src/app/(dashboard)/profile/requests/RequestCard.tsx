@@ -24,7 +24,7 @@ import {
 	DropdownMenuTrigger,
 	Separator
 } from '@/components/ui'
-import { DataItem } from '@/components/ui/data-item'
+import { DataItem } from '@/components/ui/data-fields'
 import { PreviewCarousel, PreviewDescription } from '@/components/widgets'
 import { useDeleteRequest } from '@/hooks/queries/requests'
 import { propertyRequestStatusMap } from '@/lib/constants'

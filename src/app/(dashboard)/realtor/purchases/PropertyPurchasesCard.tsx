@@ -12,7 +12,7 @@ import {
 	CardHeader,
 	buttonVariants
 } from '@/components/ui'
-import { DataItem } from '@/components/ui/data-item'
+import { DataItem } from '@/components/ui/data-fields'
 import { PreviewDescription } from '@/components/widgets'
 import { useUpdateStatus } from '@/hooks/queries/purchases'
 import {

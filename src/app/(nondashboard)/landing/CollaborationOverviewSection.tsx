@@ -81,7 +81,7 @@ const cooperationSteps = [
 	}
 ]
 
-export default function CollaborationOverviewSection() {
+export function CollaborationOverviewSection() {
 	const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 	const mousePosition = useRef({ x: 0, y: 0 })
 

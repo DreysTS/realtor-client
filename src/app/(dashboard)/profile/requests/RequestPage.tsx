@@ -27,7 +27,7 @@ export default function RequestPage() {
 	return (
 		<div className='flex h-full flex-col space-y-4'>
 			<SidebarTitle>Мои заявки</SidebarTitle>
-			<Tabs defaultValue='requests' className='grow'>
+			<Tabs defaultValue='requests' className='grow gap-0 space-y-4'>
 				<div className='flex flex-wrap justify-between gap-2'>
 					<DialogFormWrapper action='Создать заявку' title=''>
 						<Tabs

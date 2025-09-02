@@ -33,7 +33,6 @@ export function PropertyForm({ property }: { property?: IProperty | null }) {
 			ceilingHeight: property?.ceilingHeight || ('' as unknown as number),
 			buildingType: property?.buildingType || 'BRICK',
 			propertyType: property?.propertyType || 'FLAT',
-			sellingType: property?.sellingType || 'SALE',
 			address: property?.location.address || '',
 			city: property?.location.city || '',
 			district: property?.location.district || ''
@@ -70,7 +69,7 @@ export function PropertyForm({ property }: { property?: IProperty | null }) {
 						</Button>
 					</DialogClose>
 					<Button type='submit' className='grow' disabled={disabled}>
-						Отправить
+						{property ? 'Изменить' : 'Отправить'}
 					</Button>
 				</div>
 			</form>

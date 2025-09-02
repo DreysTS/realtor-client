@@ -20,12 +20,6 @@ export const PROPERTY_TYPE_OPTIONS = [
 	{ value: 'GAB', label: 'Габ' }
 ]
 
-export const SELLING_TYPE_OPTIONS = [
-	{ value: 'SALE', label: 'Продаётся' },
-	{ value: 'RENT', label: 'Аренда' },
-	{ value: 'SOLD', label: 'Продано' }
-]
-
 export const PROPERTY_FIELDS: FormFieldProps<TypeCreatePropertySchema>[] = [
 	{
 		type: 'text',
@@ -116,12 +110,6 @@ export const PROPERTY_FIELDS: FormFieldProps<TypeCreatePropertySchema>[] = [
 		name: 'propertyType',
 		label: 'Тип недвижимости',
 		options: PROPERTY_TYPE_OPTIONS
-	},
-	{
-		type: 'radio',
-		name: 'sellingType',
-		label: 'Тип продажи',
-		options: SELLING_TYPE_OPTIONS
 	},
 	{
 		type: 'text',

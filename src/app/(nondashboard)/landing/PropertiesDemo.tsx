@@ -11,7 +11,7 @@ import { PropertyCard, SectionTitling } from '@/components/widgets'
 import { useProperties } from '@/hooks/queries/properties'
 import { cn } from '@/lib/utils'
 
-export default function PropertiesDemo() {
+export function PropertiesDemo() {
 	const { properties, isPropertiesLoading } = useProperties()
 
 	return (

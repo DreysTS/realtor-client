@@ -20,6 +20,7 @@ import {
 	FormItem,
 	Textarea
 } from './ui'
+import { useProfile } from '@/hooks/queries/auth'
 import { useCreateFeedback } from '@/hooks/queries/feedback'
 import {
 	FeedbackScheme,
@@ -34,6 +35,8 @@ export function FeedbackDialog() {
 		}
 	})
 
+	const { user } = useProfile()
+
 	const { createFeedback, isFeedbackCreating } = useCreateFeedback()
 
 	async function onSubmit(values: TypeFeedbackScheme) {
@@ -47,44 +50,49 @@ export function FeedbackDialog() {
 			</DialogTrigger>
 			<DialogContent className='overflow-y-auto'>
 				<DialogHeader>
-					<DialogTitle>Оставьте ваш отзыв</DialogTitle>
+					<DialogTitle>
+						{user ? 'Оставить отзыв' : 'Необходима регистрация'}
+					</DialogTitle>
 					<DialogDescription>
-						Также желательно оставьте ваши пожелания по поводу
-						улучшения качества сайта
+						{user
+							? 'Оставьте ваш отзыв'
+							: 'Чтобы оставить отзыв, необходимо создать или войти в аккаунт'}
 					</DialogDescription>
 				</DialogHeader>
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)}>
-						<FormField
-							control={form.control}
-							name='content'
-							render={({ field }) => (
-								<FormItem>
-									<FormControl>
-										<Textarea
-											className='resize-none'
-											{...field}
-											disabled={isFeedbackCreating}
-										/>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						<DialogFooter className='pt-4'>
-							<DialogClose asChild>
-								<Button variant='ghost'>Отмена</Button>
-							</DialogClose>
-							<DialogClose asChild>
-								<Button
-									type='submit'
-									disabled={isFeedbackCreating}
-								>
-									Отправить
-								</Button>
-							</DialogClose>
-						</DialogFooter>
-					</form>
-				</Form>
+				{user && (
+					<Form {...form}>
+						<form onSubmit={form.handleSubmit(onSubmit)}>
+							<FormField
+								control={form.control}
+								name='content'
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Textarea
+												className='resize-none'
+												{...field}
+												disabled={isFeedbackCreating}
+											/>
+										</FormControl>
+									</FormItem>
+								)}
+							/>
+							<DialogFooter className='pt-4'>
+								<DialogClose asChild>
+									<Button variant='ghost'>Отмена</Button>
+								</DialogClose>
+								<DialogClose asChild>
+									<Button
+										type='submit'
+										disabled={isFeedbackCreating}
+									>
+										Отправить
+									</Button>
+								</DialogClose>
+							</DialogFooter>
+						</form>
+					</Form>
+				)}
 			</DialogContent>
 		</Dialog>
 	)

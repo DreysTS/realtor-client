@@ -8,6 +8,7 @@ import React, { memo } from 'react'
 
 import {
 	Badge,
+	BadgeDot,
 	Button,
 	Card,
 	CardHeader,
@@ -59,12 +60,26 @@ export const PropertyCard = memo(({ property }: { property: IProperty }) => {
 				<div className='relative aspect-video overflow-hidden'>
 					<Image
 						src={`${S3_PUBLIC_URL}/${property.images[0]}`}
+						alt='Preview backblur'
+						width={640}
+						height={360}
+						className='absolute inset-0 w-full object-cover blur-[10rem] transition-transform duration-300 group-hover:scale-105'
+						loading='lazy'
+					/>
+					<Image
+						src={`${S3_PUBLIC_URL}/${property.images[0]}`}
 						alt='Preview'
 						width={640}
 						height={360}
-						className='absolute inset-0 w-full object-cover transition-transform duration-300 group-hover:scale-105'
+						className='relative h-full object-contain transition-transform duration-300 group-hover:scale-105'
 						loading='lazy'
 					/>
+					{!property.isSecondary && (
+						<Badge className='absolute top-3 left-3 cursor-default rounded-full shadow'>
+							<BadgeDot />
+							Новостройка
+						</Badge>
+					)}
 
 					<Button
 						variant='outline'
@@ -97,13 +112,6 @@ export const PropertyCard = memo(({ property }: { property: IProperty }) => {
 						<h3 className='truncate text-xl font-bold lg:text-2xl'>
 							₽ {property.price.toLocaleString()}
 						</h3>
-						{!property.isSecondary ? (
-							<Badge className='cursor-default rounded-full'>
-								Новое
-							</Badge>
-						) : (
-							''
-						)}
 					</div>
 					<p className='line-clamp-1 truncate text-lg font-bold lg:text-xl'>
 						{property.title}

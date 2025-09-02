@@ -11,6 +11,8 @@ import {
 	CarouselPrevious,
 	Dialog,
 	DialogContent,
+	DialogDescription,
+	DialogHeader,
 	DialogTitle
 } from '@/components/ui'
 import { S3_PUBLIC_URL } from '@/lib/constants/environments'
@@ -43,7 +45,14 @@ export function PreviewCarousel({
 									alt={`Preview image ${index}`}
 									fill
 									priority={true}
-									className='object-cover'
+									className='object-cover blur-[10rem]'
+								/>
+								<Image
+									src={`${S3_PUBLIC_URL}/${image}`}
+									alt={`Preview image ${index}`}
+									fill
+									priority={true}
+									className='object-contain'
 								/>
 							</div>
 						</CarouselItem>
@@ -56,7 +65,10 @@ export function PreviewCarousel({
 				onOpenChange={setCarouselDialogOpen}
 			>
 				<DialogContent className='sm:max-w-5xl'>
-					<DialogTitle>Галерея</DialogTitle>
+					<DialogHeader>
+						<DialogTitle>Галерея</DialogTitle>
+						<DialogDescription></DialogDescription>
+					</DialogHeader>
 					<Carousel
 						className='h-full w-full'
 						onClick={e => {
@@ -72,7 +84,14 @@ export function PreviewCarousel({
 											src={`${S3_PUBLIC_URL}/${image}`}
 											alt={`Preview image ${index}`}
 											fill
-											className='object-cover'
+											className='object-cover blur-[10rem]'
+										/>
+										<Image
+											src={`${S3_PUBLIC_URL}/${image}`}
+											alt={`Preview image ${index}`}
+											fill
+											priority={true}
+											className='object-contain'
 										/>
 									</div>
 								</CarouselItem>

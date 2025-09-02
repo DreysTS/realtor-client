@@ -73,6 +73,7 @@ export function Footer() {
 														})
 													)}
 													href={item.href}
+													target='_blank'
 												>
 													<item.icon className='' />
 													<span className='sr-only'>

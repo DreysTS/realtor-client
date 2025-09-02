@@ -7,14 +7,6 @@ export const PROPERTY_TYPES = {
 
 export type PropertyType = (typeof PROPERTY_TYPES)[keyof typeof PROPERTY_TYPES]
 
-export const SELLING_TYPES = {
-	SALE: 'SALE',
-	RENT: 'RENT',
-	SOLD: 'SOLD'
-} as const
-
-export type SellingType = (typeof SELLING_TYPES)[keyof typeof SELLING_TYPES]
-
 export const BUILDING_TYPES = {
 	PANEL: 'PANEL',
 	BRICK: 'BRICK',
@@ -58,7 +50,6 @@ export interface IProperty {
 	ceilingHeight?: number
 	buildingType?: BuildingType
 	propertyType?: PropertyType
-	sellingType?: SellingType
 	status: PropertyStatus
 	locationId: number
 	userId?: string
