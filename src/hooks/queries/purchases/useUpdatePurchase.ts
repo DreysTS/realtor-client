@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-import { TypeUpdatePurchaseSchema } from '@/lib/schemes'
+import { TypeCreatePurchaseSchema } from '@/lib/schemes'
 import { toastMessageHandler } from '@/lib/utils'
 import { purchaseService } from '@/services'
 
@@ -16,7 +16,7 @@ export function useUpdatePurchase() {
 				data
 			}: {
 				purchaseId: string
-				data: TypeUpdatePurchaseSchema
+				data: TypeCreatePurchaseSchema
 			}) => purchaseService.updatePurchase(purchaseId, data),
 			onSuccess() {
 				toast.success('Заявка на покупку успешна обновлена!')

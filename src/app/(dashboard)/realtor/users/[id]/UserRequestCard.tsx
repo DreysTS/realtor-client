@@ -26,7 +26,7 @@ export default function UserRequestCard({ request }: { request: IRequest }) {
 					</h2>
 					<Badge>
 						{translateEnum(
-							request.propertyRequestStatus,
+							request.status,
 							propertyRequestStatusMap
 						)}
 					</Badge>
@@ -45,7 +45,7 @@ export default function UserRequestCard({ request }: { request: IRequest }) {
 						Ссылка на заявку
 					</Link>
 
-					{request.propertyRequestStatus === 'APPROWED' && (
+					{request.status === 'APPROWED' && (
 						<Link
 							href={`/realtor/properties/${request.propertyId}`}
 							className={cn(

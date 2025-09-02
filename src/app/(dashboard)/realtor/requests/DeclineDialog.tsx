@@ -50,7 +50,7 @@ export default function DeclineDialog({ request }: { request: IRequest }) {
 		<>
 			<Button
 				className='grow'
-				disabled={request.propertyRequestStatus === 'REJECTED'}
+				disabled={request.status === 'REJECTED'}
 				onClick={(e: MouseEvent<HTMLButtonElement>) =>
 					handleRejectClick(e)
 				}

@@ -1,8 +1,5 @@
 import { api } from '@/api'
-import {
-	TypeCreatePurchaseSchema,
-	TypeUpdatePurchaseSchema
-} from '@/lib/schemes'
+import { TypeCreatePurchaseSchema } from '@/lib/schemes'
 import { IPurchase } from '@/lib/types'
 
 export class PurchaseService {
@@ -42,7 +39,7 @@ export class PurchaseService {
 
 	public async updatePurchase(
 		purchaseId: string,
-		body: TypeUpdatePurchaseSchema
+		body: TypeCreatePurchaseSchema
 	) {
 		const response = await api.patch(
 			`property/purchase/${purchaseId}`,

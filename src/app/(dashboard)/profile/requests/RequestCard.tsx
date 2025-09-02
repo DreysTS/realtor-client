@@ -120,11 +120,7 @@ export function RequestCard({ request }: { request: IRequest }) {
 						<DataItem label='Кол-во комнат' value={request.rooms} />
 					</div>
 					<div className='space-y-2'>
-						<DataItem
-							label='Адрес'
-							value={request.address}
-							row={false}
-						/>
+						<DataItem label='Адрес' value={request.address} />
 						<PreviewDescription description={request.description} />
 					</div>
 					<div>
