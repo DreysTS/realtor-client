@@ -44,8 +44,10 @@ export function HeroSection() {
 					<Badge
 						variant='outline'
 						className='bg-background/40 flex w-fit gap-2 py-1.5 backdrop-blur-sm max-sm:hidden'
+						size='lg'
+						shape='circle'
 					>
-						<Badge>
+						<Badge size='sm' shape='circle'>
 							<Sparkles size={16} />
 						</Badge>
 						Недвижимость в Москве и Московской области
